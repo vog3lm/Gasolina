@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="anmelden_pane" 
+	fx:id="anmelden_pane"
+	BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField id="anmelden_benutzername" fx:id="anmelden_benutzername" 
+      	layoutX="380.7" layoutY="195.0" promptText="..." />
+      <TextField id="anmelden_passwort" fx:id="anmelden_passwort" 
+      	layoutX="380.7" layoutY="228.0" promptText="..." />
+      <Button id="anmelden_submit" 
+      	fx:id="anmelden_submit" 
+      	defaultButton="true" 
+      	layoutX="467.7" 
+      	layoutY="260.0" 
+      	mnemonicParsing="false" 
+      	text="Anmelden" />
+      <Label layoutX="272.7" layoutY="200.0" text="Benutzername:" />
+      <Label layoutX="309.7" layoutY="233.0" text="Passwort:" />
+   </children>
+</AnchorPane>

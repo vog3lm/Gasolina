@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane 
+	BorderPane.alignment="CENTER" 
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TableView id="personal_liste" 
+			fx:id="personal_liste"
+			editable="true" 
+			tableMenuButtonVisible="true" 
+			AnchorPane.bottomAnchor="0.0" 
+			AnchorPane.leftAnchor="0.0" 
+			AnchorPane.rightAnchor="0.0" 
+			AnchorPane.topAnchor="0.0">
+			<columns>
+				<TableColumn id="personal_nummer" fx:id="personal_nummer" text="PN" />
+				<TableColumn id="personal_benutzername" fx:id="personal_benutzername" text="Benutzername" />
+				<TableColumn id="personal_vorname" fx:id="personal_vorname" text="Vorname" />
+				<TableColumn id="personal_nachname" fx:id="personal_nachname" text="Nachname" />
+				<TableColumn id="personal_passwort" fx:id="personal_passwort" text="Passwort" />
+				<TableColumn id="personal_einstelldatum" fx:id="personal_einstelldatum" text="Einstelldatum" />
+			</columns>
+		</TableView>
+		<Button id="personal_hinzufuegen" fx:id="personal_hinzufuegen" layoutX="733.3" layoutY="420.0" mnemonicParsing="false" prefWidth="120.0" text="Hinzufügen" />
+	</children>
+</AnchorPane>

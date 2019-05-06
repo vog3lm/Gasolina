@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Button id="benutzer_speichern" 
+			fx:id="benutzer_speichern" 
+			layoutX="513.0" 
+			layoutY="420.0" 
+			mnemonicParsing="false" 
+			prefWidth="120.0" 
+			text="Speichern" />
+      	<ImageView fitHeight="119.0" fitWidth="127.0" layoutX="534.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         	<image>
+            	<Image url="@user.avatar.jpg" />
+         	</image>
+      	</ImageView>
+      	<Label layoutX="178.0" layoutY="176.0" text="Benutzername" />
+      	<Label layoutX="178.0" layoutY="205.0" text="Vorname" />
+      	<Label layoutX="178.0" layoutY="236.0" text="Nachname" />
+      	<Label layoutX="178.0" layoutY="277.0" text="Passwort" />
+      	<TextField  id="benutzer_benutzername" 
+			fx:id="benutzer_benutzername" 
+			layoutX="285.0" layoutY="171.0" promptText="Benutzername" />
+      	<TextField  id="benutzer_vorname" 
+			fx:id="benutzer_vorname"
+			layoutX="285.0" layoutY="200.0" promptText="Vorname" />
+      	<TextField  id="benutzer_nachname" 
+			fx:id="benutzer_nachname"
+			layoutX="285.0" layoutY="231.0" promptText="Nachname" />
+      	<TextField  id="benutzer_passwort" 
+			fx:id="benutzer_passwort"
+			layoutX="285.0" layoutY="272.0" promptText="Passwort" />
+      	<Label layoutX="178.0" layoutY="148.0" text="PN" />
+      	<Label  id="benutzer_personalnummer" 
+			fx:id="benutzer_personalnummer"
+			layoutX="285.0" layoutY="148.0" text="Label" />
+	</children>
+</AnchorPane>
