@@ -8,6 +8,7 @@ import app.Lifecycle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -27,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 
 public class KraftstoffController implements Lifecycle {
@@ -103,8 +105,32 @@ public class KraftstoffController implements Lifecycle {
 	    bestand_bezeichnung.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"bezeichnung");});
 	    bestand_einheit.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("einheit"));
 	    bestand_menge.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("menge"));
-	    bestand_menge.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestand_menge.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"menge");});
+	    /* bestand_menge.setCellFactory(TextFieldTableCell.forTableColumn()); */
+	    bestand_menge.setCellFactory(new Callback<TableColumn<KraftstoffbestandRecord,String>, TableCell<KraftstoffbestandRecord,String>>() {
+	        public TableCell<KraftstoffbestandRecord,String> call(TableColumn<KraftstoffbestandRecord,String> column) {
+	        	// TODO: crash on edit - not editable ! lt. anforderungskatalog keine explizite Edittierbarkeit gefordert!
+	        	// return new TextFieldTableCell<KraftstoffbestandRecord, String>() {
+	        	return new TableCell<KraftstoffbestandRecord, String>() {
+	                @Override
+	                public void updateItem(String value, boolean empty) {
+	                    super.updateItem(value, empty);
+	                    this.setText(value);
+	                    int kapazitaet = 1000;
+	                    if(!empty && !value.equals("")) {
+		                    float menge = Float.parseFloat(value);
+		                    if(kapazitaet / 4 >= menge) {
+		                    	this.getStyleClass().add("bestand-traffic-red");
+		                    } else if(kapazitaet / 2 >= menge) {
+		                    	this.getStyleClass().add("bestand-traffic-yellow");
+		                    } else {
+		                    	this.getStyleClass().add("bestand-traffic-green");
+		                    }
+	                    }
+	                }
+	            };
+	        }
+	    });
+	    bestand_menge.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"menge");}); 
 	    bestand_preis.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("preis"));
 	    bestand_preis.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestand_preis.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"preis");});
@@ -115,6 +141,7 @@ public class KraftstoffController implements Lifecycle {
 	    bestand_liste.setItems(FXCollections.observableList(this.bestand.onReadAll()));
 	    bestand_liste.setRowFactory(this.onCreateBestandListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
+	    	    
 	    /**/
 	    bestand_bestellen.setOnAction(this::onClickHinzufuegen);
 	    /**/
@@ -148,11 +175,9 @@ public class KraftstoffController implements Lifecycle {
 	        public TableRow<KraftstoffbestandRecord> call(TableView<KraftstoffbestandRecord> table) {
 	            final TableRow<KraftstoffbestandRecord> row = new TableRow<KraftstoffbestandRecord>();           
 	            row.contextMenuProperty().bind(Bindings
-	            		.when(Bindings.isNotNull(row.itemProperty()))
-	            		.then(onClickBestandMenu(table,row))
-	            		.otherwise((ContextMenu)null));
-	            /* TODO: add traffic lights */
-	            row.setStyle("-fx-fill-text: red;");
+            		.when(Bindings.isNotNull(row.itemProperty()))
+            		.then(onClickBestandMenu(table,row))
+            		.otherwise((ContextMenu)null));
 	            return row;
 		    }
 		};

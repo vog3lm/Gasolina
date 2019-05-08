@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +34,11 @@ public class AnmeldenController implements Initializable {
 	@FXML
 	private TextField anmelden_benutzername;
 	@FXML
+	private Label anmelden_benutzername_lbl;
+	@FXML
 	private TextField anmelden_passwort;
+	@FXML
+	private Label anmelden_passwort_lbl;
 	
 	public AnmeldenController(Anmelden listener) {
 		this.listener = listener;
@@ -63,10 +68,18 @@ public class AnmeldenController implements Initializable {
 			        size);
 			anmelden_pane.setBackground(new Background(egg));
 		} else {
-			for(PersonalRecord benutzer : bestand.onReadAll()) {
-				if(benutzername.equals(benutzer.getBenutzername()) && passwort.equals(benutzer.getPasswort())) {
+			int index = bestand.getIndex(benutzername);
+			if(-1 != index) {
+				PersonalRecord benutzer = bestand.onRead(index);
+				if(passwort.equals(benutzer.getPasswort())) {
 					this.listener.onAnmelden(benutzer);
+					return;
 				}
+				anmelden_passwort.getStyleClass().add("anmelden-input-error");
+				anmelden_passwort_lbl.getStyleClass().add("anmelden-input-error");
+			}else {
+				anmelden_benutzername.getStyleClass().add("anmelden-input-error");
+				anmelden_benutzername_lbl.getStyleClass().add("anmelden-input-error");
 			}			
 		}
 	}

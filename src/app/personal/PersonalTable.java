@@ -65,12 +65,15 @@ public class PersonalTable implements Database<PersonalRecord> {
     public String getUrl() { return this.filename; }
     
 	@Override
-	public int getIndex(PersonalRecord record) {
-		return this.records.indexOf(record);
-	}
+	public int getIndex(PersonalRecord record) { return this.records.indexOf(record); }
 	
 	@Override
-	public int getIndex(String personalnummer) {
+	public int getIndex(String benutzername) {
+		for(int i=0; i<records.size(); i++) {
+			if(benutzername.equals(records.get(i).getBenutzername())) {
+				return i;
+			}
+		}
 		return -1;
 	}
 }

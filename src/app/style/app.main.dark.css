@@ -138,5 +138,23 @@
 
 /**/
 .dialog-pane:header .header-panel {
-  -fx-background-color: rgb(66,66,66);
+	-fx-background-color: rgb(66,66,66);
 }
+
+
+/**/
+.anmelden-input-error {
+	-fx-text-fill: rgb(216,27,96);
+}
+/**/
+.bestand-traffic-red {
+	-fx-text-fill: red;
+}
+.bestand-traffic-yellow {
+	-fx-text-fill: yellow;
+}
+.bestand-traffic-green {
+	-fx-text-fill: green;
+}
+
+

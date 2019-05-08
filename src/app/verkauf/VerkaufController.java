@@ -307,8 +307,8 @@ public class VerkaufController implements Lifecycle {
 		});
 		dialog.showAndWait().ifPresent(record -> {
 			this.verkauf_liste.getItems().add(record);
-			/* TODO: check available quantity */
-			VerkaufSimulation simulation = new VerkaufSimulation(record,this.verkauf_liste);
+			KraftstoffbestandRecord bestand = kraftstoffe.onRead(kraftstoffe.getIndex(record.getBezeichnung()));
+			VerkaufSimulation simulation = new VerkaufSimulation(bestand,record,this.verkauf_liste);
 			this.verkauf_kraftstoff.setText("Stop");
 			/* TODO: delete click row listener */
 			this.verkauf_kraftstoff.setOnAction(event -> {
@@ -365,8 +365,11 @@ public class VerkaufController implements Lifecycle {
 				warennummer.setText(record.getWarennummer());
 				preis.setText(record.getPreis());
 				einheit.setText(record.getEinheit());
+				
 				if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
 					pane.lookupButton(ButtonType.OK).setDisable(false);
+					String bestand = record.getMenge();
+					/* TODO: check available quantity */
 				}
 			}else {
 				warennummer.setText("");

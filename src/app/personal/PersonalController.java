@@ -72,6 +72,7 @@ public class PersonalController implements Lifecycle {
 	    /**/
 	    personal_liste.setItems(FXCollections.observableList(this.bestand.onReadAll()));
 	    personal_liste.setRowFactory(this.onCreatePersonalListener());
+	    personal_liste.getSortOrder().addAll(personal_nachname);
 	    /**/
 	    personal_hinzufuegen.setOnAction(this::onClickHinzufuegen);
 	}

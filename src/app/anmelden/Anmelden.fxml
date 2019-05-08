@@ -20,7 +20,9 @@
       	layoutY="260.0" 
       	mnemonicParsing="false" 
       	text="Anmelden" />
-      <Label layoutX="272.7" layoutY="200.0" text="Benutzername:" />
-      <Label layoutX="309.7" layoutY="233.0" text="Passwort:" />
+      <Label id="anmelden_benutzername_lbl" fx:id="anmelden_benutzername_lbl" 
+      	layoutX="272.7" layoutY="200.0" text="Benutzername:" />
+      <Label id="anmelden_passwort_lbl" fx:id="anmelden_passwort_lbl" 
+      	layoutX="309.7" layoutY="233.0" text="Passwort:" />
    </children>
 </AnchorPane>
