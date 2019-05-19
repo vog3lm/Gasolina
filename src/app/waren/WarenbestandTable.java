@@ -3,12 +3,12 @@ package app.waren;
 import java.util.ArrayList;
 
 import app.database.DatabaseConnection;
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 
 public class WarenbestandTable implements Database<WarenbestandRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_waren.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_waren.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<WarenbestandRecord> records = new ArrayList<WarenbestandRecord>();
 

@@ -3,8 +3,9 @@ package app.personal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Einstellungen;
+import app.Zustand;
 import app.Lifecycle;
+import app.Util;
 import app.kraftstoff.KraftstoffbestellungenRecord;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -12,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
@@ -51,7 +54,9 @@ public class PersonalController implements Lifecycle {
 	@FXML
 	private Button personal_hinzufuegen;
 	
-	public PersonalController() {}
+	public PersonalController() {
+		new Util().onLoadCenter(super.getClass().getResource("Personal.fxml"),this);
+	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle res) {	
@@ -113,7 +118,7 @@ public class PersonalController implements Lifecycle {
 		dialog.setTitle("Kraftstoffbestellung");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 		pane.lookupButton(ButtonType.OK).setDisable(true);
 		/* build dialog layout components */
@@ -178,7 +183,7 @@ public class PersonalController implements Lifecycle {
 	}
 		
 	@Override
-	public boolean onDestroy() {
+	public boolean destroy() {
 		bestand.onCommit();
 		return true;
 	}

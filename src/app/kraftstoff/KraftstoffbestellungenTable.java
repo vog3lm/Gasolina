@@ -3,12 +3,12 @@ package app.kraftstoff;
 import java.util.ArrayList;
 
 import app.database.DatabaseConnection;
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 
 public class KraftstoffbestellungenTable implements Database<KraftstoffbestellungenRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_kraftstoff_bestellungen.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff_bestellungen.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<KraftstoffbestellungenRecord> records = new ArrayList<KraftstoffbestellungenRecord>();
 

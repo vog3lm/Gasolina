@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import app.Einstellungen;
+import app.Zustand;
 import app.Lifecycle;
+import app.Util;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.kraftstoff.KraftstoffbestandTable;
 import app.personal.PersonalRecord;
@@ -23,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -41,6 +43,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
@@ -108,6 +111,8 @@ public class VerkaufController implements Lifecycle {
 		
 	public VerkaufController(int tab) {
 		this.tab = tab;
+		new Util().onLoadCenter(super.getClass().getResource("Verkauf.fxml"),this);
+
 	}
 	
 	@Override
@@ -168,7 +173,7 @@ public class VerkaufController implements Lifecycle {
 		Date date = new Date();
 		String datum = dateFormat.format(date);
 		String uhrzeit = timeFormat.format(date);
-		PersonalRecord benutzer = Einstellungen.getInstance().getBenutzer();
+		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
 		String message = "Max Maier Tankstelle\n\n" + 
 			"Belegnummer: "+belegnummer+"\n" + 
 			"Datum: "+datum+" "+uhrzeit+"\n" + 
@@ -185,7 +190,7 @@ public class VerkaufController implements Lifecycle {
 		/**/
 		Alert alert = new Alert(AlertType.INFORMATION);
 		DialogPane pane = alert.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		pane.setMinHeight(Region.USE_PREF_SIZE);
 		alert.setTitle("Print Dialog");
 		alert.setHeaderText(null);
@@ -194,7 +199,7 @@ public class VerkaufController implements Lifecycle {
 		alert.setResultConverter(submit -> {
 		    if (submit.getButtonData() == ButtonData.YES) {
 				try {
-					String path = Einstellungen.getInstance().getPrintUrl();
+					String path = Zustand.getInstance().getPrintUrl();
 					BufferedWriter writer = new BufferedWriter(new FileWriter(path+"beleg.txt"));
 			        writer.write(msg);
 			        writer.close();
@@ -242,7 +247,7 @@ public class VerkaufController implements Lifecycle {
 		dialog.setTitle("Kraftstoffverkauf");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		ButtonType button = new ButtonType("Simulieren",ButtonData.YES);
@@ -327,7 +332,7 @@ public class VerkaufController implements Lifecycle {
 		dialog.setTitle("Warenverkauf");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -338,12 +343,26 @@ public class VerkaufController implements Lifecycle {
 		menge.setPromptText("Menge");
 		menge.textProperty().addListener((ob, o, n) -> {
 			if(!n.equals("")) {
-				/* TODO: check available quantity */
+				
 			    try {Float.parseFloat(n);} 
-			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
+			    catch (NumberFormatException | NullPointerException e){
+			    	menge.setText(o);
+			    	return;
+			    }
 			}
 			if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
-				pane.lookupButton(ButtonType.OK).setDisable(false);
+				int index = waren.getIndex(bezeichnung.getText());
+				if(-1 != index) {
+					WarenbestandRecord record = waren.onRead(index);
+					pane.lookupButton(ButtonType.OK).setDisable(false);
+					/* TODO: check available quantity */
+					// String bestand = record.getMenge();
+					// if(bestand < menge) {
+					// 	pane.lookupButton(ButtonType.OK).setDisable(true);
+					// }else {
+					//	pane.lookupButton(ButtonType.OK).setDisable(false);
+					// }
+				}
 			}else {
 				pane.lookupButton(ButtonType.OK).setDisable(true);
 			}
@@ -368,8 +387,13 @@ public class VerkaufController implements Lifecycle {
 				
 				if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
 					pane.lookupButton(ButtonType.OK).setDisable(false);
-					String bestand = record.getMenge();
 					/* TODO: check available quantity */
+					// String bestand = record.getMenge();
+					// if(bestand < menge) {
+					// 	pane.lookupButton(ButtonType.OK).setDisable(true);
+					// }else {
+					//	pane.lookupButton(ButtonType.OK).setDisable(false);
+					// }
 				}
 			}else {
 				warennummer.setText("");
@@ -420,11 +444,11 @@ public class VerkaufController implements Lifecycle {
 	}
 	
 	@Override
-	public boolean onDestroy() {
+	public boolean destroy() {
 		//	journal.onCommit();
 		if(0 != verkauf_liste.getItems().size()) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.getDialogPane().getStylesheets().add(Einstellungen.getInstance().getDesign());
+			alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Offene Kassenvorgänge!");
 			alert.setContentText("Buchen Sie alle Kassenvorgänge,\nbevor Sie das Programm beenden!");

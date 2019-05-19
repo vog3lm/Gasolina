@@ -3,14 +3,16 @@ package app.waren;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Einstellungen;
+import app.Zustand;
 import app.Lifecycle;
+import app.Util;
 import app.kraftstoff.KraftstoffbestandRecord;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
@@ -87,6 +90,7 @@ public class WarenController implements Lifecycle {
 	
 	public WarenController(int tab) {
 		this.tab = tab;
+		new Util().onLoadCenter(super.getClass().getResource("Waren.fxml"),this);
 	}
 	
 	@Override
@@ -252,7 +256,7 @@ public class WarenController implements Lifecycle {
 		dialog.setTitle("Warenbestellung");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -313,7 +317,7 @@ public class WarenController implements Lifecycle {
 		dialog.setTitle("Waren Einbuchen");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Einstellungen.getInstance().getDesign());
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -391,7 +395,7 @@ public class WarenController implements Lifecycle {
 	}
 	
 	@Override
-	public boolean onDestroy() {
+	public boolean destroy() {
 		bestand.onCommit();
 		bestellungen.onCommit();
 		return true;

@@ -3,12 +3,15 @@ package app.anmelden;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Einstellungen;
+import app.Util;
+import app.Zustand;
 import app.personal.PersonalRecord;
 import app.personal.PersonalTable;
+import app.verkauf.VerkaufController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,10 +23,11 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 
 public class AnmeldenController implements Initializable {
 	
-	private Anmelden listener;
+	private Anmelden anmelden;
 	
 	private PersonalTable bestand = new PersonalTable();
 	
@@ -40,8 +44,9 @@ public class AnmeldenController implements Initializable {
 	@FXML
 	private Label anmelden_passwort_lbl;
 	
-	public AnmeldenController(Anmelden listener) {
-		this.listener = listener;
+	public AnmeldenController(Anmelden anmelden) {
+		this.anmelden = anmelden;
+		new Util().onLoadCenter(super.getClass().getResource("Anmelden.fxml"),this);
 	}
 	
 	@Override
@@ -50,14 +55,14 @@ public class AnmeldenController implements Initializable {
 		Platform.runLater(() -> anmelden_benutzername.requestFocus());
 	}
 	
-	private void onAnmelden(ActionEvent event) {
+	void onAnmelden(ActionEvent event) {
 		String benutzername = anmelden_benutzername.getText().toLowerCase();
 		String passwort = anmelden_passwort.getText().toLowerCase();
 		double width = anmelden_pane.getWidth();
 		double height = anmelden_pane.getHeight();
 		if(benutzername.equals("o$ter") && passwort.equals("ha$e")) {
 			String url = "app/style/egg.dark.jpg";
-			if(Einstellungen.getInstance().getDesign().equals(Einstellungen.LIGHT)) {
+			if(Zustand.getInstance().getDesign().equals(Zustand.LIGHT)) {
 				url = "app/style/egg.light.jpg";
 			}
 			BackgroundSize size = new BackgroundSize(width, height, false, false, false, false);
@@ -72,7 +77,9 @@ public class AnmeldenController implements Initializable {
 			if(-1 != index) {
 				PersonalRecord benutzer = bestand.onRead(index);
 				if(passwort.equals(benutzer.getPasswort())) {
-					this.listener.onAnmelden(benutzer);
+					Zustand.getInstance().setBenutzer(benutzer);
+					this.anmelden.onAnmelden();
+					new VerkaufController(VerkaufController.SAEULE1);				
 					return;
 				}
 				anmelden_passwort.getStyleClass().add("anmelden-input-error");

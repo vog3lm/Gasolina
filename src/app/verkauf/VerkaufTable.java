@@ -2,14 +2,14 @@ package app.verkauf;
 
 import java.util.ArrayList;
 
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 import app.database.DatabaseConnection;
 import app.kraftstoff.KraftstoffbestandRecord;
 
 public class VerkaufTable implements Database<VerkaufRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<VerkaufRecord> records = new ArrayList<VerkaufRecord>();
 

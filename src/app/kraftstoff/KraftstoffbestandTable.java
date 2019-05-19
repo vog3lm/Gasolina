@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import app.database.DatabaseConnection;
 import app.personal.PersonalRecord;
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 
 public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<KraftstoffbestandRecord> records = new ArrayList<KraftstoffbestandRecord>();
     /**/

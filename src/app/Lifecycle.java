@@ -7,5 +7,5 @@ import javafx.fxml.Initializable;
 
 public interface Lifecycle extends Initializable {
 	public void initialize(URL arg, ResourceBundle res);
-	public boolean onDestroy();
+	public boolean destroy();
 }

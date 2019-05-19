@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import app.database.DatabaseConnection;
 import app.waren.WarenbestandRecord;
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 
 public class PersonalTable implements Database<PersonalRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_personal.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_personal.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<PersonalRecord> records = new ArrayList<PersonalRecord>();
 

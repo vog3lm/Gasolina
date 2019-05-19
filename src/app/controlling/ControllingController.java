@@ -4,10 +4,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Lifecycle;
+import app.Util;
+import app.Zustand;
 import app.kraftstoff.KraftstoffbestandTable;
 import app.kraftstoff.KraftstoffbestellungenTable;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 
 public class ControllingController implements Lifecycle {
 
@@ -26,6 +30,7 @@ public class ControllingController implements Lifecycle {
 	
 	public ControllingController(int tab) {
 		this.tab = tab;
+		new Util().onLoadCenter(super.getClass().getResource("Controlling.fxml"),this);
 	}
 	
 	@Override
@@ -37,7 +42,7 @@ public class ControllingController implements Lifecycle {
 	}
 
 	@Override
-	public boolean onDestroy() {
+	public boolean destroy() {
 		return true;
 	}
 

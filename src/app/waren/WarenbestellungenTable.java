@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import app.database.DatabaseConnection;
 import app.kraftstoff.KraftstoffbestellungenRecord;
-import app.Einstellungen;
+import app.Zustand;
 import app.database.Database;
 
 public class WarenbestellungenTable implements Database<WarenbestellungenRecord> {
 
-    private final String filename = Einstellungen.getInstance().getDatabaseUrl()+"gs_waren_bestellungen.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_waren_bestellungen.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
