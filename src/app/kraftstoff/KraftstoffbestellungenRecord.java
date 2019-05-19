@@ -15,7 +15,7 @@ public class KraftstoffbestellungenRecord {
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
 
-    KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
+    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);

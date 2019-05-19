@@ -4,16 +4,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Zustand;
+import app.personal.PersonalTable;
 import app.Lifecycle;
 import app.Util;
-import app.kraftstoff.KraftstoffbestellungenRecord;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -28,7 +27,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 

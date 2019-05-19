@@ -2,9 +2,9 @@ package app.waren;
 
 import java.util.ArrayList;
 
-import app.database.DatabaseConnection;
 import app.Zustand;
 import app.database.Database;
+import app.database.DatabaseConnection;
 
 public class WarenbestandTable implements Database<WarenbestandRecord> {
 

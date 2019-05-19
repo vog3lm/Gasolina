@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import app.Zustand;
 import app.database.Database;
 import app.database.DatabaseConnection;
-import app.kraftstoff.KraftstoffbestandRecord;
 
 public class VerkaufTable implements Database<VerkaufRecord> {
 

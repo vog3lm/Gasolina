@@ -2,9 +2,9 @@ package app.kraftstoff;
 
 import java.util.ArrayList;
 
-import app.database.DatabaseConnection;
 import app.Zustand;
 import app.database.Database;
+import app.database.DatabaseConnection;
 
 public class KraftstoffbestellungenTable implements Database<KraftstoffbestellungenRecord> {
 
@@ -12,7 +12,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<KraftstoffbestellungenRecord> records = new ArrayList<KraftstoffbestellungenRecord>();
 
-    KraftstoffbestellungenTable(){
+    public KraftstoffbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
             this.records.add(new KraftstoffbestellungenRecord(i,data.get(i)));

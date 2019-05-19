@@ -15,7 +15,7 @@ public class WarenbestellungenRecord {
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
 
-    WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
+    public WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);

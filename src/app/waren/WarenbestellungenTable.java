@@ -2,10 +2,9 @@ package app.waren;
 
 import java.util.ArrayList;
 
-import app.database.DatabaseConnection;
-import app.kraftstoff.KraftstoffbestellungenRecord;
 import app.Zustand;
 import app.database.Database;
+import app.database.DatabaseConnection;
 
 public class WarenbestellungenTable implements Database<WarenbestellungenRecord> {
 
@@ -13,7 +12,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
-    WarenbestellungenTable(){
+    public WarenbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
             this.records.add(new WarenbestellungenRecord(i,data.get(i)));

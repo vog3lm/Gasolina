@@ -2,10 +2,9 @@ package app.personal;
 
 import java.util.ArrayList;
 
-import app.database.DatabaseConnection;
-import app.waren.WarenbestandRecord;
 import app.Zustand;
 import app.database.Database;
+import app.database.DatabaseConnection;
 
 public class PersonalTable implements Database<PersonalRecord> {
 

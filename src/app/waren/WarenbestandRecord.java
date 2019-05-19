@@ -14,7 +14,7 @@ public class WarenbestandRecord {
     private SimpleStringProperty kategorie;
     private SimpleStringProperty waehrung;
 
-    WarenbestandRecord(int index, String warennummer, String bezeichnung, String einheit, String menge, String preis, String waehrung, String kategorie){
+    public WarenbestandRecord(int index, String warennummer, String bezeichnung, String einheit, String menge, String preis, String waehrung, String kategorie){
     	this.index = new SimpleIntegerProperty(index);
     	this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);

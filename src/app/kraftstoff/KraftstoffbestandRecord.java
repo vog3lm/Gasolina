@@ -15,7 +15,7 @@ public class KraftstoffbestandRecord {
     private SimpleStringProperty tank;
     private SimpleStringProperty kapazitaet;
 
-    KraftstoffbestandRecord(int index, String warennummer, String bezeichnung, String einheit, String menge, String preis, String waehrung, String tank, String kapazitaet){
+    public KraftstoffbestandRecord(int index, String warennummer, String bezeichnung, String einheit, String menge, String preis, String waehrung, String tank, String kapazitaet){
     	this.index = new SimpleIntegerProperty(index);
     	this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);

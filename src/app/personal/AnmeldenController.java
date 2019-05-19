@@ -1,17 +1,14 @@
-package app.anmelden;
+package app.personal;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Util;
 import app.Zustand;
-import app.personal.PersonalRecord;
-import app.personal.PersonalTable;
 import app.verkauf.VerkaufController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +20,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
 
 public class AnmeldenController implements Initializable {
 	

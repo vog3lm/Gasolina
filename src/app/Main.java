@@ -1,8 +1,7 @@
 package app;
 
-import app.anmelden.AnmeldenController;
+import app.personal.AnmeldenController;
 import app.menu.MenuController;
-import app.personal.PersonalRecord;
 import app.verkauf.VerkaufController;
 import javafx.application.Application;
 import javafx.application.Platform;

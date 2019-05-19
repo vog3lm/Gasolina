@@ -1,4 +1,4 @@
-package app.benutzer;
+package app.personal;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import app.Zustand;
 import app.Lifecycle;
 import app.Util;
-import app.personal.PersonalRecord;
-import app.personal.PersonalTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

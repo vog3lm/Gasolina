@@ -2,10 +2,9 @@ package app.kraftstoff;
 
 import java.util.ArrayList;
 
-import app.database.DatabaseConnection;
-import app.personal.PersonalRecord;
 import app.Zustand;
 import app.database.Database;
+import app.database.DatabaseConnection;
 
 public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord> {
 

@@ -1,4 +1,4 @@
-package app.anmelden;
+package app.personal;
 
 public interface Anmelden {
 
