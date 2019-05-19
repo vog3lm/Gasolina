@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import app.Util;
 import app.Zustand;
 import app.controlling.ControllingController;
+import app.doc.DocController;
 import app.kraftstoff.KraftstoffController;
 import app.personal.Anmelden;
 import app.personal.AnmeldenController;
@@ -63,6 +64,8 @@ public class MenuController implements Initializable, Anmelden {
 	private MenuItem nav_fenster_dark;
 	@FXML
 	private MenuItem nav_fenster_light;
+	@FXML
+	private MenuItem nav_fenster_doc;
 	
 	@FXML
 	private Button nav_user;
@@ -93,6 +96,8 @@ public class MenuController implements Initializable, Anmelden {
         nav_personal_abmelden.setOnAction(this::onClickNavMenuItem);
         nav_fenster_dark.setOnAction(this::onClickNavMenuItem);
         nav_fenster_light.setOnAction(this::onClickNavMenuItem);
+        /**/
+        nav_fenster_doc.setOnAction(this::onClickNavMenuItem);
         /**/
         nav_user.setOnAction(this::onClickNavButton);
 	}
@@ -139,7 +144,7 @@ public class MenuController implements Initializable, Anmelden {
 				ObservableList<String> sheets = zustand.getScene().getStylesheets();
 				sheets.add(zustand.getDesign());
 				sheets.remove(Zustand.DARK);
-			}
+			}else if(id.equals("nav_fenster_doc")){new DocController();}
 			else {System.out.println("no id found "+id);}
 		}
 		

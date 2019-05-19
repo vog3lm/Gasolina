@@ -26,35 +26,37 @@
            <Menu mnemonicParsing="false" text="Controlling">
              <items>
              	<MenuItem id="nav_controlling_einnahmen" fx:id="nav_controlling_einnahmen" mnemonicParsing="false" text="Einnahmen" />
-<MenuItem id="nav_controlling_ausgaben" fx:id="nav_controlling_ausgaben" mnemonicParsing="false" text="Ausgaben" />
-               <MenuItem id="nav_controlling_betriebsergebnis" fx:id="nav_controlling_betriebsergebnis" mnemonicParsing="false" text="Betriebsergebnis" />
+				<MenuItem id="nav_controlling_ausgaben" fx:id="nav_controlling_ausgaben" mnemonicParsing="false" text="Ausgaben" />
+                <MenuItem id="nav_controlling_betriebsergebnis" fx:id="nav_controlling_betriebsergebnis" mnemonicParsing="false" text="Betriebsergebnis" />
              </items>
            </Menu>
            <Menu mnemonicParsing="false" text="Kraftstoff">
              <items>
-               <MenuItem id="nav_kraftstoff_bestand" fx:id="nav_kraftstoff_bestand" mnemonicParsing="false" text="Bestand" />
-               <MenuItem id="nav_kraftstoff_bestellungen" fx:id="nav_kraftstoff_bestellungen" mnemonicParsing="false" text="Bestellungen" />
+                <MenuItem id="nav_kraftstoff_bestand" fx:id="nav_kraftstoff_bestand" mnemonicParsing="false" text="Bestand" />
+                <MenuItem id="nav_kraftstoff_bestellungen" fx:id="nav_kraftstoff_bestellungen" mnemonicParsing="false" text="Bestellungen" />
              	<MenuItem id="nav_kraftstoff_tanks" fx:id="nav_kraftstoff_tanks" mnemonicParsing="false" text="Tanks" />
              </items>
            </Menu>
            <Menu mnemonicParsing="false" text="Waren">
              <items>
-               <MenuItem id="nav_waren_bestand" fx:id="nav_waren_bestand" mnemonicParsing="false" text="Bestand" />
-               <MenuItem id="nav_waren_bestellungen" fx:id="nav_waren_bestellungen" mnemonicParsing="false" text="Bestellungen" />
+                <MenuItem id="nav_waren_bestand" fx:id="nav_waren_bestand" mnemonicParsing="false" text="Bestand" />
+                <MenuItem id="nav_waren_bestellungen" fx:id="nav_waren_bestellungen" mnemonicParsing="false" text="Bestellungen" />
              </items>
            </Menu>
            <Menu mnemonicParsing="false" text="Personal">
              <items>
-               <MenuItem id="nav_personal_verwaltung" fx:id="nav_personal_verwaltung" mnemonicParsing="false" text="Verwaltung" />
-               <SeparatorMenuItem mnemonicParsing="false" />
-               <MenuItem id="nav_personal_benutzer" fx:id="nav_personal_benutzer" mnemonicParsing="false" text="Benutzer" />
-               <MenuItem id="nav_personal_abmelden" fx:id="nav_personal_abmelden" mnemonicParsing="false" text="Abmelden" />
+				<MenuItem id="nav_personal_verwaltung" fx:id="nav_personal_verwaltung" mnemonicParsing="false" text="Verwaltung" />
+                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem id="nav_personal_benutzer" fx:id="nav_personal_benutzer" mnemonicParsing="false" text="Benutzer" />
+                <MenuItem id="nav_personal_abmelden" fx:id="nav_personal_abmelden" mnemonicParsing="false" text="Abmelden" />
              </items>
            </Menu>
           	<Menu mnemonicParsing="false" text="Fenster">
              <items>
-               <MenuItem id="nav_fenster_dark" fx:id="nav_fenster_dark" mnemonicParsing="false" text="Dark Design" />
-               <MenuItem id="nav_fenster_light" fx:id="nav_fenster_light" mnemonicParsing="false" text="Light Design" />
+                <MenuItem id="nav_fenster_dark" fx:id="nav_fenster_dark" mnemonicParsing="false" text="Dark Design" />
+                <MenuItem id="nav_fenster_light" fx:id="nav_fenster_light" mnemonicParsing="false" text="Light Design" />
+				<SeparatorMenuItem mnemonicParsing="false" />
+				<MenuItem id="nav_fenster_doc" fx:id="nav_fenster_doc" mnemonicParsing="false" text="Dokumentation" />
              </items>
            </Menu>
          </menus>

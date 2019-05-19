@@ -39,14 +39,14 @@ public class AnmeldenController implements Initializable {
 	private TextField anmelden_passwort;
 	@FXML
 	private Label anmelden_passwort_lbl;
-	
+		
 	public AnmeldenController(Anmelden anmelden) {
 		this.anmelden = anmelden;
 		new Util().onLoadCenter(super.getClass().getResource("Anmelden.fxml"),this);
 	}
 	
 	@Override
-	public void initialize(URL arg, ResourceBundle res) {
+	public void initialize(URL url, ResourceBundle arg) {
 		anmelden_submit.setOnAction(this::onAnmelden);
 		Platform.runLater(() -> anmelden_benutzername.requestFocus());
 	}
@@ -54,9 +54,9 @@ public class AnmeldenController implements Initializable {
 	void onAnmelden(ActionEvent event) {
 		String benutzername = anmelden_benutzername.getText().toLowerCase();
 		String passwort = anmelden_passwort.getText().toLowerCase();
-		double width = anmelden_pane.getWidth();
-		double height = anmelden_pane.getHeight();
 		if(benutzername.equals("o$ter") && passwort.equals("ha$e")) {
+			double width = anmelden_pane.getWidth();
+			double height = anmelden_pane.getHeight();
 			String url = "app/style/egg.dark.jpg";
 			if(Zustand.getInstance().getDesign().equals(Zustand.LIGHT)) {
 				url = "app/style/egg.light.jpg";

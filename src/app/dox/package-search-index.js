@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"app"},{"l":"app.controlling"},{"l":"app.database"},{"l":"app.kraftstoff"},{"l":"app.menu"},{"l":"app.personal"},{"l":"app.verkauf"},{"l":"app.waren"}]

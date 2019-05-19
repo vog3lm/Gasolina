@@ -148,7 +148,7 @@ public class WarenController implements Lifecycle {
 	    bestellungen_hinzufuegen.setOnAction(this::onClickHinzufuegen);
 	}
 	
-	private Callback<TableView<WarenbestandRecord>,TableRow<WarenbestandRecord>> onCreateBestandListener() {
+	protected Callback<TableView<WarenbestandRecord>,TableRow<WarenbestandRecord>> onCreateBestandListener() {
 		return new Callback<TableView<WarenbestandRecord>, TableRow<WarenbestandRecord>>(){
 	        @Override
 	        public TableRow<WarenbestandRecord> call(TableView<WarenbestandRecord> table) {
@@ -162,7 +162,7 @@ public class WarenController implements Lifecycle {
 		};
 	}
 	
-	private void onClickBestandEdit(TableColumn.CellEditEvent<WarenbestandRecord, String> cell, String id) {
+	protected void onClickBestandEdit(TableColumn.CellEditEvent<WarenbestandRecord, String> cell, String id) {
 		WarenbestandRecord row = cell.getTableView().getItems().get(cell.getTablePosition().getRow());	
 		if(id.equals("bezeichnung")) { row.setBezeichnung(cell.getNewValue()); }
 		else if(id.equals("einheit")) { row.setEinheit(cell.getNewValue()); }
@@ -171,7 +171,7 @@ public class WarenController implements Lifecycle {
 		else if(id.equals("kategorie")) { row.setKategorie(cell.getNewValue()); }
 	}
 	
-	private ContextMenu onClickBestandMenu(TableView<WarenbestandRecord> table, TableRow<WarenbestandRecord> row) {
+	protected ContextMenu onClickBestandMenu(TableView<WarenbestandRecord> table, TableRow<WarenbestandRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem bestellen = new MenuItem("Bestellen");
         bestellen.setOnAction(event -> {onClickBestellen(row.getItem());});
@@ -181,7 +181,7 @@ public class WarenController implements Lifecycle {
         return menu;
 	}
 	
-	private Callback<TableView<WarenbestellungenRecord>,TableRow<WarenbestellungenRecord>> onCreateBestellungListener() {
+	protected Callback<TableView<WarenbestellungenRecord>,TableRow<WarenbestellungenRecord>> onCreateBestellungListener() {
 		return new Callback<TableView<WarenbestellungenRecord>, TableRow<WarenbestellungenRecord>>(){
 	        @Override
 	        public TableRow<WarenbestellungenRecord> call(TableView<WarenbestellungenRecord> table) {
@@ -195,7 +195,7 @@ public class WarenController implements Lifecycle {
 		};
 	}
 	
-	private void onClickBestellungEdit(TableColumn.CellEditEvent<WarenbestellungenRecord, String> cell, String id) {
+	protected void onClickBestellungEdit(TableColumn.CellEditEvent<WarenbestellungenRecord, String> cell, String id) {
 		WarenbestellungenRecord row = cell.getTableView().getItems().get(cell.getTablePosition().getRow());	
 		if(id.equals("bezeichnung")) { row.setBezeichnung(cell.getNewValue()); }
 		else if(id.equals("menge")) { row.setMenge(cell.getNewValue()); }
@@ -203,7 +203,7 @@ public class WarenController implements Lifecycle {
 		else if(id.equals("lieferdatum")) { row.setLieferdatum(cell.getNewValue()); }
 	}
 	
-	private ContextMenu onClickBestellungMenu(TableView<WarenbestellungenRecord> table, TableRow<WarenbestellungenRecord> row) {
+	protected ContextMenu onClickBestellungMenu(TableView<WarenbestellungenRecord> table, TableRow<WarenbestellungenRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem buchen = new MenuItem("Buchen");
         buchen.setOnAction(event -> {onClickBuchen(row.getItem());});
@@ -213,7 +213,7 @@ public class WarenController implements Lifecycle {
         return menu;
 	}
 
-	private void onClickBestellen(WarenbestandRecord record) {
+	protected void onClickBestellen(WarenbestandRecord record) {
 		TextField warennummer = new TextField();
 		warennummer.setText(record.getWarennummer());
 		TextField bezeichnung = new TextField();
