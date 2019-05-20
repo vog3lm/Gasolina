@@ -31,7 +31,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class KraftstoffController implements Lifecycle {
 
 	public static final int BESTAND = 0;

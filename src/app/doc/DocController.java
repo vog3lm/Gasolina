@@ -8,7 +8,12 @@ import app.Util;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.web.WebView;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class DocController implements Initializable {
 
 	@FXML 

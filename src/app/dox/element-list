@@ -1,8 +1,11 @@
 app
 app.controlling
 app.database
+app.doc
 app.kraftstoff
 app.menu
 app.personal
+app.sources
+app.style
 app.verkauf
 app.waren

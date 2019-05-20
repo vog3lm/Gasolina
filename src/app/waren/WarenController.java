@@ -30,7 +30,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class WarenController implements Lifecycle {
 
 	public static final int BESTAND = 0;

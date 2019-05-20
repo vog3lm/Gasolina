@@ -1,7 +1,12 @@
 package app.database;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public interface Database<T> {
 
     public T onRead(int index);

@@ -46,7 +46,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.util.Callback;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class VerkaufController implements Lifecycle {
 
 	public static final int SAEULE1 = 0;

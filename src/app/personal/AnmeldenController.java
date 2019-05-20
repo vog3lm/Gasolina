@@ -20,7 +20,12 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class AnmeldenController implements Initializable {
 	
 	private Anmelden anmelden;
@@ -48,6 +53,7 @@ public class AnmeldenController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle arg) {
 		anmelden_submit.setOnAction(this::onAnmelden);
+		anmelden_passwort.setText("geheim");
 		Platform.runLater(() -> anmelden_benutzername.requestFocus());
 	}
 	

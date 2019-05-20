@@ -2,7 +2,12 @@ package app.kraftstoff;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class KraftstoffbestandRecord {
 
     private SimpleIntegerProperty index;

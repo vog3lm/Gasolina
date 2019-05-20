@@ -9,8 +9,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * Application entry point class. Wraps all startup/shutdown methods.
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class Main extends Application {
-
+	/**
+	 * JavaFX entry point. 
+	 * Creates a scene and root objects to be stored in Zustand object.
+	 * Applies a custom application shutdown strategy.
+	 * Loads initial views. Anmelden if noone is logged in, Verkauf on autologin activated.
+	 * @param JavaFX Stage object
+	 */
 	@Override
 	public void start(Stage stage) {		
 		Zustand zustand = Zustand.getInstance();
@@ -37,7 +49,9 @@ public class Main extends Application {
 		if(null == zustand.getBenutzer()){new AnmeldenController(menu);}
 		else {new VerkaufController(1);}
 	}
-	
+	/**
+	 * Application shutdown strategy. Makes sure all data is been written on shutdown.
+	 */
 	public void destroy() {
 		boolean exit = true;
 		Lifecycle current = Zustand.getInstance().getCurrent();
@@ -47,7 +61,10 @@ public class Main extends Application {
 	        System.exit(0);
 		}
 	}
-	
+	/**
+	 * Application entry point.
+	 * @param Application command line arguments.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

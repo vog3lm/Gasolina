@@ -2,7 +2,12 @@ package app.verkauf;
 
 import app.kraftstoff.KraftstoffbestandRecord;
 import javafx.scene.control.TableView;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class VerkaufSimulation extends Thread {
   
 	private VerkaufRecord row;

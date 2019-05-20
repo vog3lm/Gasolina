@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import app.Zustand;
 import app.database.Database;
 import app.database.DatabaseConnection;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class VerkaufTable implements Database<VerkaufRecord> {
 
     private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";

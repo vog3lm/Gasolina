@@ -5,14 +5,14 @@ import java.util.ResourceBundle;
 
 import app.Lifecycle;
 import app.Util;
-import app.Zustand;
-import app.kraftstoff.KraftstoffbestandTable;
-import app.kraftstoff.KraftstoffbestellungenTable;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class ControllingController implements Lifecycle {
 
 	public static final int EINNAHMEN = 0;

@@ -8,9 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import app.Util;
 import app.Zustand;
@@ -24,8 +22,12 @@ import app.personal.PersonalController;
 import app.personal.PersonalRecord;
 import app.verkauf.VerkaufController;
 import app.waren.WarenController;
-
-
+/**
+ * 
+ * @author vog3lm
+ * @version 1.0
+ * @since   1.0
+ */
 public class MenuController implements Initializable, Anmelden {
 			
 	@FXML
