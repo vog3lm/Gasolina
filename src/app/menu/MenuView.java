@@ -57,7 +57,7 @@ public class MenuView implements Initializable {
 	
 	public MenuView(MenuController controller) {
 		this.controller = controller;
-		new Util().onLoadTop(super.getClass().getResource("Menu.fxml"),this);
+		new Util().onLoadTop(null,super.getClass().getResource("Menu.fxml"),this);
 	}
 	
 	@Override

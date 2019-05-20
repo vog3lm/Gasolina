@@ -38,7 +38,7 @@ public class AnmeldenView implements Initializable {
 	
 	AnmeldenView(AnmeldenController controller) {
 		this.controller = controller;
-		new Util().onLoadCenter(super.getClass().getResource("Anmelden.fxml"),this);
+		new Util().onLoadCenter(null,super.getClass().getResource("Anmelden.fxml"),this);
 	}
 
 	@Override

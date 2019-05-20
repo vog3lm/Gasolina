@@ -96,7 +96,7 @@ public class KraftstoffController implements Lifecycle {
 	
 	public KraftstoffController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(super.getClass().getResource("Kraftstoff.fxml"),this);
+		new Util().onLoadCenter(this,super.getClass().getResource("Kraftstoff.fxml"),this);
 	}
 	
 	@Override

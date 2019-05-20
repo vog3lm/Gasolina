@@ -94,7 +94,7 @@ public class WarenController implements Lifecycle {
 	
 	public WarenController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(super.getClass().getResource("Waren.fxml"),this);
+		new Util().onLoadCenter(this,super.getClass().getResource("Waren.fxml"),this);
 	}
 	
 	@Override

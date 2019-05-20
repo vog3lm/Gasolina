@@ -30,7 +30,7 @@ public class ControllingController implements Lifecycle {
 	
 	public ControllingController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(super.getClass().getResource("Controlling.fxml"),this);
+		new Util().onLoadCenter(this,super.getClass().getResource("Controlling.fxml"),this);
 	}
 	
 	@Override

@@ -17,25 +17,37 @@ public class Util {
 	 * @param Path to fxml layout
 	 * @param Fxml layout view wrapper
 	 */
-	public void onLoadTop(URL url, Initializable controller) {
-		Zustand.getInstance().getRoot().setTop(onLoad(url,controller));
+	public void onLoadTop(Lifecycle lc, URL url, Initializable view) {
+		Zustand zustand = Zustand.getInstance();
+		Lifecycle current = zustand.getCurrent();
+		if(null != current) {
+			zustand.getCurrent().destroy();
+		}
+		zustand.setCurrent(lc);
+		zustand.getRoot().setTop(onLoad(url,view));
 	}
 	/**
 	 * BoderPane center section fxml layout loader.
 	 * @param Path to fxml layout
 	 * @param Fxml layout view wrapper
 	 */
-	public void onLoadCenter(URL url, Initializable controller) {
-		Zustand.getInstance().getRoot().setCenter(onLoad(url,controller));
+	public void onLoadCenter(Lifecycle lc, URL url, Initializable view) {
+		Zustand zustand = Zustand.getInstance();
+		Lifecycle current = zustand.getCurrent();
+		if(null != current) {
+			zustand.getCurrent().destroy();
+		}
+		zustand.setCurrent(lc);
+		zustand.getRoot().setCenter(onLoad(url,view));
 	}
 	/**
 	 * @param Path to fxml layout
 	 * @param Fxml layout view wrapper
 	 */
-	private Parent onLoad(URL url, Initializable controller) {
+	private Parent onLoad(URL url, Initializable view) {
 		try {		
 			FXMLLoader loader = new FXMLLoader(url);
-		    loader.setController(controller);
+		    loader.setController(view);
 		    return loader.load();
 		} catch(Exception e) {
 			e.printStackTrace();

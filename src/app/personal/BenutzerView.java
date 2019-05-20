@@ -32,7 +32,7 @@ public class BenutzerView implements Initializable {
 	BenutzerView(BenutzerController controller, PersonalRecord benutzer) {
 		this.controller = controller;
 		this.benutzer = benutzer;
-		new Util().onLoadCenter(super.getClass().getResource("Benutzer.fxml"),this);
+		new Util().onLoadCenter(controller,super.getClass().getResource("Benutzer.fxml"),this);
 	}
 	
 	@Override

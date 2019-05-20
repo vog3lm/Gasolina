@@ -115,7 +115,7 @@ public class VerkaufController implements Lifecycle {
 		
 	public VerkaufController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(super.getClass().getResource("Verkauf.fxml"),this);
+		new Util().onLoadCenter(this,super.getClass().getResource("Verkauf.fxml"),this);
 
 	}
 	

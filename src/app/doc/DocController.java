@@ -20,7 +20,7 @@ public class DocController implements Initializable {
 	private WebView webview;
 	
 	public DocController() {
-		new Util().onLoadCenter(super.getClass().getResource("Documentation.fxml"),this);
+		new Util().onLoadCenter(null,super.getClass().getResource("Documentation.fxml"),this);
 	}
 	
 	@Override
