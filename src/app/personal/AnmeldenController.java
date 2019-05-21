@@ -2,7 +2,7 @@ package app.personal;
 
 import app.Zustand;
 import app.verkauf.VerkaufController;
-
+import app.verkauf.VerkaufView;
 import javafx.event.ActionEvent;
 
 /**
@@ -33,7 +33,7 @@ public class AnmeldenController {
 				if(passwort.equals(benutzer.getPasswort())) {
 					Zustand.getInstance().setBenutzer(benutzer);
 					this.anmelden.onAnmelden();
-					new VerkaufController(VerkaufController.SAEULE1);				
+					new VerkaufController(VerkaufView.SAEULE1);				
 				}else {
 					view.showPasswortError();
 				}

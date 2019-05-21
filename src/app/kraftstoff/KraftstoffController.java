@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Zustand;
+import app.controlling.AusgabenTable;
 import app.fxml.Loader;
 import app.Lifecycle;
 import javafx.application.Platform;
@@ -49,6 +50,8 @@ public class KraftstoffController implements Lifecycle, Initializable {
 	private KraftstoffbestandTable bestand = new KraftstoffbestandTable();
 	
 	private KraftstoffbestellungenTable bestellungen = new KraftstoffbestellungenTable();
+	
+	private AusgabenTable ausgaben = new AusgabenTable();
 	
 	@FXML
 	private TabPane kraftstoff_tabs;
@@ -146,7 +149,7 @@ public class KraftstoffController implements Lifecycle, Initializable {
 	    bestand_tank.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("tank"));
 	    bestand_kapazitaet.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("kapazitaet"));	    
 	    /**/
-	    bestand_liste.setItems(FXCollections.observableList(this.bestand.onReadAll()));
+	    bestand_liste.setItems(FXCollections.observableList(this.bestand.onRead()));
 	    bestand_liste.setRowFactory(this.onCreateBestandListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    	    
@@ -170,7 +173,7 @@ public class KraftstoffController implements Lifecycle, Initializable {
 	    bestellungen_lieferdatum.setOnEditCommit((cell) -> {onClickBestellungEdit(cell,"lieferdatum");});
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("bestelldatum"));
 	    /**/
-	    bestellungen_liste.setItems(FXCollections.observableList(this.bestellungen.onReadAll()));
+	    bestellungen_liste.setItems(FXCollections.observableList(this.bestellungen.onRead()));
 	    bestellungen_liste.setRowFactory(this.onCreateBestellungListener());
 	    bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
 	    /**/

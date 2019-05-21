@@ -54,11 +54,6 @@ import javafx.util.Callback;
  * @since   1.0
  */
 public class VerkaufController implements Lifecycle, Initializable {
-
-	public static final int SAEULE1 = 0;
-	public static final int SAEULE2 = 1;
-	public static final int SAEULE3 = 2;
-	public static final int JOURNAL= 3;
 	
 	private int tab;
 	

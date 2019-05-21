@@ -3,6 +3,7 @@ package app.menu;
 import javafx.collections.ObservableList;
 import app.Zustand;
 import app.controlling.ControllingController;
+import app.controlling.ControllingView;
 import app.doc.DocController;
 import app.kraftstoff.KraftstoffController;
 import app.personal.Anmelden;
@@ -11,6 +12,7 @@ import app.personal.BenutzerController;
 import app.personal.PersonalController;
 import app.personal.PersonalRecord;
 import app.verkauf.VerkaufController;
+import app.verkauf.VerkaufView;
 import app.waren.WarenController;
 /**
  * 
@@ -26,13 +28,13 @@ public class MenuController implements Anmelden {
 		if(null == Zustand.getInstance().getBenutzer()) {
 			this.onAbmelden();
 		}else {
-			if(id.equals("nav_saeule_1")){new VerkaufController(VerkaufController.SAEULE1);}
-			else if(id.equals("nav_saeule_2")){new VerkaufController(VerkaufController.SAEULE2);}
-			else if(id.equals("nav_saeule_3")){new VerkaufController(VerkaufController.SAEULE3);}
-			else if(id.equals("nav_journal")){new VerkaufController(VerkaufController.JOURNAL);}		
-			else if(id.equals("nav_controlling_einnahmen")){new ControllingController(ControllingController.EINNAHMEN);}
-			else if(id.equals("nav_controlling_ausgaben")){new ControllingController(ControllingController.AUSGABEN);}
-			else if(id.equals("nav_controlling_betriebsergebnis")){new ControllingController(ControllingController.ERGEBNIS);}
+			if(id.equals("nav_saeule_1")){new VerkaufController(VerkaufView.SAEULE1);}
+			else if(id.equals("nav_saeule_2")){new VerkaufController(VerkaufView.SAEULE2);}
+			else if(id.equals("nav_saeule_3")){new VerkaufController(VerkaufView.SAEULE3);}
+			else if(id.equals("nav_journal")){new VerkaufController(VerkaufView.JOURNAL);}		
+			else if(id.equals("nav_controlling_einnahmen")){new ControllingController(ControllingView.EINNAHMEN);}
+			else if(id.equals("nav_controlling_ausgaben")){new ControllingController(ControllingView.AUSGABEN);}
+			else if(id.equals("nav_controlling_betriebsergebnis")){new ControllingController(ControllingView.ERGEBNIS);}
 			else if(id.equals("nav_kraftstoff_bestand")){new KraftstoffController(KraftstoffController.BESTAND);}
 			else if(id.equals("nav_kraftstoff_bestellungen")){new KraftstoffController(KraftstoffController.BESTELLUNGEN);}
 			else if(id.equals("nav_kraftstoff_tanks")){new KraftstoffController(KraftstoffController.TANKS);}

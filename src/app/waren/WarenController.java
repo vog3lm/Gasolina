@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Zustand;
+import app.controlling.AusgabenTable;
 import app.fxml.Loader;
 import app.waren.WarenbestellungenRecord;
 import app.waren.WarenbestellungenTable;
@@ -50,6 +51,8 @@ public class WarenController implements Lifecycle, Initializable {
 	private WarenbestandTable bestand = new WarenbestandTable();
 	
 	private WarenbestellungenTable bestellungen = new WarenbestellungenTable();
+	
+	private AusgabenTable ausgaben = new AusgabenTable();
 	
 	@FXML
     private TableView<WarenbestandRecord> bestand_liste;
@@ -124,7 +127,7 @@ public class WarenController implements Lifecycle, Initializable {
 	    bestand_kategorie.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestand_kategorie.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"kategorie");});
 	    /**/
-	    bestand_liste.setItems(FXCollections.observableList(this.bestand.onReadAll()));
+	    bestand_liste.setItems(FXCollections.observableList(this.bestand.onRead()));
 	    bestand_liste.setRowFactory(this.onCreateBestandListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    /**/
@@ -147,7 +150,7 @@ public class WarenController implements Lifecycle, Initializable {
 	    bestellungen_lieferdatum.setOnEditCommit((cell) -> {onClickBestellungEdit(cell,"lieferdatum");});
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("bestelldatum"));
 	    /**/
-	    bestellungen_liste.setItems(FXCollections.observableList(this.bestellungen.onReadAll()));
+	    bestellungen_liste.setItems(FXCollections.observableList(this.bestellungen.onRead()));
 	    bestellungen_liste.setRowFactory(this.onCreateBestellungListener());
 	    bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
 	    /**/
