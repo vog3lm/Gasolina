@@ -6,6 +6,7 @@ import app.controlling.ControllingController;
 import app.controlling.ControllingView;
 import app.doc.DocController;
 import app.kraftstoff.KraftstoffController;
+import app.kraftstoff.KraftstoffView;
 import app.personal.Anmelden;
 import app.personal.AnmeldenController;
 import app.personal.BenutzerController;
@@ -35,9 +36,9 @@ public class MenuController implements Anmelden {
 			else if(id.equals("nav_controlling_einnahmen")){new ControllingController(ControllingView.EINNAHMEN);}
 			else if(id.equals("nav_controlling_ausgaben")){new ControllingController(ControllingView.AUSGABEN);}
 			else if(id.equals("nav_controlling_betriebsergebnis")){new ControllingController(ControllingView.ERGEBNIS);}
-			else if(id.equals("nav_kraftstoff_bestand")){new KraftstoffController(KraftstoffController.BESTAND);}
-			else if(id.equals("nav_kraftstoff_bestellungen")){new KraftstoffController(KraftstoffController.BESTELLUNGEN);}
-			else if(id.equals("nav_kraftstoff_tanks")){new KraftstoffController(KraftstoffController.TANKS);}
+			else if(id.equals("nav_kraftstoff_bestand")){new KraftstoffController(KraftstoffView.BESTAND);}
+			else if(id.equals("nav_kraftstoff_bestellungen")){new KraftstoffController(KraftstoffView.BESTELLUNGEN);}
+			else if(id.equals("nav_kraftstoff_tanks")){new KraftstoffController(KraftstoffView.TANKS);}
 			else if(id.equals("nav_waren_bestand")){new WarenController(WarenController.BESTAND);}
 			else if(id.equals("nav_waren_bestellungen")){new WarenController(WarenController.BESTELLUNGEN);}
 			else if(id.equals("nav_personal_benutzer")){new BenutzerController();}

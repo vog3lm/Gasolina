@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+
+<AnchorPane id="bestellungen_wrapper"
+	fx:id="bestellungen_wrapper"	
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TableView id="bestellungen_liste" 
+         	fx:id="bestellungen_liste"
+       		editable="true" 
+			tableMenuButtonVisible="true" 
+          	AnchorPane.bottomAnchor="0.0" 
+       	 	AnchorPane.leftAnchor="0.0" 
+       	 	AnchorPane.rightAnchor="0.0" 
+       	 	AnchorPane.topAnchor="0.0">
+			<columns>
+	            <TableColumn id="bestellungen_warennummer" fx:id="bestellungen_warennummer" text="BN" />
+	            <TableColumn id="bestellungen_bestellnummer" fx:id="bestellungen_bestellnummer" text="WN" />
+	            <TableColumn id="bestellungen_bezeichnung" fx:id="bestellungen_bezeichnung" text="Bezeichnung" />
+	            <TableColumn id="bestellungen_preis" fx:id="bestellungen_preis" text="Preis" />
+	            <TableColumn id="bestellungen_waehrung" fx:id="bestellungen_waehrung" text="Währung" />
+	            <TableColumn id="bestellungen_menge" fx:id="bestellungen_menge" text="Menge" />
+	            <TableColumn id="bestellungen_bestelldatum" fx:id="bestellungen_bestelldatum" text="Bestelldatum" />
+	            <TableColumn id="bestellungen_lieferdatum" fx:id="bestellungen_lieferdatum" text="Lieferdatum" />
+			</columns>
+		</TableView>
+		<Button id="bestellungen_hinzufuegen" 
+			fx:id="bestellungen_hinzufuegen" 
+            layoutX="733.3" 
+           	layoutY="385.0" 
+           	mnemonicParsing="false" 
+           	prefWidth="120.0" 
+           	text="Hinzufügen" />
+	</children>
+</AnchorPane>
+
+

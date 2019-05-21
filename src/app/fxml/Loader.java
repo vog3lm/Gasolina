@@ -1,7 +1,5 @@
 package app.fxml;
 
-import java.net.URL;
-
 import app.Lifecycle;
 import app.Zustand;
 import javafx.fxml.FXMLLoader;
@@ -20,10 +18,17 @@ public class Loader {
 	public static final String BENUTZER = "Benutzer.fxml";
 	/** */
 	public static final String CONTROLLING = "Controlling.fxml";
+	public static final String EINNAHMEN = "Einnahmen.fxml";
+	public static final String AUSGABEN = "Ausgaben.fxml";
+	public static final String ERGEBNIS = "Ergebnis.fxml";
+	
 	/** */
 	public static final String DOCUMENTATION = "Documentation.fxml";
 	/** */
 	public static final String KRAFTSTOFF = "Kraftstoff.fxml";
+	public static final String KRAFTSTOFF_BESTAND = "KraftstoffBestand.fxml";
+	public static final String KRAFTSTOFF_BESTELLUNGEN = "KraftstoffBestellungen.fxml";
+	public static final String TANKS = "Tanks.fxml";
 	/** */
 	public static final String MENU = "Menu.fxml";
 	/** */
