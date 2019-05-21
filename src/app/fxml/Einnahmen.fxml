@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+
+
+<TableView id="einnahmen_liste" 
+	fx:id="einnahmen_liste" 
+	editable="false"
+	tableMenuButtonVisible="true"
+	BorderPane.alignment="CENTER" 
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columns>
+		<TableColumn id="einnahmen_id" fx:id="einnahmen_id" text="VN" />
+		<TableColumn id="einnahmen_warennummer" fx:id="einnahmen_warennummer" text="WN" />
+		<TableColumn id="einnahmen_warennummer" fx:id="einnahmen_bezeichnung" text="Bezeichnung" />
+		<TableColumn id="einnahmen_preis" fx:id="einnahmen_preis" text="Preis" />
+		<TableColumn id="einnahmen_menge" fx:id="einnahmen_menge" text="Menge" />
+		<TableColumn id="einnahmen_einheit" fx:id="einnahmen_einheit" text="Einheit" />
+		<TableColumn id="einnahmen_summe" fx:id="einnahmen_summe" text="Summe" />
+		<TableColumn id="einnahmen_belegnummer" fx:id="einnahmen_belegnummer" text="BN" />
+		<TableColumn id="einnahmen_datum" fx:id="einnahmen_datum" text="Datum" />
+		<TableColumn id="einnahmen_uhrzeit" fx:id="einnahmen_uhrzeit" text="Zeit" />
+		<TableColumn id="einnahmen_mitarbeiter" fx:id="einnahmen_mitarbeiter" text="Mitarbeiter" />
+	</columns>
+</TableView>

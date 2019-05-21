@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+
+
+<TableView id="ausgaben_liste" 
+	fx:id="ausgaben_liste" 
+	editable="false" 
+	tableMenuButtonVisible="true"
+	BorderPane.alignment="CENTER" 
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<columns>
+		<TableColumn id="ausgaben_id" fx:id="ausgaben_id" text="VN" />
+		<TableColumn id="ausgaben_warennummer" fx:id="ausgaben_warennummer" text="WN" />
+		<TableColumn id="ausgaben_bezeichnung" fx:id="ausgaben_bezeichnung" text="Bezeichnung" />
+		<TableColumn id="ausgaben_preis" fx:id="ausgaben_preis" text="Preis" />
+		<TableColumn id="ausgaben_menge" fx:id="ausgaben_menge" text="Menge" />
+		<TableColumn id="ausgaben_einheit" fx:id="ausgaben_einheit" text="Einheit" />
+		<TableColumn id="ausgaben_summe" fx:id="ausgaben_summe" text="Summe" />
+		<TableColumn id="ausgaben_belegnummer" fx:id="ausgaben_belegnummer" text="BN" />
+		<TableColumn id="ausgaben_datum" fx:id="ausgaben_datum" text="Datum" />
+		<TableColumn id="ausgaben_uhrzeit" fx:id="ausgaben_uhrzeit" text="Zeit" />
+		<TableColumn id="ausgaben_mitarbeiter" fx:id="ausgaben_mitarbeiter" text="Mitarbeiter" />
+	</columns>
+</TableView>

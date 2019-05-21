@@ -1,6 +1,7 @@
 package app.controlling;
 
 import app.Lifecycle;
+import app.verkauf.VerkaufTable;
 /**
  * 
  * @author vog3lm
@@ -9,19 +10,18 @@ import app.Lifecycle;
  */
 public class ControllingController implements Lifecycle {
 
-	public static final int EINNAHMEN = 0;
-	public static final int AUSGABEN = 1;
-	public static final int ERGEBNIS = 2;
+	private VerkaufTable einnahmen = new VerkaufTable();
 	
-	// journal
-	// kraftstoff
-	// waren
-	
+	private AusgabenTable ausgaben = new AusgabenTable();
+
 	private ControllingView view = new ControllingView(this);
 
 	
 	public ControllingController(int tab) {
 		view.setIndex(tab);
+		view.setEinnahmen(einnahmen.onRead());
+		view.setAusgaben(ausgaben.onRead());
+		/**/
 	}
 	
 	@Override

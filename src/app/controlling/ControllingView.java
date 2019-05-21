@@ -1,65 +1,37 @@
 package app.controlling;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import app.fxml.Loader;
+import app.verkauf.VerkaufRecord;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestellungenRecord;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class ControllingView implements Initializable {
 
+	public static final int EINNAHMEN = 0;
+	public static final int AUSGABEN = 1;
+	public static final int ERGEBNIS = 2;
+	
 	@FXML
 	private TabPane controlling_tabs;
 	
+	private EinnahmenView einnahmen = new EinnahmenView();
 	
-	@FXML
-    private TableView<WarenbestandRecord> bestand_liste;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_warennummer;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_bezeichnung;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_einheit;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_menge;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_preis;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_waehrung;
-	@FXML
-	private TableColumn<WarenbestandRecord, String> bestand_kategorie;
-	@FXML
-	private Button bestand_bestellen;
+	private AusgabenView ausgaben = new AusgabenView();
 	
-	@FXML
-    private TableView<WarenbestellungenRecord> bestellungen_liste;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_bestellnummer;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_warennummer;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_bezeichnung;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_preis;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_waehrung;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_menge;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_bestelldatum;
-	@FXML
-	private TableColumn<WarenbestellungenRecord, String> bestellungen_lieferdatum;
-	@FXML
-	private Button bestellungen_hinzufuegen;
-	
-	
+	private ErgebnisView ergebnis = new ErgebnisView();
 	
 	private ControllingController controller;
 	
@@ -70,8 +42,17 @@ public class ControllingView implements Initializable {
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
-
+		ObservableList<Tab> tabs = controlling_tabs.getTabs();
+		tabs.get(EINNAHMEN).setContent(einnahmen.getView());
+		tabs.get(AUSGABEN).setContent(ausgaben.getView());
+		tabs.get(ERGEBNIS).setContent(ergebnis.getView());
 	}
+	
+	void setEinnahmen(ArrayList<VerkaufRecord> items) { einnahmen.setItems(items); }
+	
+	void setAusgaben(ArrayList<AusgabenRecord> items) { ausgaben.setItems(items); }
+	
+	void setEinnahmen() {  }
 	
 	int getIndex() { return controlling_tabs.getSelectionModel().getSelectedIndex(); }
 	
