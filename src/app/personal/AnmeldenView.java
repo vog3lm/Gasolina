@@ -3,8 +3,8 @@ package app.personal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Util;
 import app.Zustand;
+import app.fxml.Loader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +38,7 @@ public class AnmeldenView implements Initializable {
 	
 	AnmeldenView(AnmeldenController controller) {
 		this.controller = controller;
-		new Util().onLoadCenter(null,super.getClass().getResource("Anmelden.fxml"),this);
+		new Loader().onLoadBorderCenter(null,Loader.ANMELDEN,this);
 	}
 
 	@Override

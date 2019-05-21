@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+// TODO : https://javadoc-themer.firebaseapp.com/ jdoc themer
+
 /**
  * Application entry point class. Wraps all startup/shutdown methods.
  * @author vog3lm
@@ -41,7 +43,7 @@ public class Main extends Application {
 			event.consume();
 			this.destroy();
 		});
-		stage.setTitle("Tankstellenverwaltung");
+		stage.setTitle("Tankstellenverwaltung"); // TODO : Main.java Title String
 		stage.setScene(scene);
 		stage.show();
 		/* load entry point view */

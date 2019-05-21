@@ -3,7 +3,7 @@ package app.personal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Util;
+import app.fxml.Loader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,7 +32,7 @@ public class BenutzerView implements Initializable {
 	BenutzerView(BenutzerController controller, PersonalRecord benutzer) {
 		this.controller = controller;
 		this.benutzer = benutzer;
-		new Util().onLoadCenter(controller,super.getClass().getResource("Benutzer.fxml"),this);
+		new Loader().onLoadBorderCenter(controller,Loader.BENUTZER,this);
 	}
 	
 	@Override

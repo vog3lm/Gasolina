@@ -3,7 +3,7 @@ package app.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Util;
+import app.fxml.Loader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -57,7 +57,7 @@ public class MenuView implements Initializable {
 	
 	public MenuView(MenuController controller) {
 		this.controller = controller;
-		new Util().onLoadTop(null,super.getClass().getResource("Menu.fxml"),this);
+		new Loader().onLoadBorderTop(null,Loader.MENU,this);
 	}
 	
 	@Override

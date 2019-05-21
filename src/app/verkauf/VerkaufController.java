@@ -11,10 +11,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import app.Zustand;
+import app.fxml.Loader;
 import app.personal.PersonalRecord;
 import app.verkauf.VerkaufRecord;
 import app.Lifecycle;
-import app.Util;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestandTable;
 import app.kraftstoff.KraftstoffbestandRecord;
@@ -25,6 +25,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -52,7 +53,7 @@ import javafx.util.Callback;
  * @version 1.0
  * @since   1.0
  */
-public class VerkaufController implements Lifecycle {
+public class VerkaufController implements Lifecycle, Initializable {
 
 	public static final int SAEULE1 = 0;
 	public static final int SAEULE2 = 1;
@@ -115,7 +116,7 @@ public class VerkaufController implements Lifecycle {
 		
 	public VerkaufController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(this,super.getClass().getResource("Verkauf.fxml"),this);
+		new Loader().onLoadBorderCenter(this,Loader.VERKAUF,this);
 
 	}
 	

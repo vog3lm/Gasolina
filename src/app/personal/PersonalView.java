@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.Util;
 import app.Zustand;
+import app.fxml.Loader;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,7 +56,7 @@ public class PersonalView implements Initializable {
 	PersonalView(PersonalController controller, ArrayList<PersonalRecord> data){
 		this.controller = controller;
 		this.data = FXCollections.observableList(data);
-		new Util().onLoadCenter(controller,super.getClass().getResource("Personal.fxml"),this);
+		new Loader().onLoadBorderCenter(controller,Loader.PERSONAL,this);
 	}
 	
 	@Override

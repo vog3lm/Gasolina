@@ -4,15 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Zustand;
+import app.fxml.Loader;
 import app.waren.WarenbestellungenRecord;
 import app.waren.WarenbestellungenTable;
 import app.Lifecycle;
-import app.Util;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -36,7 +37,7 @@ import javafx.util.Callback;
  * @version 1.0
  * @since   1.0
  */
-public class WarenController implements Lifecycle {
+public class WarenController implements Lifecycle, Initializable {
 
 	public static final int BESTAND = 0;
 	public static final int BESTELLUNGEN = 1;
@@ -94,7 +95,7 @@ public class WarenController implements Lifecycle {
 	
 	public WarenController(int tab) {
 		this.tab = tab;
-		new Util().onLoadCenter(this,super.getClass().getResource("Waren.fxml"),this);
+		new Loader().onLoadBorderCenter(this,Loader.WAREN,this);
 	}
 	
 	@Override

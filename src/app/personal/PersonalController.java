@@ -1,8 +1,5 @@
 package app.personal;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import app.personal.PersonalTable;
 import app.Lifecycle;
 
@@ -17,12 +14,7 @@ public class PersonalController implements Lifecycle {
 	private PersonalTable bestand = new PersonalTable();
 
 	private PersonalView view = new PersonalView(this,bestand.onReadAll());
-	
-	@Override
-	public void initialize(URL url, ResourceBundle res) {	
-
-	}
-	
+		
 	void onAdd(String bn, String vn, String nn, String pw, String d) {
 		bestand.onCreate(new PersonalRecord(-1,"-1",bn,vn,nn,pw,d));
 		view.onRefresh();

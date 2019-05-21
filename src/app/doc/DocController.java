@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.Util;
+import app.fxml.Loader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.web.WebView;
@@ -20,7 +20,7 @@ public class DocController implements Initializable {
 	private WebView webview;
 	
 	public DocController() {
-		new Util().onLoadCenter(null,super.getClass().getResource("Documentation.fxml"),this);
+		new Loader().onLoadBorderCenter(null,Loader.DOCUMENTATION,this);
 	}
 	
 	@Override

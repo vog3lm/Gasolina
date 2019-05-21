@@ -1,8 +1,5 @@
 package app.personal;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import app.Zustand;
 import app.Lifecycle;
 /**
@@ -31,10 +28,5 @@ public class BenutzerController implements Lifecycle {
 	public boolean destroy() {
 		bestand.onCommit();
 		return true;
-	}
-
-	@Override
-	public void initialize(URL url, ResourceBundle arg) {
-		
 	}
 }
