@@ -26,7 +26,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     @Override
     public WarenbestellungenRecord onRead(int index) { return this.records.get(index); }
 
-    public ArrayList<WarenbestellungenRecord> onReadAll() { return this.records; }
+    public ArrayList<WarenbestellungenRecord> onRead() { return this.records; }
     
     @Override
     public int onCreate(WarenbestellungenRecord record){

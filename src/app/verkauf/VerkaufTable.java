@@ -28,7 +28,7 @@ public class VerkaufTable implements Database<VerkaufRecord> {
 	public VerkaufRecord onRead(int index) { return this.records.get(index); }
 
 	@Override
-	public ArrayList<VerkaufRecord> onReadAll() { return this.records; }
+	public ArrayList<VerkaufRecord> onRead() { return this.records; }
 
 	@Override
 	public int onCreate(VerkaufRecord record) {

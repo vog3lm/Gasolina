@@ -31,7 +31,7 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
     public KraftstoffbestandRecord onRead(int index) { return this.records.get(index); }
 
     @Override
-    public ArrayList<KraftstoffbestandRecord> onReadAll() { return this.records; }
+    public ArrayList<KraftstoffbestandRecord> onRead() { return this.records; }
     
     @Override
     public int onCreate(KraftstoffbestandRecord record){

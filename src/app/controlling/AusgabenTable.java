@@ -19,8 +19,7 @@ public class AusgabenTable implements Database<AusgabenRecord> {
     public AusgabenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
-        	/* TODO: build ausgaben table */
-        //    this.records.add(new AusgabenRecord(i,data.get(i)));
+            this.records.add(new AusgabenRecord(i,data.get(i)));
         }
     }
 
@@ -28,7 +27,7 @@ public class AusgabenTable implements Database<AusgabenRecord> {
 	public AusgabenRecord onRead(int index) { return this.records.get(index); }
 
 	@Override
-	public ArrayList<AusgabenRecord> onReadAll() { return this.records; }
+	public ArrayList<AusgabenRecord> onRead() { return this.records; }
 
 	@Override
 	public int onCreate(AusgabenRecord record) {
@@ -54,7 +53,7 @@ public class AusgabenTable implements Database<AusgabenRecord> {
         	/* TODO: wirte table on commit */
             records.add(new String[]{});
         }
-        //database.onWrite(records);
+        // TODO : database.onWrite(records);
 	}
 
 	@Override

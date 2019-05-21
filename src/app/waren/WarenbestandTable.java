@@ -26,7 +26,7 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
     public WarenbestandRecord onRead(int index) { return this.records.get(index); }
     
     @Override
-    public ArrayList<WarenbestandRecord> onReadAll() { return this.records; }
+    public ArrayList<WarenbestandRecord> onRead() { return this.records; }
 
     @Override
     public int onCreate(WarenbestandRecord record){

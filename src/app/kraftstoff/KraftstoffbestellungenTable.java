@@ -27,7 +27,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     public KraftstoffbestellungenRecord onRead(int index) { return this.records.get(index); }
 
     @Override
-    public ArrayList<KraftstoffbestellungenRecord> onReadAll() { return this.records; }
+    public ArrayList<KraftstoffbestellungenRecord> onRead() { return this.records; }
     
     @Override
     public int onCreate(KraftstoffbestellungenRecord record){

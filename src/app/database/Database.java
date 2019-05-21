@@ -11,7 +11,7 @@ public interface Database<T> {
 
     public T onRead(int index);
 
-    ArrayList<T> onReadAll();
+    ArrayList<T> onRead();
     
     public int onCreate(T record);
 

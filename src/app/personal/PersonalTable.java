@@ -27,7 +27,7 @@ public class PersonalTable implements Database<PersonalRecord> {
     public PersonalRecord onRead(int index) { return this.records.get(index); }
 
     @Override
-    public ArrayList<PersonalRecord> onReadAll() { return this.records; }
+    public ArrayList<PersonalRecord> onRead() { return this.records; }
     
     @Override
     public int onCreate(PersonalRecord record){
