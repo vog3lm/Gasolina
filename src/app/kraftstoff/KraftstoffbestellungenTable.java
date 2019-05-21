@@ -13,8 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class KraftstoffbestellungenTable implements Database<KraftstoffbestellungenRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff_bestellungen.csv";
-    private final DatabaseConnection database = new DatabaseConnection(filename);
+    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.KRAFTSTOFF_BESTELLUNGEN);
     private ArrayList<KraftstoffbestellungenRecord> records = new ArrayList<KraftstoffbestellungenRecord>();
 
     public KraftstoffbestellungenTable(){
@@ -70,7 +69,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return this.filename; }
+    public String getUrl() { return DatabaseConnection.KRAFTSTOFF_BESTELLUNGEN; }
     
 	@Override
 	public int getIndex(KraftstoffbestellungenRecord record) {

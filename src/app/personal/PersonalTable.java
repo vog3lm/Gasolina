@@ -13,8 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class PersonalTable implements Database<PersonalRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_personal.csv";
-    private final DatabaseConnection database = new DatabaseConnection(filename);
+    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.PERSONAL);
     private ArrayList<PersonalRecord> records = new ArrayList<PersonalRecord>();
 
     public PersonalTable(){
@@ -66,7 +65,7 @@ public class PersonalTable implements Database<PersonalRecord> {
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return this.filename; }
+    public String getUrl() { return DatabaseConnection.PERSONAL; }
     
 	@Override
 	public int getIndex(PersonalRecord record) { return this.records.indexOf(record); }

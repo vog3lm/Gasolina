@@ -6,6 +6,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
+import app.Zustand;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -15,9 +17,24 @@ import java.util.ArrayList;
  * @version 1.0
  * @since   1.0
  */
-public class DatabaseConnection{
-	/**
-	 * */
+public class DatabaseConnection {
+	/** */
+	private static final String path = Zustand.getInstance().getDatabaseUrl();
+	/** */
+	public static final String EINNAHMEN = path+"gs_verkauf.csv";
+	/** */
+	public static final String AUSGABEN = path+"gs_ausgaben.csv";
+	/** */
+	public static final String KRAFTSTOFF = path+"gs_kraftstoff.csv";
+	/** */
+	public static final String KRAFTSTOFF_BESTELLUNGEN = path+"gs_kraftstoff_bestellungen.csv";
+	/** */
+	public static final String WAREN = path+"gs_waren.csv";
+	/** */
+	public static final String WAREN_BESTELLUNGEN = path+"gs_waren_bestellungen.csv";
+	/** */
+	public static final String PERSONAL = path+"gs_personal.csv";
+	/** */
     private final String filename;
     /**
      * 

@@ -13,7 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class VerkaufTable implements Database<VerkaufRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
+    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_verkauf.csv";
     private final DatabaseConnection database = new DatabaseConnection(filename);
     private ArrayList<VerkaufRecord> records = new ArrayList<VerkaufRecord>();
 

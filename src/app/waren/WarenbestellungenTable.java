@@ -13,8 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class WarenbestellungenTable implements Database<WarenbestellungenRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_waren_bestellungen.csv";
-    private final DatabaseConnection database = new DatabaseConnection(filename);
+    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.WAREN_BESTELLUNGEN);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
     public WarenbestellungenTable(){
@@ -69,7 +68,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return this.filename; }
+    public String getUrl() { return DatabaseConnection.WAREN_BESTELLUNGEN; }
     
 	@Override
 	public int getIndex(WarenbestellungenRecord record) {

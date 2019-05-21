@@ -13,8 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_kraftstoff.csv";
-    private final DatabaseConnection database = new DatabaseConnection(filename);
+    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.KRAFTSTOFF);
     private ArrayList<KraftstoffbestandRecord> records = new ArrayList<KraftstoffbestandRecord>();
     /**/
     private ArrayList<String> einheiten = new ArrayList<String>(){{
@@ -71,7 +70,7 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return this.filename; }
+    public String getUrl() { return DatabaseConnection.KRAFTSTOFF; }
     
 	@Override
 	public int getIndex(KraftstoffbestandRecord record) {
