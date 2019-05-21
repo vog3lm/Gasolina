@@ -2,9 +2,9 @@ package app.kraftstoff;
 
 import java.util.ArrayList;
 
+import app.Database;
 import app.Zustand;
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -13,7 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord> {
 
-    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.KRAFTSTOFF);
+    private final CsvConnection database = new CsvConnection(CsvConnection.KRAFTSTOFF);
     private ArrayList<KraftstoffbestandRecord> records = new ArrayList<KraftstoffbestandRecord>();
     /**/
     private ArrayList<String> einheiten = new ArrayList<String>(){{
@@ -70,7 +70,7 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return DatabaseConnection.KRAFTSTOFF; }
+    public String getUrl() { return CsvConnection.KRAFTSTOFF; }
     
 	@Override
 	public int getIndex(KraftstoffbestandRecord record) {

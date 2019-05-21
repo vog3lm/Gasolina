@@ -1,4 +1,4 @@
-package app.database;
+package app;
 
 import java.util.ArrayList;
 /**

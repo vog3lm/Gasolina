@@ -2,9 +2,9 @@ package app.waren;
 
 import java.util.ArrayList;
 
+import app.Database;
 import app.Zustand;
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -13,7 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class WarenbestellungenTable implements Database<WarenbestellungenRecord> {
 
-    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.WAREN_BESTELLUNGEN);
+    private final CsvConnection database = new CsvConnection(CsvConnection.WAREN_BESTELLUNGEN);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
     public WarenbestellungenTable(){
@@ -68,7 +68,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return DatabaseConnection.WAREN_BESTELLUNGEN; }
+    public String getUrl() { return CsvConnection.WAREN_BESTELLUNGEN; }
     
 	@Override
 	public int getIndex(WarenbestellungenRecord record) {

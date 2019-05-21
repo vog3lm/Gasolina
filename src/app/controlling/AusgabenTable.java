@@ -2,9 +2,9 @@ package app.controlling;
 
 import java.util.ArrayList;
 
+import app.Database;
 import app.Zustand;
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -13,7 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class AusgabenTable implements Database<AusgabenRecord> {
 
-    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.AUSGABEN);
+    private final CsvConnection database = new CsvConnection(CsvConnection.AUSGABEN);
     private ArrayList<AusgabenRecord> records = new ArrayList<AusgabenRecord>();
 
     public AusgabenTable(){
@@ -69,6 +69,6 @@ public class AusgabenTable implements Database<AusgabenRecord> {
 	public int getCount() { return this.records.size(); }
 
 	@Override
-	public String getUrl() { return DatabaseConnection.AUSGABEN; }
+	public String getUrl() { return CsvConnection.AUSGABEN; }
 
 }

@@ -2,8 +2,8 @@ package app.waren;
 
 import java.util.ArrayList;
 
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.Database;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -12,7 +12,7 @@ import app.database.DatabaseConnection;
  */
 public class WarenbestandTable implements Database<WarenbestandRecord> {
 
-    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.WAREN);
+    private final CsvConnection database = new CsvConnection(CsvConnection.WAREN);
     private ArrayList<WarenbestandRecord> records = new ArrayList<WarenbestandRecord>();
 
     public WarenbestandTable(){
@@ -66,7 +66,7 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return DatabaseConnection.WAREN; }
+    public String getUrl() { return CsvConnection.WAREN; }
 
 	@Override
 	public int getIndex(WarenbestandRecord record) {

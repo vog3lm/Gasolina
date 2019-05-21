@@ -2,9 +2,9 @@ package app.verkauf;
 
 import java.util.ArrayList;
 
+import app.Database;
 import app.Zustand;
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -13,8 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class VerkaufTable implements Database<VerkaufRecord> {
 
-    private final String filename = Zustand.getInstance().getDatabaseUrl()+"gs_verkauf.csv";
-    private final DatabaseConnection database = new DatabaseConnection(filename);
+    private final CsvConnection database = new CsvConnection(CsvConnection.EINNAHMEN);
     private ArrayList<VerkaufRecord> records = new ArrayList<VerkaufRecord>();
 
     public VerkaufTable(){
@@ -74,6 +73,6 @@ public class VerkaufTable implements Database<VerkaufRecord> {
 	public int getCount() { return this.records.size(); }
 
 	@Override
-	public String getUrl() { return this.filename; }
+	public String getUrl() { return CsvConnection.EINNAHMEN; }
 
 }

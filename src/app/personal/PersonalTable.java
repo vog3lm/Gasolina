@@ -2,9 +2,9 @@ package app.personal;
 
 import java.util.ArrayList;
 
+import app.Database;
 import app.Zustand;
-import app.database.Database;
-import app.database.DatabaseConnection;
+import app.csv.CsvConnection;
 /**
  * 
  * @author vog3lm
@@ -13,7 +13,7 @@ import app.database.DatabaseConnection;
  */
 public class PersonalTable implements Database<PersonalRecord> {
 
-    private final DatabaseConnection database = new DatabaseConnection(DatabaseConnection.PERSONAL);
+    private final CsvConnection database = new CsvConnection(CsvConnection.PERSONAL);
     private ArrayList<PersonalRecord> records = new ArrayList<PersonalRecord>();
 
     public PersonalTable(){
@@ -65,7 +65,7 @@ public class PersonalTable implements Database<PersonalRecord> {
     public int getCount(){ return this.records.size(); }
 
     @Override
-    public String getUrl() { return DatabaseConnection.PERSONAL; }
+    public String getUrl() { return CsvConnection.PERSONAL; }
     
 	@Override
 	public int getIndex(PersonalRecord record) { return this.records.indexOf(record); }

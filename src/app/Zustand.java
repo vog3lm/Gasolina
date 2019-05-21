@@ -125,21 +125,6 @@ public class Zustand {
 		return this;
 	}
 	/**
-	 * Used application database path.
-	 * */
-	private String databaseUrl = "src/app/sources/";
-	/**
-	 * Print path getter.
-	 * */
-	public String getDatabaseUrl() { return this.databaseUrl; }
-	/**
-	 * Print path setter.
-	 * */
-	public Zustand setDatabaseUrl(String databaseUrl) {
-		this.databaseUrl = databaseUrl;
-		return this;
-	}
-	/**
 	 * Singleton instance.
 	 * */
 	private static Zustand instance = new Zustand();

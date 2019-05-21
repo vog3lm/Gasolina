@@ -1,4 +1,4 @@
-package app.database;
+package app.csv;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
@@ -17,9 +17,9 @@ import java.util.ArrayList;
  * @version 1.0
  * @since   1.0
  */
-public class DatabaseConnection {
+public class CsvConnection {
 	/** */
-	private static final String path = Zustand.getInstance().getDatabaseUrl();
+	private static final String path = "src/app/csv/";
 	/** */
 	public static final String EINNAHMEN = path+"gs_verkauf.csv";
 	/** */
@@ -40,7 +40,7 @@ public class DatabaseConnection {
      * 
      * @param Path to database .csv file.
      */
-    public DatabaseConnection(String filename){
+    public CsvConnection(String filename){
         this.filename = filename;
     }
 	/**
