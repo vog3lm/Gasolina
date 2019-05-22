@@ -15,6 +15,7 @@ import app.personal.PersonalRecord;
 import app.verkauf.VerkaufController;
 import app.verkauf.VerkaufView;
 import app.waren.WarenController;
+import app.waren.WarenView;
 /**
  * 
  * @author vog3lm
@@ -39,8 +40,8 @@ public class MenuController implements Anmelden {
 			else if(id.equals("nav_kraftstoff_bestand")){new KraftstoffController(KraftstoffView.BESTAND);}
 			else if(id.equals("nav_kraftstoff_bestellungen")){new KraftstoffController(KraftstoffView.BESTELLUNGEN);}
 			else if(id.equals("nav_kraftstoff_tanks")){new KraftstoffController(KraftstoffView.TANKS);}
-			else if(id.equals("nav_waren_bestand")){new WarenController(WarenController.BESTAND);}
-			else if(id.equals("nav_waren_bestellungen")){new WarenController(WarenController.BESTELLUNGEN);}
+			else if(id.equals("nav_waren_bestand")){new WarenController(WarenView.BESTAND);}
+			else if(id.equals("nav_waren_bestellungen")){new WarenController(WarenView.BESTELLUNGEN);}
 			else if(id.equals("nav_personal_benutzer")){new BenutzerController();}
 			else if(id.equals("nav_personal_verwaltung")){new PersonalController();}
 			else if(id.equals("nav_personal_abmelden")){this.onAbmelden();}

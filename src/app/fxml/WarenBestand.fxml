@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+
+
+<AnchorPane id="bestand_wrapper"
+	fx:id="bestand_wrapper"	
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1" >
+	<children>
+		<TableView id="bestand_liste" 
+			fx:id="bestand_liste" 
+			editable="true" 
+			tableMenuButtonVisible="true"                    
+			AnchorPane.bottomAnchor="0.0" 
+			AnchorPane.leftAnchor="0.0" 
+			AnchorPane.rightAnchor="0.0" 
+			AnchorPane.topAnchor="0.0">
+            <columns>
+	            <TableColumn id="bestand_warennummer" fx:id="bestand_warennummer" text="WN" />
+	            <TableColumn id="bestand_bezeichnung" fx:id="bestand_bezeichnung" text="Bezeichnung" />
+	            <TableColumn id="bestand_preis" fx:id="bestand_preis" text="Preis" />
+	            <TableColumn id="bestand_waehrung" fx:id="bestand_waehrung" text="Währung" />
+	            <TableColumn id="bestand_menge" fx:id="bestand_menge" text="Menge" />
+	            <TableColumn id="bestand_einheit" fx:id="bestand_einheit" text="Einheit" />
+	            <TableColumn id="bestand_kategorie" fx:id="bestand_kategorie" text="Kategorie" />
+            </columns>
+		</TableView>
+		<Button id="bestand_bestellen" 
+           	fx:id="bestand_bestellen" 
+           	layoutX="733.3" 
+           	layoutY="385.0" 
+           	mnemonicParsing="false" 
+           	prefWidth="120.0" 
+           	text="Bestellen" />
+	</children>
+</AnchorPane>

@@ -37,6 +37,8 @@ public class Loader {
 	public static final String VERKAUF = "Verkauf.fxml";
 	/** */
 	public static final String WAREN = "Waren.fxml";
+	public static final String WAREN_BESTAND = "WarenBestand.fxml";
+	public static final String WAREN_BESTELLUNGEN = "WarenBestellungen.fxml";
 	/**
 	 * BoderPane top section fxml layout loader.
 	 * @param 
