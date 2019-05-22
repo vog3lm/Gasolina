@@ -59,7 +59,7 @@ public class BestandView implements Initializable {
 		bestand_warennummer.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("warennummer"));
 	    bestand_bezeichnung.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("bezeichnung"));
 	    bestand_bezeichnung.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestand_bezeichnung.setOnEditCommit((cell) -> {controller.onBestandEdit(cell,"bezeichnung");});
+	    bestand_bezeichnung.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"bezeichnung",cell.getNewValue());});    
 	    bestand_einheit.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("einheit"));
 	    bestand_menge.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("menge"));
 	    /* bestand_menge.setCellFactory(TextFieldTableCell.forTableColumn()); */
@@ -87,10 +87,10 @@ public class BestandView implements Initializable {
 	            };
 	        }
 	    });
-	    bestand_menge.setOnEditCommit((cell) -> {controller.onBestandEdit(cell,"menge");}); 
+	    bestand_menge.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});
 	    bestand_preis.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("preis"));
 	    bestand_preis.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestand_preis.setOnEditCommit((cell) -> {controller.onBestandEdit(cell,"preis");});
+	    bestand_preis.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"preis",cell.getNewValue());});
 	    bestand_waehrung.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("waehrung"));
 	    bestand_tank.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("tank"));
 	    bestand_kapazitaet.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("kapazitaet"));	    

@@ -17,15 +17,17 @@ public class KraftstoffbestellungenRecord {
     private SimpleStringProperty preis;
     private SimpleStringProperty waehrung;
     private SimpleStringProperty menge;
+    private SimpleStringProperty einheit;
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
-
-    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
+    
+    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String bestelldatum, String lieferdatum){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);
         this.menge = new SimpleStringProperty(menge);
+        this.einheit = new SimpleStringProperty(einheit);
         this.preis = new SimpleStringProperty(preis);
         this.waehrung = new SimpleStringProperty(waehrung);
         this.bestelldatum = new SimpleStringProperty(bestelldatum);
@@ -40,8 +42,9 @@ public class KraftstoffbestellungenRecord {
         this.preis = new SimpleStringProperty(record[3]);
         this.waehrung = new SimpleStringProperty(record[4]);
         this.menge = new SimpleStringProperty(record[5]);
-        this.bestelldatum = new SimpleStringProperty(record[6]);
-        this.lieferdatum = new SimpleStringProperty(record[7]);
+        this.einheit = new SimpleStringProperty(record[6]);
+        this.bestelldatum = new SimpleStringProperty(record[7]);
+        this.lieferdatum = new SimpleStringProperty(record[8]);
     }
 
     int getIndex() { return this.index.get(); }
@@ -79,6 +82,13 @@ public class KraftstoffbestellungenRecord {
         return this;
     }
 
+    public String getEinheit(){return this.einheit.get();}
+
+    public KraftstoffbestellungenRecord setEinheit(String einheit) {
+        this.einheit = new SimpleStringProperty(einheit);
+        return this;
+    }
+    
     public String getPreis(){return this.preis.get();}
 
     public KraftstoffbestellungenRecord setPreis(String preis) {

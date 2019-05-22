@@ -1,7 +1,13 @@
 package app.kraftstoff;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import app.Zustand;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -12,6 +18,105 @@ import javafx.scene.layout.GridPane;
 
 public class KraftstoffDialoge {
 
+	Dialog<KraftstoffbestellungenRecord> createBuchenDialog(KraftstoffbestellungenRecord record) {
+		/* prepare dialog - one/two */
+		Dialog<KraftstoffbestellungenRecord> dialog = new Dialog<KraftstoffbestellungenRecord>();
+		dialog.setTitle("Waren Einbuchen");
+		dialog.setHeaderText(null);
+		DialogPane pane = dialog.getDialogPane();
+		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		// Set the icon (must be included in the project).
+		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
+		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+		pane.lookupButton(ButtonType.OK).setDisable(false);
+		/* build dialog layout components */
+		TextField bestellnummer = new TextField();
+		bestellnummer.setEditable(false);
+		bestellnummer.setText(record.getBestellnummer());
+		TextField bezeichnung = new TextField();
+		bezeichnung.setEditable(false);
+		bezeichnung.setText(record.getBezeichnung());
+		TextField restmenge = new TextField();
+		restmenge.setPromptText("Restmenge");
+		restmenge.setEditable(false);
+		restmenge.setVisible(false);
+		Label restmenge_label = new Label("Restmenge:");
+		restmenge_label.setVisible(false);
+		TextField lieferdatum = new TextField();
+		lieferdatum.setPromptText("Lieferdatum");
+		lieferdatum.setVisible(false);
+		lieferdatum.textProperty().addListener((ob, o, n) -> {
+			if("".equals(lieferdatum.getText())) {
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}else {
+				pane.lookupButton(ButtonType.OK).setDisable(false);
+			}
+		});
+		Label lieferdatum_label = new Label("Lieferdatum:");
+		lieferdatum_label.setVisible(false);
+		TextField menge = new TextField();
+		menge.setPromptText("Menge");
+		menge.setText(record.getMenge());
+		menge.textProperty().addListener((ob, o, n) -> {
+			float liefermenge = 0;
+			if(!n.equals("")) {
+			    try {liefermenge = Float.parseFloat(n);} 
+			    catch (NumberFormatException | NullPointerException e){
+			    	menge.setText(o);
+			    	return;
+			    }
+			}
+			if(!n.equals(record.getMenge())) {
+				restmenge.setText((Float.parseFloat(record.getMenge())-liefermenge)+"");
+				restmenge.setVisible(true);
+				restmenge_label.setVisible(true);
+				lieferdatum.setVisible(true);
+				lieferdatum_label.setVisible(true);
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}else {
+				restmenge.setText("");
+				restmenge.setVisible(false);
+				restmenge_label.setVisible(false);
+				lieferdatum.setVisible(false);
+				lieferdatum_label.setVisible(false);
+				pane.lookupButton(ButtonType.OK).setDisable(false);
+			}
+		});
+		/* build dialog layout */
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
+		grid.add(new Label("Bestellnummer:"), 0, 0);
+		grid.add(bestellnummer, 1, 0);
+		grid.add(new Label("Bezeichnung:"), 0, 1);
+		grid.add(bezeichnung, 1, 1);
+		grid.add(new Label("Menge:"), 0, 2);
+		grid.add(menge, 1, 2);
+		grid.add(restmenge_label, 0, 3);
+		grid.add(restmenge, 1, 3);
+		grid.add(lieferdatum_label, 0, 4);
+		grid.add(lieferdatum, 1, 4);
+		/* prepare dialog - two/two */
+		pane.setContent(grid);
+		dialog.setResultConverter(submit -> {
+		    if (submit == ButtonType.OK) {
+		    	return new KraftstoffbestellungenRecord(record.getIndex()
+		    			,record.getBestellnummer()
+		    			,record.getWarennummer()
+		    			,record.getBezeichnung()
+		    			,record.getPreis()
+		    			,record.getWaehrung()
+		    			,menge.getText()			/* gelieferte menge */
+		    			,record.getEinheit()
+		    			,record.getBestelldatum()
+		    			,lieferdatum.getText());	/* lieferdatum restmenge */
+		    }
+		    return null;
+		});
+		return dialog;
+	}
+	
 	Dialog<KraftstoffbestellungenRecord> createBestandBestellenDialog(KraftstoffbestandRecord record) {
 		TextField warennummer = new TextField();
 		warennummer.setText(record.getWarennummer());
@@ -49,26 +154,48 @@ public class KraftstoffDialoge {
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 		pane.lookupButton(ButtonType.OK).setDisable(true);
 		/* build dialog layout components */
-		menge.setPromptText("Menge");
-		menge.textProperty().addListener((ob, o, n) -> {
-			if(!n.equals("")) {
-			    try {Float.parseFloat(n);} 
-			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
-			}
-		});
 		TextField preis = new TextField();
+		TextField lieferdatum = new TextField();
 		preis.setPromptText("Preis");
 		preis.textProperty().addListener((ob, o, n) -> {
 			if(!n.equals("")) {
-			    try {Float.parseFloat(n);} 
+			    try {
+			    	Float.parseFloat(n);
+					if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					}else {
+						pane.lookupButton(ButtonType.OK).setDisable(false);
+					}	
+			    } 
 			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
+			}
+			
+		});
+		menge.setPromptText("Menge");
+		menge.textProperty().addListener((ob, o, n) -> {
+			if(!n.equals("")) {
+			    try {
+			    	Float.parseFloat(n);
+					if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					}else {
+						pane.lookupButton(ButtonType.OK).setDisable(false);
+					}	
+			    } 
+			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
+			}
+		});
+		lieferdatum.setPromptText("Lieferdatum");
+		lieferdatum.textProperty().addListener((ob, o, n) -> {
+			if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}else {
+				pane.lookupButton(ButtonType.OK).setDisable(false);
 			}
 		});
 		warennummer.setPromptText("Warennummer");
 		warennummer.setEditable(false);
 		einheit.setPromptText("Einheit");
-		TextField lieferdatum = new TextField();
-		lieferdatum.setPromptText("Lieferdatum");
 		bezeichnung.setPromptText("Bezeichnung");
 		/* build dialog layout */
 		GridPane grid = new GridPane();
@@ -91,8 +218,16 @@ public class KraftstoffDialoge {
 		pane.setContent(grid);
 		dialog.setResultConverter(submit -> {
 		    if (submit == ButtonType.OK) {
-		    	// TODO :: 
-		        return new KraftstoffbestellungenRecord(-1,"","","","","","","","");
+				DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		        return new KraftstoffbestellungenRecord(-1,""
+		        		,warennummer.getText()
+		        		,bezeichnung.getText()
+		        		,preis.getText()
+		        		,"EUR"
+		        		,menge.getText()
+		        		,einheit.getText()
+		        		,dateFormat.format(new Date())
+		        		,lieferdatum.getText());
 		    }
 		    return null;
 		});

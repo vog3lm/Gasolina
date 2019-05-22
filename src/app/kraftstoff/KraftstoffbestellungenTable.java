@@ -32,7 +32,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     @Override
     public int onCreate(KraftstoffbestellungenRecord record){
         int index = this.records.size();
-        this.records.add(record.setIndex(index));
+        this.records.add(record.setIndex(index).setBestellnummer(""+index));
         return index;
     }
 
@@ -60,7 +60,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(KraftstoffbestellungenRecord r : this.records){
-            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getBestelldatum(),r.getLieferdatum()});
+            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getEinheit(),r.getBestelldatum(),r.getLieferdatum()});
         }
         database.onWrite(records);
     }
