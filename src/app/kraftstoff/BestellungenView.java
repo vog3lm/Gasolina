@@ -112,7 +112,7 @@ public class BestellungenView implements Initializable {
         	controller.onBuchen(r);
         });});
         MenuItem remove = new MenuItem("Entfernen");
-        remove.setOnAction(event -> { table.getItems().remove(row.getIndex());}); // TODO : controller.onDelete()
+        remove.setOnAction(event -> { controller.onBestellungDelete(row.getIndex());});
         menu.getItems().addAll(buchen,remove);
         return menu;
 	}

@@ -37,6 +37,11 @@ public class WarenController implements Lifecycle {
 		view.onRefresh();
 	}
 	
+	void onBestandDelete(int index) {
+		bestand.onDelete(index);
+		view.onRefresh();
+	}
+	
 
 	void onBestellungEdit(int index, String id, String value) {
 		WarenbestellungenRecord record = bestellungen.onRead(index);
@@ -44,6 +49,11 @@ public class WarenController implements Lifecycle {
 		else if(id.equals("menge")) { record.setMenge(value); }
 		else if(id.equals("preis")) { record.setPreis(value); }
 		else if(id.equals("lieferdatum")) { record.setLieferdatum(value); }
+		view.onRefresh();
+	}
+	
+	void onBestellungDelete(int index) {
+		bestellungen.onDelete(index);
 		view.onRefresh();
 	}
 	

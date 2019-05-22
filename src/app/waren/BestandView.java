@@ -106,7 +106,7 @@ public class BestandView implements Initializable {
 			});
         });
         MenuItem remove = new MenuItem("Entfernen");
-        remove.setOnAction(event -> { table.getItems().remove(row.getIndex());});
+        remove.setOnAction(event -> { controller.onBestandDelete(row.getIndex()); });
         menu.getItems().addAll(bestellen,remove);
         return menu;
 	}
