@@ -1,12 +1,10 @@
 package app.waren;
 
 import app.controlling.AusgabenTable;
-
 import app.waren.WarenbestellungenRecord;
 import app.waren.WarenbestellungenTable;
 import app.Lifecycle;
 
-import javafx.scene.control.TableColumn;
 /**
  * 
  * @author vog3lm
@@ -49,23 +47,59 @@ public class WarenController implements Lifecycle {
 		view.onRefresh();
 	}
 	
-	void onBestellen(WarenbestellungenRecord record) {
-		/* TODO: process result */
-		// bestellungen.onCreate(r);
-		// bestellungen_liste.refresh();
+	void onBestellen(WarenbestellungenRecord bestellung) {
 		view.setIndex(WarenView.BESTELLUNGEN);
-		System.out.println("bestellen");
+		bestellungen.onCreate(bestellung);
+		view.onRefresh();
 	}
 
-	void onBuchen(WarenbestandRecord record) {
+	void onBuchen(WarenbestellungenRecord lieferung) {
 		view.setIndex(WarenView.BESTAND);
-		System.out.println("buchen");
+		WarenbestandRecord vorrat;
+		int index = bestand.getIndex(lieferung.getBezeichnung());
+		if(-1 == index) {
+			index = bestand.onCreate(new WarenbestandRecord(-1
+					,"warennummer"
+					,lieferung.getBezeichnung()
+					,"einheit"
+					,"menge"
+					,lieferung.getPreis()
+					,lieferung.getWaehrung()
+					,"kategorie"));
+		}
+		vorrat = bestand.onRead(index);
+		WarenbestellungenRecord bestellung = bestellungen.onRead(lieferung.getIndex());
+		try {
+			float preis = Float.parseFloat(lieferung.getPreis());
+			float bestandsmenge = Float.parseFloat(vorrat.getMenge());
+			float liefermenge = Float.parseFloat(lieferung.getMenge());
+			
+			
+			System.out.println("delete: "+lieferung.getIndex());
+			for(WarenbestellungenRecord r : bestellungen.onRead()) {
+				System.out.println(r.getIndex()+" "+r.getBezeichnung());
+			}
+			
+			
+			bestellungen.onDelete(lieferung.getIndex());
+			if("".equals(lieferung.getLieferdatum())) {
+		    	bestandsmenge = bestandsmenge + liefermenge;
+			} else {
+		    	bestandsmenge = Float.parseFloat(vorrat.getMenge()) + liefermenge;
+		     	int i = bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
+			}
+			vorrat.setMenge(bestandsmenge+"");
+//		 	TODO : ausgaben.onCreate();			
+		}catch (NumberFormatException | NullPointerException e){
+	    	System.out.println("kraftstoff teilmenge buchen: oooops");
+	    }
+		view.onRefresh();
 	}
 	
 	@Override
 	public boolean destroy() {
-		bestand.onCommit();
-		bestellungen.onCommit();
+	//	bestand.onCommit();
+	//	bestellungen.onCommit();
 		return true;
 	}
 }

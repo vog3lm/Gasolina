@@ -39,9 +39,13 @@ public class BestellungenView implements Initializable {
 	@FXML
 	private TableColumn<WarenbestellungenRecord, String> bestellungen_menge;
 	@FXML
+	private TableColumn<WarenbestellungenRecord, String> bestellungen_einheit;
+	@FXML
 	private TableColumn<WarenbestellungenRecord, String> bestellungen_bestelldatum;
 	@FXML
 	private TableColumn<WarenbestellungenRecord, String> bestellungen_lieferdatum;
+	@FXML
+	private TableColumn<WarenbestellungenRecord, String> bestellungen_mitarbeiter;
 	@FXML
 	private Button bestellungen_hinzufuegen;
 	
@@ -62,6 +66,7 @@ public class BestellungenView implements Initializable {
 	    bestellungen_menge.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("menge"));
 	    bestellungen_menge.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestellungen_menge.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});  
+	    bestellungen_einheit.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("einheit"));
 	    bestellungen_preis.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("preis"));
 	    bestellungen_preis.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestellungen_preis.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"preis",cell.getNewValue());});
@@ -70,9 +75,9 @@ public class BestellungenView implements Initializable {
 	    bestellungen_lieferdatum.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestellungen_lieferdatum.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"lieferdatum",cell.getNewValue());});    
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("bestelldatum"));
+	    bestellungen_mitarbeiter.setCellValueFactory(new PropertyValueFactory<WarenbestellungenRecord, String>("mitarbeiter"));
 	    /**/
 	    bestellungen_liste.setRowFactory(createRowListener());
-	    bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
 	    /**/
 	    bestellungen_hinzufuegen.setOnAction(event -> {
 	    	new WarenDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
@@ -113,6 +118,5 @@ public class BestellungenView implements Initializable {
 	
 	void onRefresh() {
 		bestellungen_liste.refresh();
-		bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
 	}
 }

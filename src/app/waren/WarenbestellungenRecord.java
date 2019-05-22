@@ -17,19 +17,23 @@ public class WarenbestellungenRecord {
     private SimpleStringProperty preis;
     private SimpleStringProperty waehrung;
     private SimpleStringProperty menge;
+    private SimpleStringProperty einheit;
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
+    private SimpleStringProperty mitarbeiter;
 
-    public WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String preis, String waehrung, String bestelldatum, String lieferdatum){
+    public WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String einheit, String preis, String waehrung, String bestelldatum, String lieferdatum, String mitarbeiter){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);
         this.menge = new SimpleStringProperty(menge);
+        this.einheit = new SimpleStringProperty(einheit);
         this.preis = new SimpleStringProperty(preis);
         this.waehrung = new SimpleStringProperty(waehrung);
         this.bestelldatum = new SimpleStringProperty(bestelldatum);
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
+        this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
     }
 
     WarenbestellungenRecord(int index, String[] record){
@@ -40,8 +44,10 @@ public class WarenbestellungenRecord {
         this.preis = new SimpleStringProperty(record[3]);
         this.waehrung = new SimpleStringProperty(record[4]);
         this.menge = new SimpleStringProperty(record[5]);
-        this.bestelldatum = new SimpleStringProperty(record[6]);
-        this.lieferdatum = new SimpleStringProperty(record[7]);
+        this.einheit = new SimpleStringProperty(record[6]);
+        this.bestelldatum = new SimpleStringProperty(record[7]);
+        this.lieferdatum = new SimpleStringProperty(record[8]);
+        this.mitarbeiter = new SimpleStringProperty(record[9]);
     }
 
     public int getIndex() { return this.index.get(); }
@@ -78,6 +84,13 @@ public class WarenbestellungenRecord {
         this.menge = new SimpleStringProperty(menge);
         return this;
     }
+    
+    public String getEinheit(){return this.einheit.get(); }
+
+    public WarenbestellungenRecord setEinheit(String einheit) {
+        this.einheit = new SimpleStringProperty(einheit);
+        return this;
+    }
 
     public String getPreis(){return this.preis.get();}
 
@@ -104,6 +117,13 @@ public class WarenbestellungenRecord {
 
     public WarenbestellungenRecord setLieferdatum(String lieferdatum) {
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
+        return this;
+    }
+    
+    public String getMitarbeiter(){return this.mitarbeiter.get(); }
+
+    public WarenbestellungenRecord setMitarbeiter(String mitarbeiter) {
+        this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
         return this;
     }
 }

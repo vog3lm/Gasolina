@@ -33,6 +33,7 @@ public class KraftstoffbestellungenRecord {
         this.waehrung = new SimpleStringProperty(waehrung);
         this.bestelldatum = new SimpleStringProperty(bestelldatum);
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
+        this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
     }
 
     KraftstoffbestellungenRecord(int index, String[] record){

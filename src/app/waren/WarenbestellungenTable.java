@@ -31,7 +31,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     @Override
     public int onCreate(WarenbestellungenRecord record){
         int index = this.records.size();
-        this.records.add(record.setIndex(index));
+        this.records.add(record.setIndex(index).setBestellnummer(""+index));
         return index;
     }
 
@@ -42,9 +42,11 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
                 .setWarennummer(record.getWarennummer())
                 .setBezeichnung(record.getBezeichnung())
                 .setMenge(record.getMenge())
+                .setEinheit(record.getEinheit())
                 .setPreis(record.getPreis())
                 .setBestelldatum(record.getBestelldatum())
-                .setLieferdatum(record.getLieferdatum());
+                .setLieferdatum(record.getLieferdatum())
+                .setMitarbeiter(record.getMitarbeiter());
     }
 
     @Override
@@ -59,7 +61,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(WarenbestellungenRecord r : this.records){
-            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getBestelldatum(),r.getLieferdatum()});
+            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getEinheit(),r.getBestelldatum(),r.getLieferdatum(),r.getMitarbeiter()});
         }
         database.onWrite(records);
     }
@@ -76,7 +78,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
 	}
 	
 	@Override
-	public int getIndex(String warennummer) {
+	public int getIndex(String bezeichnung) {
 		/* TODO: search by ... */
 		return -1;
 	}

@@ -1,6 +1,11 @@
 package app.waren;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import app.Zustand;
+import app.kraftstoff.KraftstoffbestellungenRecord;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
@@ -12,9 +17,9 @@ import javafx.scene.layout.GridPane;
 
 public class WarenDialoge {
 
-	Dialog<WarenbestandRecord> createBuchenDialog(WarenbestellungenRecord record) {
+	Dialog<WarenbestellungenRecord> createBuchenDialog(WarenbestellungenRecord record) {
 		/* prepare dialog - one/two */
-		Dialog<WarenbestandRecord> dialog = new Dialog<WarenbestandRecord>();
+		Dialog<WarenbestellungenRecord> dialog = new Dialog<WarenbestellungenRecord>();
 		dialog.setTitle("Waren Einbuchen");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
@@ -22,7 +27,7 @@ public class WarenDialoge {
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-		pane.lookupButton(ButtonType.OK).setDisable(true);
+		pane.lookupButton(ButtonType.OK).setDisable(false);
 		/* build dialog layout components */
 		TextField bestellnummer = new TextField();
 		bestellnummer.setEditable(false);
@@ -39,6 +44,13 @@ public class WarenDialoge {
 		TextField lieferdatum = new TextField();
 		lieferdatum.setPromptText("Lieferdatum");
 		lieferdatum.setVisible(false);
+		lieferdatum.textProperty().addListener((ob, o, n) -> {
+			if("".equals(lieferdatum.getText())) {
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}else {
+				pane.lookupButton(ButtonType.OK).setDisable(false);
+			}
+		});
 		Label lieferdatum_label = new Label("Lieferdatum:");
 		lieferdatum_label.setVisible(false);
 		TextField menge = new TextField();
@@ -59,12 +71,14 @@ public class WarenDialoge {
 				restmenge_label.setVisible(true);
 				lieferdatum.setVisible(true);
 				lieferdatum_label.setVisible(true);
+				pane.lookupButton(ButtonType.OK).setDisable(true);
 			}else {
 				restmenge.setText("");
 				restmenge.setVisible(false);
 				restmenge_label.setVisible(false);
 				lieferdatum.setVisible(false);
 				lieferdatum_label.setVisible(false);
+				pane.lookupButton(ButtonType.OK).setDisable(false);
 			}
 		});
 		/* build dialog layout */
@@ -86,7 +100,17 @@ public class WarenDialoge {
 		pane.setContent(grid);
 		dialog.setResultConverter(submit -> {
 		    if (submit == ButtonType.OK) {
-		        return new WarenbestandRecord(-1,"","","","","","","");
+		    	return new WarenbestellungenRecord(record.getIndex()
+		    			,record.getBestellnummer()
+		    			,record.getWarennummer()
+		    			,record.getBezeichnung()
+		    			,menge.getText()			/* gelieferte menge */
+		    			,record.getEinheit()
+		    			,record.getPreis()
+		    			,record.getWaehrung()		    			
+		    			,record.getBestelldatum()
+		    			,lieferdatum.getText()	/* lieferdatum restmenge */
+		    			,record.getMitarbeiter());
 		    }
 		    return null;
 		});
@@ -106,7 +130,6 @@ public class WarenDialoge {
 		einheit.setText(record.getEinheit());
 		/* create and call dialog */
 		return onCreateBestellenDialog(warennummer,bezeichnung,menge,einheit);
-		
 	}
 
 	Dialog<WarenbestellungenRecord> createBestellungAddDialog() {
@@ -131,26 +154,49 @@ public class WarenDialoge {
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 		pane.lookupButton(ButtonType.OK).setDisable(true);
 		/* build dialog layout components */
+		TextField preis = new TextField();
+		TextField lieferdatum = new TextField();
 		menge.setPromptText("Menge");
 		menge.textProperty().addListener((ob, o, n) -> {
 			if(!n.equals("")) {
-			    try {Float.parseFloat(n);} 
+			    try {
+			    	Float.parseFloat(n);
+					if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					}else {
+						pane.lookupButton(ButtonType.OK).setDisable(false);
+					}	
+			    } 
 			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
 			}
 		});
-		TextField preis = new TextField();
+		
 		preis.setPromptText("Preis");
 		preis.textProperty().addListener((ob, o, n) -> {
 			if(!n.equals("")) {
-			    try {Float.parseFloat(n);} 
+			    try {
+			    	Float.parseFloat(n);
+					if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					}else {
+						pane.lookupButton(ButtonType.OK).setDisable(false);
+					}		
+			    } 
 			    catch (NumberFormatException | NullPointerException e){menge.setText(o);}
 			}
 		});
 		warennummer.setPromptText("Warennummer");
 		warennummer.setEditable(false);
 		einheit.setPromptText("Einheit");
-		TextField lieferdatum = new TextField();
+		
 		lieferdatum.setPromptText("Lieferdatum");
+		lieferdatum.textProperty().addListener((ob, o, n) -> {
+			if("".equals(menge.getText()) || "".equals(preis.getText()) || "".equals(lieferdatum.getText())) {
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}else {
+				pane.lookupButton(ButtonType.OK).setDisable(false);
+			}
+		});
 		bezeichnung.setPromptText("Bezeichnung");
 		/* build dialog layout */
 		GridPane grid = new GridPane();
@@ -173,7 +219,17 @@ public class WarenDialoge {
 		pane.setContent(grid);
 		dialog.setResultConverter(submit -> {
 		    if (submit == ButtonType.OK) {
-		        return new WarenbestellungenRecord(-1,"","","","","","","","");
+				DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		        return new WarenbestellungenRecord(-1,""
+		        		,warennummer.getText()
+		        		,bezeichnung.getText()
+		        		,menge.getText()
+		        		,einheit.getText()
+		        		,preis.getText()
+		        		,"EUR"
+		        		,dateFormat.format(new Date())
+		        		,lieferdatum.getText()
+		        		,Zustand.getInstance().getBenutzer().getBenutzername());
 		    }
 		    return null;
 		});

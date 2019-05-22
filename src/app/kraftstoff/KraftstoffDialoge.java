@@ -110,7 +110,7 @@ public class KraftstoffDialoge {
 		    			,menge.getText()			/* gelieferte menge */
 		    			,record.getEinheit()
 		    			,record.getBestelldatum()
-		    			,lieferdatum.getText()	/* lieferdatum restmenge */
+		    			,lieferdatum.getText()		/* lieferdatum restmenge */
 		    			,record.getMitarbeiter());
 		    }
 		    return null;

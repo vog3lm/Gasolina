@@ -69,6 +69,7 @@ public class KraftstoffController implements Lifecycle {
 			float preis = Float.parseFloat(lieferung.getPreis());
 			float bestandsmenge = Float.parseFloat(vorrat.getMenge());
 			float liefermenge = Float.parseFloat(lieferung.getMenge());
+			bestellungen.onDelete(lieferung.getIndex());
 			if("".equals(lieferung.getLieferdatum())) {
 		    	bestandsmenge = bestandsmenge + liefermenge;
 			} else {
@@ -76,7 +77,6 @@ public class KraftstoffController implements Lifecycle {
 		     	bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
 		    }
 			vorrat.setMenge(bestandsmenge+"");
-			bestellungen.onDelete(lieferung.getIndex());
 //		 	TODO : ausgaben.onCreate();
 	    }catch (NumberFormatException | NullPointerException e){
 	    	System.out.println("kraftstoff teilmenge buchen: oooops");
