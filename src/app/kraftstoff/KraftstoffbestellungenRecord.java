@@ -20,8 +20,9 @@ public class KraftstoffbestellungenRecord {
     private SimpleStringProperty einheit;
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
+    private SimpleStringProperty mitarbeiter;
     
-    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String bestelldatum, String lieferdatum){
+    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String bestelldatum, String lieferdatum, String mitarbeiter){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
@@ -45,6 +46,7 @@ public class KraftstoffbestellungenRecord {
         this.einheit = new SimpleStringProperty(record[6]);
         this.bestelldatum = new SimpleStringProperty(record[7]);
         this.lieferdatum = new SimpleStringProperty(record[8]);
+        this.mitarbeiter = new SimpleStringProperty(record[9]);
     }
 
     int getIndex() { return this.index.get(); }
@@ -114,6 +116,13 @@ public class KraftstoffbestellungenRecord {
 
     public KraftstoffbestellungenRecord setLieferdatum(String lieferdatum) {
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
+        return this;
+    }
+    
+    public String getMitarbeiter(){ return this.mitarbeiter.get();}
+
+    public KraftstoffbestellungenRecord setMitarbeiter(String mitarbeiter) {
+        this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
         return this;
     }
 }

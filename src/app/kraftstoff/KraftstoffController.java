@@ -53,7 +53,6 @@ public class KraftstoffController implements Lifecycle {
 		KraftstoffbestandRecord vorrat;
 		int index = bestand.getIndex(lieferung.getBezeichnung());
 		if(-1 == index) {
-			// TODO new Bestand for new gas
 			index = bestand.onCreate(new KraftstoffbestandRecord(-1
 					,"warennummer"
 					,lieferung.getBezeichnung()

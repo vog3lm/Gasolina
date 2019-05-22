@@ -54,6 +54,8 @@ public class BestellungenView implements Initializable {
 	@FXML
 	private TableColumn<KraftstoffbestellungenRecord, String> bestellungen_lieferdatum;
 	@FXML
+	private TableColumn<KraftstoffbestellungenRecord, String> bestellungen_mitarbeiter;
+	@FXML
 	private Button bestellungen_hinzufuegen;
 		
 	private KraftstoffController controller;
@@ -86,6 +88,7 @@ public class BestellungenView implements Initializable {
 	    bestellungen_lieferdatum.setCellFactory(TextFieldTableCell.forTableColumn());
 	    bestellungen_lieferdatum.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"lieferdatum",cell.getNewValue());});
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("bestelldatum"));
+	    bestellungen_mitarbeiter.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("mitarbeiter"));
 	    /**/
 	    bestellungen_liste.setRowFactory(this.createRowListener());
 	    bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);

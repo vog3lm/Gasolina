@@ -27,6 +27,7 @@
 	            <TableColumn id="bestellungen_einheit" fx:id="bestellungen_einheit" text="Einheit" />
 	            <TableColumn id="bestellungen_bestelldatum" fx:id="bestellungen_bestelldatum" text="Bestelldatum" />
 	            <TableColumn id="bestellungen_lieferdatum" fx:id="bestellungen_lieferdatum" text="Lieferdatum" />
+	            <TableColumn id="bestellungen_mitarbeiter" fx:id="bestellungen_mitarbeiter" text="Mitarbeiter" />
 			</columns>
 		</TableView>
 		<Button id="bestellungen_hinzufuegen" 
