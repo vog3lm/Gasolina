@@ -53,9 +53,7 @@ public class BestellungenView implements Initializable {
 	private TableColumn<KraftstoffbestellungenRecord, String> bestellungen_lieferdatum;
 	@FXML
 	private Button bestellungen_hinzufuegen;
-	
-	private KraftstoffDialoge factory = new KraftstoffDialoge();
-	
+		
 	private KraftstoffController controller;
 	
 	BestellungenView(KraftstoffController controller) {
@@ -82,17 +80,17 @@ public class BestellungenView implements Initializable {
 	    bestellungen_lieferdatum.setOnEditCommit((cell) -> {controller.onBestellungEdit(cell,"lieferdatum");});
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("bestelldatum"));
 	    /**/
-	    bestellungen_liste.setRowFactory(this.onCreateListener());
+	    bestellungen_liste.setRowFactory(this.createRowListener());
 	    bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
 	    /**/
 	    bestellungen_hinzufuegen.setOnAction(event -> {
-	    	factory.createBestellungAddDialog().showAndWait().ifPresent(record -> {
+	    	new KraftstoffDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
 	    		controller.onBestellen(record);
 			});
 	    });
 	}
 	
-	private Callback<TableView<KraftstoffbestellungenRecord>,TableRow<KraftstoffbestellungenRecord>> onCreateListener() {
+	private Callback<TableView<KraftstoffbestellungenRecord>,TableRow<KraftstoffbestellungenRecord>> createRowListener() {
 		return new Callback<TableView<KraftstoffbestellungenRecord>, TableRow<KraftstoffbestellungenRecord>>(){
 	        @Override
 	        public TableRow<KraftstoffbestellungenRecord> call(TableView<KraftstoffbestellungenRecord> table) {
@@ -204,4 +202,9 @@ public class BestellungenView implements Initializable {
 	}
 	
 	AnchorPane getView() { return bestellungen_wrapper; }
+	
+	void onRefresh() {
+		bestellungen_liste.refresh();
+		bestellungen_liste.getSortOrder().addAll(bestellungen_bezeichnung);
+	}
 }

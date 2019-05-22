@@ -6,21 +6,17 @@ import java.util.ResourceBundle;
 
 import app.fxml.Loader;
 
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -50,8 +46,6 @@ public class BestandView implements Initializable {
 	private TableColumn<KraftstoffbestandRecord, String> bestand_kapazitaet;
 	@FXML
 	private Button bestand_bestellen;
-	
-	private KraftstoffDialoge factory = new KraftstoffDialoge();
 	
 	private KraftstoffController controller;
 	
@@ -101,36 +95,36 @@ public class BestandView implements Initializable {
 	    bestand_tank.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("tank"));
 	    bestand_kapazitaet.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("kapazitaet"));	    
 	    /**/
-	    bestand_liste.setRowFactory(this.onCreateListener());
+	    bestand_liste.setRowFactory(this.createRowListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    	    
 	    /**/
 	    bestand_bestellen.setOnAction(event -> {
-	    	factory.createBestellungAddDialog().showAndWait().ifPresent(record -> {
+	    	new KraftstoffDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
 	    		controller.onBestellen(record);
 			});
 	    });
 	}
 	
-	private Callback<TableView<KraftstoffbestandRecord>,TableRow<KraftstoffbestandRecord>> onCreateListener() {
+	private Callback<TableView<KraftstoffbestandRecord>,TableRow<KraftstoffbestandRecord>> createRowListener() {
 		return new Callback<TableView<KraftstoffbestandRecord>, TableRow<KraftstoffbestandRecord>>(){
 	        @Override
 	        public TableRow<KraftstoffbestandRecord> call(TableView<KraftstoffbestandRecord> table) {
 	            final TableRow<KraftstoffbestandRecord> row = new TableRow<KraftstoffbestandRecord>();           
 	            row.contextMenuProperty().bind(Bindings
             		.when(Bindings.isNotNull(row.itemProperty()))
-            		.then(onClickMenu(table,row))
+            		.then(createRowMenu(table,row))
             		.otherwise((ContextMenu)null));
 	            return row;
 		    }
 		};
 	}
 	
-	private ContextMenu onClickMenu(TableView<KraftstoffbestandRecord> table, TableRow<KraftstoffbestandRecord> row) {
+	private ContextMenu createRowMenu(TableView<KraftstoffbestandRecord> table, TableRow<KraftstoffbestandRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem bestellen = new MenuItem("Bestellen");
         bestellen.setOnAction(event -> {
-	    	factory.createBestandBestellenDialog(row.getItem()).showAndWait().ifPresent(record -> {
+        	new KraftstoffDialoge().createBestandBestellenDialog(row.getItem()).showAndWait().ifPresent(record -> {
 	    		controller.onBestellen(record);
 			});
         });
@@ -140,9 +134,12 @@ public class BestandView implements Initializable {
         return menu;
 	}
 	
-	void setItems(ArrayList<KraftstoffbestandRecord> items) {
-		bestand_liste.setItems(FXCollections.observableList(items));
-	}
+	void setItems(ArrayList<KraftstoffbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
 	
 	AnchorPane getView() { return bestand_wrapper; }
+	
+	void onRefresh() {
+		bestand_liste.refresh();
+		bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
+	}
 }

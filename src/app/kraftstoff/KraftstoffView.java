@@ -50,9 +50,11 @@ public class KraftstoffView implements Initializable {
 	
 	KraftstoffView setIndex(int tab) {
 		kraftstoff_tabs.getSelectionModel().select(tab);
-	//	controlling_tabs.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-	//        this.tab = controlling_tabs.getSelectionModel().getSelectedIndex();
-	//    });
 		return this;
+	}
+	
+	void onRefresh() {
+		bestand.onRefresh();
+		bestellungen.onRefresh();
 	}
 }

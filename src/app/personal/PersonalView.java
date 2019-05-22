@@ -64,40 +64,40 @@ public class PersonalView implements Initializable {
 	    personal_nummer.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("personalnummer"));
 	    personal_benutzername.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("benutzername"));
 	    personal_benutzername.setCellFactory(TextFieldTableCell.forTableColumn());
-	    personal_benutzername.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"benutzername");});
+	    personal_benutzername.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"benutzername",cell.getNewValue());});
 	    personal_vorname.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("vorname"));
 	    personal_vorname.setCellFactory(TextFieldTableCell.forTableColumn());
-	    personal_vorname.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"vorname");});
+	    personal_vorname.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"vorname",cell.getNewValue());});
 	    personal_nachname.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("nachname"));
 	    personal_nachname.setCellFactory(TextFieldTableCell.forTableColumn());
-	    personal_nachname.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"nachname");});
+	    personal_nachname.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"nachname",cell.getNewValue());});
 	    personal_passwort.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("passwort"));
 	    personal_passwort.setCellFactory(TextFieldTableCell.forTableColumn());
-	    personal_passwort.setOnEditCommit((cell) -> {onClickBestandEdit(cell,"passwort");});
+	    personal_passwort.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"passwort",cell.getNewValue());});
 	    personal_einstelldatum.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("einstelldatum"));
 	    /**/
 	    personal_liste.setItems(data);
-	    personal_liste.setRowFactory(this.onCreatePersonalListener());
+	    personal_liste.setRowFactory(this.createRowListener());
 	    personal_liste.getSortOrder().addAll(personal_nachname);
 	    /**/
 	    personal_hinzufuegen.setOnAction(event -> {showAddDialog();});
 	}
 	
-	private Callback<TableView<PersonalRecord>,TableRow<PersonalRecord>> onCreatePersonalListener() {
+	private Callback<TableView<PersonalRecord>,TableRow<PersonalRecord>> createRowListener() {
 		return new Callback<TableView<PersonalRecord>, TableRow<PersonalRecord>>(){
 	        @Override
 	        public TableRow<PersonalRecord> call(TableView<PersonalRecord> table) {
 	            final TableRow<PersonalRecord> row = new TableRow<PersonalRecord>();           
 	            row.contextMenuProperty().bind(Bindings
 	            		.when(Bindings.isNotNull(row.itemProperty()))
-	            		.then(createRightClickMenu(table,row))
+	            		.then(createRowMenu(table,row))
 	            		.otherwise((ContextMenu)null));
 	            return row;
 		    }
 		};
 	}
 	
-	private ContextMenu createRightClickMenu(TableView<PersonalRecord> table, TableRow<PersonalRecord> row) {
+	private ContextMenu createRowMenu(TableView<PersonalRecord> table, TableRow<PersonalRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem remove = new MenuItem("Entfernen");
      //   remove.setOnAction(event -> {table.getItems().remove(row.getIndex());});
@@ -169,12 +169,7 @@ public class PersonalView implements Initializable {
 		});
 		dialog.showAndWait();
 	}
-	
-	private void onClickBestandEdit(TableColumn.CellEditEvent<PersonalRecord, String> cell, String id) {
-		/* PersonalRecord record = cell.getTableView().getItems().get(cell.getTablePosition().getRow()); */
-		controller.onEdit(cell.getTablePosition().getRow(),id,cell.getNewValue());
-	}
-	
+		
 	void onRefresh() {
 		personal_liste.refresh();
 		personal_liste.getSortOrder().addAll(personal_nachname);
