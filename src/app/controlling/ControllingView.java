@@ -50,9 +50,6 @@ public class ControllingView implements Initializable {
 	
 	ControllingView setIndex(int tab) {
 		controlling_tabs.getSelectionModel().select(tab);
-	//	controlling_tabs.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-	//        this.tab = controlling_tabs.getSelectionModel().getSelectedIndex();
-	//    });
 		return this;
 	}
 }

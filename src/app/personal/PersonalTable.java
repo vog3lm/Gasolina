@@ -15,7 +15,7 @@ public class PersonalTable implements Database<PersonalRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.PERSONAL);
     private ArrayList<PersonalRecord> records = new ArrayList<PersonalRecord>();
 
-    private int personalnummern = 0;
+    private int personalnummern = -1;
     
     public PersonalTable(){
         ArrayList<String[]> data = database.onRead();
