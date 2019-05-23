@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import app.Database;
 import app.Zustand;
+import app.controlling.AusgabenRecord;
 import app.csv.CsvConnection;
 /**
  * 
@@ -16,10 +17,17 @@ public class PersonalTable implements Database<PersonalRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.PERSONAL);
     private ArrayList<PersonalRecord> records = new ArrayList<PersonalRecord>();
 
+    private int personalnummern = 0;
+    
     public PersonalTable(){
         ArrayList<String[]> data = database.onRead();
-        for(int i=0; i<data.size(); i++){
-            this.records.add(new PersonalRecord(i,data.get(i)));
+        for(int i=0; i<data.size(); i++){           
+            PersonalRecord record = new PersonalRecord(i,data.get(i));
+        	int personalnummer = Integer.parseInt(record.getPersonalnummer());
+        	if(personalnummer > personalnummern) {
+        		personalnummern = personalnummer;
+        	}
+            this.records.add(record);
         }
     }
 
@@ -31,9 +39,9 @@ public class PersonalTable implements Database<PersonalRecord> {
     
     @Override
     public int onCreate(PersonalRecord record){
-        int personalnummer = this.records.size();
-        this.records.add(record.setPersonalnummer(personalnummer+""));
-        return personalnummer;
+        int index = this.records.size();
+        this.records.add(record.setIndex(index).setPersonalnummer(++personalnummern+""));
+        return index;
     }
 
     @Override
