@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Zustand;
-import app.kraftstoff.KraftstoffbestellungenRecord;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
@@ -15,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class WarenDialoge {
+class WarenDialoge {
 
 	Dialog<WarenbestellungenRecord> createBuchenDialog(WarenbestellungenRecord record) {
 		/* prepare dialog - one/two */

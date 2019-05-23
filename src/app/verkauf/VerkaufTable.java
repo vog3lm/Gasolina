@@ -3,7 +3,6 @@ package app.verkauf;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
 import app.csv.CsvConnection;
 /**
  * 

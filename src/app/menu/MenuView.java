@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
-public class MenuView implements Initializable {
+class MenuView implements Initializable {
 
 	@FXML
 	private MenuBar nav_bar;
@@ -55,7 +55,7 @@ public class MenuView implements Initializable {
 	
 	private MenuController controller;
 	
-	public MenuView(MenuController controller) {
+	MenuView(MenuController controller) {
 		this.controller = controller;
 		new Loader().onLoadBorderTop(null,Loader.MENU,this);
 	}

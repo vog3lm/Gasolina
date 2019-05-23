@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class BenutzerView implements Initializable {
+class BenutzerView implements Initializable {
 
 	@FXML
 	private Label benutzer_personalnummer;

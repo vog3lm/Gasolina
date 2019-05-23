@@ -9,7 +9,6 @@ import java.util.Date;
 
 import app.Lifecycle;
 import app.Zustand;
-import javafx.scene.control.TableColumn;
 /**
  * 
  * @author vog3lm

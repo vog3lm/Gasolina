@@ -3,8 +3,6 @@ package app.personal;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
-import app.controlling.AusgabenRecord;
 import app.csv.CsvConnection;
 /**
  * 

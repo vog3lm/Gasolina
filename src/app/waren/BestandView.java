@@ -20,7 +20,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-public class BestandView implements Initializable {
+class BestandView implements Initializable {
 
 	@FXML
 	private AnchorPane bestand_wrapper;

@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-public class ErgebnisView  implements Initializable {
+class ErgebnisView  implements Initializable {
 
 	@FXML
 	private AnchorPane controlling_ergebnis;

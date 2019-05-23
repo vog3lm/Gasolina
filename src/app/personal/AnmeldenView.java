@@ -19,7 +19,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
-public class AnmeldenView implements Initializable {
+class AnmeldenView implements Initializable {
 
 	@FXML
 	private AnchorPane anmelden_pane;

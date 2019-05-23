@@ -30,7 +30,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-public class PersonalView implements Initializable {
+class PersonalView implements Initializable {
 
 	@FXML
     private TableView<PersonalRecord> personal_liste;

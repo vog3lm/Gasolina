@@ -6,17 +6,12 @@ import java.util.ResourceBundle;
 
 import app.fxml.Loader;
 import app.verkauf.VerkaufRecord;
-import app.waren.WarenbestandRecord;
-import app.waren.WarenbestellungenRecord;
-import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 public class ControllingView implements Initializable {
 
@@ -32,11 +27,8 @@ public class ControllingView implements Initializable {
 	private AusgabenView ausgaben = new AusgabenView();
 	
 	private ErgebnisView ergebnis = new ErgebnisView();
-	
-	private ControllingController controller;
-	
+		
 	ControllingView(ControllingController controller) {
-		this.controller = controller;
 		new Loader().onLoadBorderCenter(controller,Loader.CONTROLLING,this);
 	}
 	

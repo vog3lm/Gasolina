@@ -3,8 +3,6 @@ package app.personal;
 import app.Zustand;
 import app.verkauf.VerkaufController;
 import app.verkauf.VerkaufView;
-import javafx.event.ActionEvent;
-
 /**
  * 
  * @author vog3lm

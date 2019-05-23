@@ -20,7 +20,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-public class BestellungenView implements Initializable {
+class BestellungenView implements Initializable {
 
 	@FXML
 	private AnchorPane bestellungen_wrapper;

@@ -7,7 +7,7 @@ import app.fxml.Loader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-public class TankView implements Initializable {
+class TankView implements Initializable {
 	
 	TankView() {
 		new Loader().onLoadInitializable(Loader.KRAFTSTOFF_BESTELLUNGEN,this);

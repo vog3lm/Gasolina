@@ -6,8 +6,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
-import app.Zustand;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;

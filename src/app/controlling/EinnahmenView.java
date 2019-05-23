@@ -13,7 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class EinnahmenView implements Initializable {
+class EinnahmenView implements Initializable {
 	
 	@FXML
 	private TableView<VerkaufRecord> einnahmen_liste;

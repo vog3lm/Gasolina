@@ -23,7 +23,7 @@ public class WarenView implements Initializable {
 	
 	private BestellungenView bestellungen;
 		
-	public WarenView(WarenController controller) {
+	WarenView(WarenController controller) {
 		bestand = new BestandView(controller);
 		bestellungen = new BestellungenView(controller);
 		new Loader().onLoadBorderCenter(controller,Loader.WAREN,this);
