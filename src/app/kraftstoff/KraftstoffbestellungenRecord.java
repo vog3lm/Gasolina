@@ -21,8 +21,9 @@ public class KraftstoffbestellungenRecord {
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
     private SimpleStringProperty mitarbeiter;
+    private SimpleStringProperty status;
     
-    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String bestelldatum, String lieferdatum, String mitarbeiter){
+    public KraftstoffbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String bestelldatum, String lieferdatum, String mitarbeiter, String status){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
@@ -34,6 +35,7 @@ public class KraftstoffbestellungenRecord {
         this.bestelldatum = new SimpleStringProperty(bestelldatum);
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
+        this.status = new SimpleStringProperty(status);
     }
 
     KraftstoffbestellungenRecord(int index, String[] record){
@@ -48,6 +50,7 @@ public class KraftstoffbestellungenRecord {
         this.bestelldatum = new SimpleStringProperty(record[7]);
         this.lieferdatum = new SimpleStringProperty(record[8]);
         this.mitarbeiter = new SimpleStringProperty(record[9]);
+        this.mitarbeiter = new SimpleStringProperty(record[10]);
     }
 
     int getIndex() { return this.index.get(); }
@@ -124,6 +127,13 @@ public class KraftstoffbestellungenRecord {
 
     public KraftstoffbestellungenRecord setMitarbeiter(String mitarbeiter) {
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
+        return this;
+    }
+    
+    public String getStatus(){ return this.status.get();}
+
+    public KraftstoffbestellungenRecord setStatus(String status) {
+        this.status = new SimpleStringProperty(status);
         return this;
     }
 }

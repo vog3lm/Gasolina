@@ -109,7 +109,8 @@ class WarenDialoge {
 		    			,record.getWaehrung()		    			
 		    			,record.getBestelldatum()
 		    			,lieferdatum.getText()	/* lieferdatum restmenge */
-		    			,record.getMitarbeiter());
+		    			,record.getMitarbeiter()
+		    			,"aktiv");
 		    }
 		    return null;
 		});
@@ -228,7 +229,8 @@ class WarenDialoge {
 		        		,"EUR"
 		        		,dateFormat.format(new Date())
 		        		,lieferdatum.getText()
-		        		,Zustand.getInstance().getBenutzer().getBenutzername());
+		        		,Zustand.getInstance().getBenutzer().getBenutzername()
+		        		,"aktiv");
 		    }
 		    return null;
 		});

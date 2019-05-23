@@ -19,7 +19,7 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
         add("Liter");add("Kubikmeter");add("Kilowattstunden");
     }};
 
-    private int warennummern = 0;
+    private int warennummern = -1;
     
     public KraftstoffbestandTable(){
         ArrayList<String[]> data = database.onRead();

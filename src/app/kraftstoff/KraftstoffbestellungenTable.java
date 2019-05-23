@@ -15,7 +15,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     private final CsvConnection database = new CsvConnection(CsvConnection.KRAFTSTOFF_BESTELLUNGEN);
     private ArrayList<KraftstoffbestellungenRecord> records = new ArrayList<KraftstoffbestellungenRecord>();
 
-    private int bestellnummern = 0;
+    private int bestellnummern = -1;
     
     public KraftstoffbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
@@ -53,7 +53,8 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
         .setPreis(record.getPreis())
         .setBestelldatum(record.getBestelldatum())
         .setLieferdatum(record.getLieferdatum())
-        .setMitarbeiter(record.getMitarbeiter());
+        .setMitarbeiter(record.getMitarbeiter())
+        .setStatus(record.getStatus());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(KraftstoffbestellungenRecord r : this.records){
-            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getEinheit(),r.getBestelldatum(),r.getLieferdatum(),r.getMitarbeiter()});
+            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getEinheit(),r.getBestelldatum(),r.getLieferdatum(),r.getMitarbeiter(),r.getStatus()});
         }
         database.onWrite(records);
     }

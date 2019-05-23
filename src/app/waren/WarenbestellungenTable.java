@@ -15,7 +15,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     private final CsvConnection database = new CsvConnection(CsvConnection.WAREN_BESTELLUNGEN);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
-    private int bestellnummern = 0;
+    private int bestellnummern = -1;
     
     public WarenbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
@@ -52,7 +52,8 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
                 .setPreis(record.getPreis())
                 .setBestelldatum(record.getBestelldatum())
                 .setLieferdatum(record.getLieferdatum())
-                .setMitarbeiter(record.getMitarbeiter());
+                .setMitarbeiter(record.getMitarbeiter())
+                .setStatus(record.getStatus());
     }
 
     @Override
@@ -67,7 +68,18 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(WarenbestellungenRecord r : this.records){
-            records.add(new String[]{r.getBestellnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getWaehrung(),r.getMenge(),r.getEinheit(),r.getBestelldatum(),r.getLieferdatum(),r.getMitarbeiter()});
+            records.add(new String[]{r.getBestellnummer()
+            		,r.getWarennummer()
+            		,r.getBezeichnung()
+            		,r.getPreis()
+            		,r.getWaehrung()
+            		,r.getMenge()
+            		,r.getEinheit()
+            		,r.getBestelldatum()
+            		,r.getLieferdatum()
+            		,r.getMitarbeiter()
+            		,r.getStatus()
+            	});
         }
         database.onWrite(records);
     }

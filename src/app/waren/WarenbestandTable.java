@@ -15,7 +15,7 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.WAREN);
     private ArrayList<WarenbestandRecord> records = new ArrayList<WarenbestandRecord>();
 
-    private int warennummern = 0;
+    private int warennummern = -1;
     
     public WarenbestandTable(){
         ArrayList<String[]> data = database.onRead();

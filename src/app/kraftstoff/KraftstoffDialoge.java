@@ -110,7 +110,8 @@ class KraftstoffDialoge {
 		    			,record.getEinheit()
 		    			,record.getBestelldatum()
 		    			,lieferdatum.getText()		/* lieferdatum restmenge */
-		    			,record.getMitarbeiter());
+		    			,record.getMitarbeiter()
+		    			,"aktiv");
 		    }
 		    return null;
 		});
@@ -228,7 +229,8 @@ class KraftstoffDialoge {
 		        		,einheit.getText()
 		        		,dateFormat.format(new Date())
 		        		,lieferdatum.getText()
-		        		,Zustand.getInstance().getBenutzer().getBenutzername());
+		        		,Zustand.getInstance().getBenutzer().getBenutzername()
+		        		,"aktiv");
 		    }
 		    return null;
 		});

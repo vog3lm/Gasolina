@@ -21,8 +21,9 @@ public class WarenbestellungenRecord {
     private SimpleStringProperty bestelldatum;
     private SimpleStringProperty lieferdatum;
     private SimpleStringProperty mitarbeiter;
+    private SimpleStringProperty status;
 
-    public WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String einheit, String preis, String waehrung, String bestelldatum, String lieferdatum, String mitarbeiter){
+    public WarenbestellungenRecord(int index, String bestellnummer, String warennummer, String bezeichnung, String menge, String einheit, String preis, String waehrung, String bestelldatum, String lieferdatum, String mitarbeiter, String status){
         this.index = new SimpleIntegerProperty(index);
     	this.bestellnummer = new SimpleStringProperty(bestellnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
@@ -34,6 +35,7 @@ public class WarenbestellungenRecord {
         this.bestelldatum = new SimpleStringProperty(bestelldatum);
         this.lieferdatum = new SimpleStringProperty(lieferdatum);
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
+        this.status = new SimpleStringProperty(status);
     }
 
     WarenbestellungenRecord(int index, String[] record){
@@ -124,6 +126,13 @@ public class WarenbestellungenRecord {
 
     public WarenbestellungenRecord setMitarbeiter(String mitarbeiter) {
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
+        return this;
+    }
+    
+    public String getStatus(){ return this.status.get();}
+
+    public WarenbestellungenRecord setStatus(String status) {
+        this.status = new SimpleStringProperty(status);
         return this;
     }
 }
