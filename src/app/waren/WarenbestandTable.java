@@ -64,7 +64,7 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
     public void onCommit(){
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(WarenbestandRecord r : this.records){
-            records.add(new String[]{r.getWarennummer(),r.getBezeichnung(),r.getEinheit(),r.getMenge(),r.getPreis(),r.getWaehrung(),r.getKategorie()});
+            records.add(r.toArray());
         }
         database.onWrite(records);
     }

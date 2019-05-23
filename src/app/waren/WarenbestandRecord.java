@@ -1,5 +1,6 @@
 package app.waren;
 
+import app.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 /**
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @version 1.0
  * @since   1.0
  */
-public class WarenbestandRecord {
+public class WarenbestandRecord implements Model {
 
 	private SimpleIntegerProperty index;
     private SimpleStringProperty warennummer;
@@ -96,4 +97,29 @@ public class WarenbestandRecord {
         this.kategorie = new SimpleStringProperty(kategorie);
         return this;
     }
+        
+	@Override
+	public String toString() { 
+		return "idx:" + index.get() + ","
+			 + "wn:" + warennummer.get() + ","
+			 + "bez:" + bezeichnung.get() + ","
+			 + "e:" + einheit.get() + ","
+			 + "menge:" + menge.get() + ","
+			 + "preis:" + preis.get() + ","
+			 + "cur:" + waehrung.get() + ","
+			 + "type:" + kategorie.get();
+	}
+    
+	@Override
+	public String[] toArray() {
+		return new String[]{
+			 warennummer.get()
+			,bezeichnung.get()
+			,einheit.get()
+			,menge.get()
+			,preis.get()
+			,waehrung.get()
+			,kategorie.get()
+		};
+	}
 }

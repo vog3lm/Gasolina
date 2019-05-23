@@ -53,10 +53,9 @@ public class VerkaufTable implements Database<VerkaufRecord> {
 	public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(VerkaufRecord r : this.records){
-        	/* TODO: wirte table on commit */
-            records.add(new String[]{});
+            records.add(r.toArray());
         }
-        //database.onWrite(records);
+        database.onWrite(records);
 	}
 
 	@Override

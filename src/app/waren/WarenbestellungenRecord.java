@@ -1,5 +1,6 @@
 package app.waren;
 
+import app.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 /**
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @version 1.0
  * @since   1.0
  */
-public class WarenbestellungenRecord {
+public class WarenbestellungenRecord implements Model {
 
     private SimpleIntegerProperty index;
     private SimpleStringProperty bestellnummer;
@@ -135,4 +136,37 @@ public class WarenbestellungenRecord {
         this.status = new SimpleStringProperty(status);
         return this;
     }
+        
+	@Override
+	public String toString() { 
+		return "idx:" + index.get() + ","
+			 + "bn:" + bestellnummer.get() + ","
+			 + "wn:" + warennummer.get() + ","
+			 + "bet:" + bezeichnung.get() + ","
+			 + "preis:" + preis.get() + ","
+			 + "cur:" + waehrung.get() + ","
+			 + "menge:" + menge.get() + ","
+			 + "e:" + einheit.get() + ","
+			 + "b-date:" + bestelldatum.get() + ","
+			 + "l-date:" + lieferdatum.get() + ","
+			 + "ma:" + mitarbeiter.get() + ","
+			 + "state:" + status.get();
+	}
+    
+	@Override
+	public String[] toArray() {
+		return new String[]{
+			 bestellnummer.get()
+			,warennummer.get()
+			,bezeichnung.get()
+			,preis.get()
+			,waehrung.get()
+			,menge.get()
+			,einheit.get()
+			,bestelldatum.get()
+			,lieferdatum.get()
+			,mitarbeiter.get()
+			,status.get()
+		};
+	}
 }

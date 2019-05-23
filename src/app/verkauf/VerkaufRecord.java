@@ -1,5 +1,6 @@
 package app.verkauf;
 
+import app.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 /**
@@ -8,26 +9,27 @@ import javafx.beans.property.SimpleStringProperty;
  * @version 1.0
  * @since   1.0
  */
-public class VerkaufRecord {
-	/* kasse values */
+public class VerkaufRecord implements Model {
+
 	private SimpleIntegerProperty index;
 	private SimpleStringProperty warennummer;
 	private SimpleStringProperty bezeichnung;
 	private SimpleStringProperty preis;
+	private SimpleStringProperty waehrung;
 	private SimpleStringProperty menge;
 	private SimpleStringProperty einheit;
 	private SimpleStringProperty summe;
-	/* journal values */
 	private SimpleStringProperty belegnummer;
 	private SimpleStringProperty datum;
 	private SimpleStringProperty uhrzeit;
 	private SimpleStringProperty mitarbeiter;
 	
-    public VerkaufRecord(int index, String warennummer, String bezeichnung, String preis, String menge, String einheit, String summe){
+    public VerkaufRecord(int index, String warennummer, String bezeichnung, String preis, String waehrung, String menge, String einheit, String summe){
     	this.index = new SimpleIntegerProperty(index);
         this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);
         this.preis = new SimpleStringProperty(preis);
+        this.waehrung = new SimpleStringProperty(waehrung);
         this.menge = new SimpleStringProperty(menge);
         this.einheit = new SimpleStringProperty(einheit);
         this.summe = new SimpleStringProperty(summe);
@@ -35,18 +37,17 @@ public class VerkaufRecord {
 
     public VerkaufRecord(int index, String[] record){
     	this.index = new SimpleIntegerProperty(index);
-    	/* kasse values */
         this.warennummer = new SimpleStringProperty(record[0]);
         this.bezeichnung = new SimpleStringProperty(record[1]);
         this.preis = new SimpleStringProperty(record[2]);
-        this.menge = new SimpleStringProperty(record[3]);
-        this.einheit = new SimpleStringProperty(record[4]);
-        this.summe = new SimpleStringProperty(record[5]);
-        /* journal values */
-        this.belegnummer = new SimpleStringProperty(record[6]);
-        this.datum = new SimpleStringProperty(record[7]);
-        this.uhrzeit = new SimpleStringProperty(record[8]);
-        this.mitarbeiter = new SimpleStringProperty(record[9]);
+        this.waehrung = new SimpleStringProperty(record[3]);
+        this.menge = new SimpleStringProperty(record[4]);
+        this.einheit = new SimpleStringProperty(record[5]);
+        this.summe = new SimpleStringProperty(record[6]);
+        this.belegnummer = new SimpleStringProperty(record[7]);
+        this.datum = new SimpleStringProperty(record[8]);
+        this.uhrzeit = new SimpleStringProperty(record[9]);
+        this.mitarbeiter = new SimpleStringProperty(record[10]);
     }
 	
     public int getIndex() { return this.index.get(); }
@@ -125,4 +126,37 @@ public class VerkaufRecord {
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
         return this;
     }
+        
+	@Override
+	public String toString() { 
+		return "idx:" + index.get() + ","
+			 + "wn:" + warennummer.get() + ","
+			 + "bez:" + bezeichnung.get() + ","
+			 + "preis:" + preis.get() + ","
+			 + "cur:" + waehrung.get() + ","
+			 + "menge:" + menge.get() + ","
+			 + "e:" + einheit.get() + ","
+			 + "sum:" + summe.get() + ","
+			 + "bn:" + belegnummer.get() + ","
+			 + "date:" + datum.get() + ","
+			 + "time:" + uhrzeit.get() + ","
+			 + "ma:" + mitarbeiter.get();
+	}
+    
+	@Override
+	public String[] toArray() {
+		return new String[]{
+			 warennummer.get()
+			,bezeichnung.get()
+			,preis.get()
+			,waehrung.get()
+			,menge.get()
+			,einheit.get()
+			,summe.get()
+			,belegnummer.get()
+			,datum.get()
+			,uhrzeit.get()
+			,mitarbeiter.get()
+		};
+	}
 }

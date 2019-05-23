@@ -68,18 +68,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(WarenbestellungenRecord r : this.records){
-            records.add(new String[]{r.getBestellnummer()
-            		,r.getWarennummer()
-            		,r.getBezeichnung()
-            		,r.getPreis()
-            		,r.getWaehrung()
-            		,r.getMenge()
-            		,r.getEinheit()
-            		,r.getBestelldatum()
-            		,r.getLieferdatum()
-            		,r.getMitarbeiter()
-            		,r.getStatus()
-            	});
+            records.add(r.toArray());
         }
         database.onWrite(records);
     }

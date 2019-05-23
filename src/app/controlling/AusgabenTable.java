@@ -15,13 +15,13 @@ public class AusgabenTable implements Database<AusgabenRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.AUSGABEN);
     private ArrayList<AusgabenRecord> records = new ArrayList<AusgabenRecord>();
 
-    private int buchungsnummern = 0;
+    private int buchungsnummern = -1;
     
     public AusgabenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){           
             AusgabenRecord bestand = new AusgabenRecord(i,data.get(i));
-        	int buchungsnummer = Integer.parseInt(bestand.getWarennummer());
+        	int buchungsnummer = Integer.parseInt(bestand.getBuchungsnummer());
         	if(buchungsnummer > buchungsnummern) {
         		buchungsnummern = buchungsnummer;
         	}
@@ -69,7 +69,7 @@ public class AusgabenTable implements Database<AusgabenRecord> {
 	public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(AusgabenRecord r : this.records){
-            records.add(new String[]{r.getBuchungsnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getMenge(),r.getEinheit(),r.getSumme(),r.getDatum(),r.getUhrzeit(),r.getMitarbeiter()});
+            records.add(r.toArray());
         }
         database.onWrite(records);
 	}

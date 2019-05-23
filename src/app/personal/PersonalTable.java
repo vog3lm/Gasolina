@@ -62,7 +62,7 @@ public class PersonalTable implements Database<PersonalRecord> {
     public void onCommit(){
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(PersonalRecord r : this.records){
-            records.add(new String[]{r.getPersonalnummer(),r.getBenutzername(),r.getVorname(),r.getNachname(),r.getPasswort(),r.getEinstelldatum()});
+            records.add(r.toArray());
         }
         database.onWrite(records);
     }

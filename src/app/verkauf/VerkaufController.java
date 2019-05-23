@@ -306,7 +306,7 @@ public class VerkaufController implements Controller, Initializable {
 		pane.setContent(grid);
 		dialog.setResultConverter(submit -> {
 		    if (submit.getButtonData() == ButtonData.YES) {
-		    	return new VerkaufRecord(-1,warennummer.getText(),bezeichnung.getText(),preis.getText(),"0",einheit.getText(),"0");
+		    	return new VerkaufRecord(-1,warennummer.getText(),bezeichnung.getText(),preis.getText(),"EUR","0",einheit.getText(),"0");
 		    }
 		    return null;
 		});
@@ -427,7 +427,7 @@ public class VerkaufController implements Controller, Initializable {
 		    	Double summe = Double.parseDouble(men_string)*Float.parseFloat(preis.getText());
 		    	summe = Math.round(summe * Math.pow(10, 2)) / Math.pow(10, 2);
 		    	verkauf_total.setText((Float.parseFloat(verkauf_total.getText())+summe)+"");
-		        return new VerkaufRecord(-1,warennummer.getText(),bez_string,preis.getText(),men_string,einheit.getText(),summe+"");
+		        return new VerkaufRecord(-1,warennummer.getText(),bez_string,preis.getText(),"EUR",men_string,einheit.getText(),summe+"");
 		    }
 		    return null;
 		});

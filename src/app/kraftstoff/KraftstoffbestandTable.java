@@ -67,7 +67,7 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
     public void onCommit(){
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(KraftstoffbestandRecord r : this.records){
-            records.add(new String[]{r.getWarennummer(),r.getBezeichnung(),r.getEinheit(),r.getMenge(),r.getPreis(),r.getWaehrung(),r.getTank(),r.getKapazitaet()});
+            records.add(r.toArray());
         }
         database.onWrite(records);
     }

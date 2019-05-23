@@ -1,5 +1,6 @@
 package app.personal;
 
+import app.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 /**
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @version 1.0
  * @since   1.0
  */
-public class PersonalRecord {
+public class PersonalRecord implements Model {
 
 	private SimpleIntegerProperty index;
 	private SimpleStringProperty personalnummer;
@@ -86,4 +87,27 @@ public class PersonalRecord {
         this.einstelldatum = new SimpleStringProperty(einstelldatum);
         return this;
     }
+    
+	@Override
+	public String toString() { 
+		return "idx:" + index.get() + ","
+			 + "pn:" + personalnummer.get() + ","
+			 + "user:" + benutzername.get() + ","
+			 + "vn:" + vorname.get() + ","
+			 + "nn:" + nachname.get() + ","
+			 + "pw:" + passwort.get() + ","
+			 + "date:" + einstelldatum.get();
+	}
+	
+	@Override
+	public String[] toArray() {
+		return new String[]{
+			 personalnummer.get()
+			,benutzername.get()
+			,vorname.get()
+			,nachname.get()
+			,passwort.get()
+			,einstelldatum.get()
+		};
+	}
 }

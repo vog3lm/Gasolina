@@ -1,9 +1,10 @@
 package app.controlling;
 
+import app.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class AusgabenRecord {
+public class AusgabenRecord implements Model {
 	
 	private SimpleIntegerProperty index;
 	private SimpleStringProperty buchungsnummer;
@@ -123,4 +124,35 @@ public class AusgabenRecord {
         this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
         return this;
     }
+    
+	@Override
+	public String toString() { 
+		return "idx:" + index.get() + ","
+			 + "bn:" + buchungsnummer.get() + ","
+			 + "wn:" + warennummer.get() + ","
+			 + "bez:" + bezeichnung.get() + ","
+			 + "preis:" + preis.get() + ","
+			 + "menge:" + menge.get() + ","
+			 + "e:" + einheit.get() + ","
+			 + "sum:" + summe.get() + ","
+			 + "date:" + datum.get() + ","
+			 + "time:" + uhrzeit.get() + ","
+			 + "user:" + mitarbeiter.get();
+	}
+    
+	@Override
+	public String[] toArray() {
+		return new String[]{
+			 buchungsnummer.get()
+			,warennummer.get()
+			,bezeichnung.get()
+			,preis.get()
+			,menge.get()
+			,einheit.get()
+			,summe.get()
+			,datum.get()
+			,uhrzeit.get()
+			,mitarbeiter.get()
+		};
+	}
 }
