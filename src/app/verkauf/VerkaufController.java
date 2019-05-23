@@ -3,50 +3,17 @@ package app.verkauf;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
-
 import app.Zustand;
-import app.fxml.Loader;
-import app.personal.PersonalRecord;
 import app.verkauf.VerkaufRecord;
 import app.Controller;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestandTable;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.kraftstoff.KraftstoffbestandTable;
-import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.util.Callback;
+import javafx.scene.control.Alert.AlertType;
 /**
  * 
  * @author vog3lm
@@ -65,22 +32,19 @@ public class VerkaufController implements Controller {
 		view.setIndex(tab);
 	}
 	
-	void onSimulate(VerkaufRecord record) {
-	//	verkauf_liste.getItems().add(record);
-	//	KraftstoffbestandRecord bestand = kraftstoffe.onRead(kraftstoffe.getIndex(record.getBezeichnung()));
-	//	VerkaufSimulation simulation = new VerkaufSimulation(bestand,record,this.verkauf_liste);
-	//	verkauf_kraftstoff.setText("Stop");
-		/* TODO: delete click row listener */
-	//	verkauf_kraftstoff.setOnAction(event -> {
-	//		simulation.interrupt();
-			/* TODO: set click row listener
-			 * item.onCreateRowListener() */
-	//		verkauf_kraftstoff.setText("Kraftstoff");
-	//		verkauf_kraftstoff.setOnAction(e -> {onCreateKraftstoffVerkauf();});
-	//	});
-	//	simulation.start();
+	WarenbestandRecord hasWare(String bezeichnung) {
+		int index = waren.getIndex(bezeichnung);
+		if(-1 == index) { return null; }
+		else { return waren.onRead(index); }
 	}
 	
+	KraftstoffbestandRecord hasKraftstoff(String bezeichnung) {
+		int index = kraftstoffe.getIndex(bezeichnung);
+		if(-1 == index) { return null; }
+		else { return kraftstoffe.onRead(index); }
+	}
+	
+		
 	void onDrucken(String message) {
 		try {
 			String path = Zustand.getInstance().getPrintUrl();

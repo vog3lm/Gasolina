@@ -1,12 +1,8 @@
 package app.verkauf;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -15,11 +11,10 @@ import app.fxml.Loader;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.personal.PersonalRecord;
 import app.waren.WarenbestandRecord;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -136,33 +131,30 @@ public class SaeuleView implements Initializable {
 		/**/
 		TextField bezeichnung = new TextField();
 		TextField menge = new TextField();
+		menge.setDisable(true);
 		menge.setPromptText("Menge");
 		menge.textProperty().addListener((ob, o, n) -> {
 			if(!n.equals("")) {
-				
 			    try {Float.parseFloat(n);} 
 			    catch (NumberFormatException | NullPointerException e){
 			    	menge.setText(o);
 			    	return;
 			    }
 			}
-			
-			//if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
-			//	int index = waren.getIndex(bezeichnung.getText());
-			//	if(-1 != index) {
-			//		WarenbestandRecord record = waren.onRead(index);
-			//		pane.lookupButton(ButtonType.OK).setDisable(false);
-					/* TODO: check available quantity */
-					// String bestand = record.getMenge();
-					// if(bestand < menge) {
-					// 	pane.lookupButton(ButtonType.OK).setDisable(true);
-					// }else {
-					//	pane.lookupButton(ButtonType.OK).setDisable(false);
-					// }
-			//	}
-			//}else {
-			//	pane.lookupButton(ButtonType.OK).setDisable(true);
-			//}
+			if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
+				WarenbestandRecord ware = controller.hasWare(bezeichnung.getText());
+				try {
+					if(Float.parseFloat(ware.getMenge()) < Float.parseFloat(menge.getText())) {
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					} else {
+						pane.lookupButton(ButtonType.OK).setDisable(false);
+					}
+				} catch (NumberFormatException | NullPointerException e){
+					pane.lookupButton(ButtonType.OK).setDisable(true);
+				}
+			}else {
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+			}
 		});
 		TextField preis = new TextField();
 		preis.setPromptText("Preis");
@@ -175,29 +167,31 @@ public class SaeuleView implements Initializable {
 		einheit.setEditable(false);
 		bezeichnung.setPromptText("Bezeichnung");
 		bezeichnung.textProperty().addListener((ob, o, n) -> {
-		//	int index = waren.getIndex(n);
-		//	if(-1 != index) {
-		//		WarenbestandRecord record = waren.onRead(index);
-		//		warennummer.setText(record.getWarennummer());
-		//		preis.setText(record.getPreis());
-		//		einheit.setText(record.getEinheit());
-				
-		//		if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
-		//			pane.lookupButton(ButtonType.OK).setDisable(false);
-					/* TODO: check available quantity */
-					// String bestand = record.getMenge();
-					// if(bestand < menge) {
-					// 	pane.lookupButton(ButtonType.OK).setDisable(true);
-					// }else {
-					//	pane.lookupButton(ButtonType.OK).setDisable(false);
-					// }
-		//		}
-		//	}else {
-		//		warennummer.setText("");
-		//		preis.setText("");
-		//		einheit.setText("");
-		//		pane.lookupButton(ButtonType.OK).setDisable(true);
-		//	}
+			WarenbestandRecord ware = controller.hasWare(n);
+			if(null == ware) {
+				warennummer.setText("");
+				preis.setText("");
+				einheit.setText("");
+				/* menge.setText(""); */
+				pane.lookupButton(ButtonType.OK).setDisable(true);
+				menge.setDisable(true);
+			} else {
+				warennummer.setText(ware.getWarennummer());
+				preis.setText(ware.getPreis());
+				einheit.setText(ware.getEinheit());
+				menge.setDisable(false);
+				if(!menge.getText().equals("") && !bezeichnung.getText().equals("")) {
+					try {
+						if(Float.parseFloat(ware.getMenge()) < Float.parseFloat(menge.getText())) {
+							pane.lookupButton(ButtonType.OK).setDisable(true);
+						} else {
+							pane.lookupButton(ButtonType.OK).setDisable(false);
+						}
+					} catch (NumberFormatException | NullPointerException e){
+						pane.lookupButton(ButtonType.OK).setDisable(true);
+					}
+				}
+			}
 		});
 		Platform.runLater(() -> bezeichnung.requestFocus());
 		/**/
@@ -222,22 +216,15 @@ public class SaeuleView implements Initializable {
 			String men_string = menge.getText();
 		    if (submit == ButtonType.OK) {
 		    	Double summe = Double.parseDouble(men_string)*Float.parseFloat(preis.getText());
+		    	summe = summe + Double.parseDouble(verkauf_total.getText());
 		    	summe = Math.round(summe * Math.pow(10, 2)) / Math.pow(10, 2);
-		    	verkauf_total.setText((Float.parseFloat(verkauf_total.getText())+summe)+"");
-		        return new VerkaufRecord(-1,warennummer.getText(),bez_string,preis.getText(),"EUR",men_string,einheit.getText(),summe+"");
+		    	verkauf_total.setText(summe+"");
+		    	VerkaufRecord record = new VerkaufRecord(-1,warennummer.getText(),bez_string,preis.getText(),"EUR",men_string,einheit.getText(),summe+"");
+		    	verkauf_liste.getItems().add(record);
 		    }
 		    return null;
 		});
-		dialog.showAndWait().ifPresent(record -> {this.verkauf_liste.getItems().add(record);});
-		
-		
-		
-		/* TODO: create waren verkauf dialog
-		WarenbestandRecord record = waren.onRead(index);
-		warennummer.setText(record.getWarennummer());
-		preis.setText(record.getPreis());
-		einheit.setText(record.getEinheit());
-		 */
+		dialog.showAndWait();
 	}
 	
 	private void createKraftstoffVerkauf() {
@@ -269,21 +256,20 @@ public class SaeuleView implements Initializable {
 		einheit.setEditable(false);
 		bezeichnung.setPromptText("Bezeichnung");
 		bezeichnung.textProperty().addListener((ob, o, n) -> {
-		//	int index = kraftstoffe.getIndex(n);
-		//	if(-1 != index) {
-		//		KraftstoffbestandRecord record = kraftstoffe.onRead(index);
-		//		warennummer.setText(record.getWarennummer());
-		//		preis.setText(record.getPreis());
-		//		einheit.setText(record.getEinheit());
-		//		if(!bezeichnung.getText().equals("")) {
-		//			pane.lookupButton(button).setDisable(false);
-		//		}
-		//	}else {
-		//		warennummer.setText("");
-		//		preis.setText("");
-		//		einheit.setText("");
-		//		pane.lookupButton(button).setDisable(true);
-		//	}
+			KraftstoffbestandRecord ware = controller.hasKraftstoff(n);
+			if(null == ware) {
+				warennummer.setText("");
+				preis.setText("");
+				einheit.setText("");
+				pane.lookupButton(button).setDisable(true);
+			} else {
+				warennummer.setText(ware.getWarennummer());
+				preis.setText(ware.getPreis());
+				einheit.setText(ware.getEinheit());
+				if(!bezeichnung.getText().equals("")) {
+					pane.lookupButton(button).setDisable(false);
+				}
+			}
 		});
 		Platform.runLater(() -> bezeichnung.requestFocus());
 		/**/
@@ -305,15 +291,30 @@ public class SaeuleView implements Initializable {
 		pane.setContent(grid);
 		dialog.setResultConverter(submit -> {
 		    if (submit.getButtonData() == ButtonData.YES) {
-		    	controller.onSimulate(new VerkaufRecord(-1
+		    	VerkaufRecord record = new VerkaufRecord(-1
 		    			,warennummer.getText()
 		    			,bezeichnung.getText()
 		    			,preis.getText()
 		    			,"EUR"
 		    			,"0"
 		    			,einheit.getText()
-		    			,"0")
-		    	);
+		    			,"0");
+		    	KraftstoffbestandRecord ware = controller.hasKraftstoff(bezeichnung.getText());
+				VerkaufSimulation simulation = new VerkaufSimulation(ware,record,verkauf_liste);
+				verkauf_kraftstoff.setText("Stop");
+				/* TODO: delete click row listener */
+				verkauf_kraftstoff.setOnAction(event -> {
+					simulation.interrupt();
+					/* TODO: set click row listener
+					 * item.onCreateRowListener() */
+					verkauf_kraftstoff.setText("Kraftstoff");
+					verkauf_kraftstoff.setOnAction(e -> {createKraftstoffVerkauf();});
+					Double summe = Double.parseDouble(record.getSumme());
+					summe = summe + Double.parseDouble(verkauf_total.getText());
+			    	summe = Math.round(summe * Math.pow(10, 2)) / Math.pow(10, 2);
+			    	verkauf_total.setText(summe+"");
+				});
+				simulation.start();
 		    }
 		    return null;
 		});

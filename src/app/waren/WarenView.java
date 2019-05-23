@@ -49,5 +49,4 @@ public class WarenView implements Initializable {
 		bestand.onRefresh();
 		bestellungen.onRefresh();
 	}
-	
 }
