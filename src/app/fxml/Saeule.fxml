@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+
+
+<AnchorPane id="verkauf_wrapper" 
+	fx:id="verkauf_wrapper"
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+	<BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+	    <center>
+   			<AnchorPane>
+			<children>
+				<TableView id="verkauf_liste" fx:id="verkauf_liste" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+					<TableColumn id="verkauf_warennummer" fx:id="verkauf_warennummer" text="WN" />
+					<TableColumn id="verkauf_bezeichnung" fx:id="verkauf_bezeichnung" text="Bezeichnung" />
+					<TableColumn id="verkauf_preis" fx:id="verkauf_preis" text="Preis" />
+					<TableColumn id="verkauf_menge" fx:id="verkauf_menge" text="Menge" />
+					<TableColumn id="verkauf_einheit" fx:id="verkauf_einheit" text="Einheit" />
+					<TableColumn id="verkauf_summe" fx:id="verkauf_summe" text="Summe" />
+				</columns>
+				</TableView>
+                <Button id="verkauf_waren" fx:id="verkauf_waren" layoutX="733.3" layoutY="350.0" mnemonicParsing="false" prefWidth="120.0" text="Waren" />
+                <Button id="verkauf_kraftstoff" fx:id="verkauf_kraftstoff" layoutX="733.3" layoutY="375.0" mnemonicParsing="false" prefWidth="120.0" text="Kraftstoff" />
+                <Button id="verkauf_buchen" fx:id="verkauf_buchen" layoutX="733.3" layoutY="325.0" mnemonicParsing="false" prefWidth="120.0" text="Buchen" />
+          	</children>
+	       	</AnchorPane>	    
+		</center>
+	    <bottom>
+			<AnchorPane>
+			<children>
+				<Label id="verkauf_total" fx:id="verkauf_total" alignment="CENTER_RIGHT" layoutX="612.3" prefHeight="32.0" prefWidth="200.0" text="0.00">
+					<font><Font name="System Bold" size="19.0" /></font>
+				</Label>
+	            <Label alignment="CENTER" layoutX="820.3" prefHeight="32.0" prefWidth="32.0" text="€" textAlignment="CENTER">
+					<font><Font name="System Bold" size="19.0" /></font>
+				</Label>
+			</children>
+			</AnchorPane>
+		</bottom>
+	</BorderPane>
+	</children>
+</AnchorPane>
