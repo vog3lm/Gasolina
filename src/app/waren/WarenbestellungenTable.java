@@ -3,7 +3,6 @@ package app.waren;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
 import app.csv.CsvConnection;
 /**
  * 
@@ -16,13 +15,20 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     private final CsvConnection database = new CsvConnection(CsvConnection.WAREN_BESTELLUNGEN);
     private ArrayList<WarenbestellungenRecord> records = new ArrayList<WarenbestellungenRecord>();
 
+    private int bestellnummern = 0;
+    
     public WarenbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
-            this.records.add(new WarenbestellungenRecord(i,data.get(i)));
+        	WarenbestellungenRecord bestellung = new WarenbestellungenRecord(i,data.get(i));
+        	int bestellnummer = Integer.parseInt(bestellung.getBestellnummer());
+        	if(bestellnummer > bestellnummern) {
+        		bestellnummern = bestellnummer;
+        	}
+            this.records.add(bestellung);
         }
     }
-
+    
     @Override
     public WarenbestellungenRecord onRead(int index) { return this.records.get(index); }
 
@@ -31,7 +37,7 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
     @Override
     public int onCreate(WarenbestellungenRecord record){
         int index = this.records.size();
-        this.records.add(record.setIndex(index).setBestellnummer(""+index));
+        this.records.add(record.setIndex(index).setBestellnummer(++bestellnummern+""));
         return index;
     }
 
@@ -78,8 +84,12 @@ public class WarenbestellungenTable implements Database<WarenbestellungenRecord>
 	}
 	
 	@Override
-	public int getIndex(String bezeichnung) {
-		/* TODO: search by ... */
+	public int getIndex(String bestellnummer) {
+		for(int i=0; i<records.size(); i++) {
+			if(bestellnummer.equals(records.get(i).getBezeichnung())) {
+				return i;
+			}
+		}
 		return -1;
 	}
 }

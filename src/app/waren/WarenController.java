@@ -1,10 +1,16 @@
 package app.waren;
 
+import app.controlling.AusgabenRecord;
 import app.controlling.AusgabenTable;
 import app.waren.WarenbestellungenRecord;
 import app.waren.WarenbestellungenTable;
-import app.Lifecycle;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import app.Lifecycle;
+import app.Zustand;
 /**
  * 
  * @author vog3lm
@@ -42,7 +48,6 @@ public class WarenController implements Lifecycle {
 		view.onRefresh();
 	}
 	
-
 	void onBestellungEdit(int index, String id, String value) {
 		WarenbestellungenRecord record = bestellungen.onRead(index);
 		if(id.equals("bezeichnung")) { record.setBezeichnung(value); }
@@ -83,23 +88,27 @@ public class WarenController implements Lifecycle {
 			float preis = Float.parseFloat(lieferung.getPreis());
 			float bestandsmenge = Float.parseFloat(vorrat.getMenge());
 			float liefermenge = Float.parseFloat(lieferung.getMenge());
-			
-			
-			System.out.println("delete: "+lieferung.getIndex());
-			for(WarenbestellungenRecord r : bestellungen.onRead()) {
-				System.out.println(r.getIndex()+" "+r.getBezeichnung());
-			}
-			
-			
 			bestellungen.onDelete(lieferung.getIndex());
 			if("".equals(lieferung.getLieferdatum())) {
 		    	bestandsmenge = bestandsmenge + liefermenge;
 			} else {
 		    	bestandsmenge = Float.parseFloat(vorrat.getMenge()) + liefermenge;
-		     	int i = bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
+		     	bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
 			}
-			vorrat.setMenge(bestandsmenge+"");
-//		 	TODO : ausgaben.onCreate();			
+			vorrat.setMenge(bestandsmenge+"");	
+			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+			DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+			Date date = new Date();
+			ausgaben.onCreate(new AusgabenRecord(-1,""
+					,vorrat.getWarennummer()
+					,vorrat.getBezeichnung()
+					,lieferung.getPreis()
+					,lieferung.getMenge()
+					,vorrat.getEinheit()
+					,(preis*liefermenge)+""
+					,dateFormat.format(date)
+					,timeFormat.format(date)
+					,Zustand.getInstance().getBenutzer().getBenutzername()));
 		}catch (NumberFormatException | NullPointerException e){
 	    	System.out.println("kraftstoff teilmenge buchen: oooops");
 	    }
@@ -108,8 +117,9 @@ public class WarenController implements Lifecycle {
 	
 	@Override
 	public boolean destroy() {
-	//	bestand.onCommit();
-	//	bestellungen.onCommit();
+		bestand.onCommit();
+		bestellungen.onCommit();
+		ausgaben.onCommit();
 		return true;
 	}
 }

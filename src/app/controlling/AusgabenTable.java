@@ -3,7 +3,6 @@ package app.controlling;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
 import app.csv.CsvConnection;
 /**
  * 
@@ -16,10 +15,17 @@ public class AusgabenTable implements Database<AusgabenRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.AUSGABEN);
     private ArrayList<AusgabenRecord> records = new ArrayList<AusgabenRecord>();
 
+    private int buchungsnummern = 0;
+    
     public AusgabenTable(){
         ArrayList<String[]> data = database.onRead();
-        for(int i=0; i<data.size(); i++){
-            this.records.add(new AusgabenRecord(i,data.get(i)));
+        for(int i=0; i<data.size(); i++){           
+            AusgabenRecord bestand = new AusgabenRecord(i,data.get(i));
+        	int buchungsnummer = Integer.parseInt(bestand.getWarennummer());
+        	if(buchungsnummer > buchungsnummern) {
+        		buchungsnummern = buchungsnummer;
+        	}
+            this.records.add(bestand);
         }
     }
 
@@ -31,38 +37,54 @@ public class AusgabenTable implements Database<AusgabenRecord> {
 
 	@Override
 	public int onCreate(AusgabenRecord record) {
-		/* TODO: delete ausgaben record */
-		return -1;
+        int index = this.records.size();
+        this.records.add(record.setIndex(index).setBuchungsnummer(++buchungsnummern+""));
+        return index;
 	}
 
 	@Override
 	public void onUpdate(int index, AusgabenRecord record) {
-        this.records.get(index);
-        /* TODO: update ausgaben record */
+		AusgabenRecord r = this.records.get(index);
+		r.setBuchungsnummer(record.getBuchungsnummer());
+		r.setWarennummer(record.getWarennummer());
+		r.setBezeichnung(record.getBezeichnung());
+		r.setPreis(record.getPreis());
+		r.setMenge(record.getMenge());
+		r.setEinheit(record.getEinheit());
+		r.setSumme(record.getSumme());
+		r.setDatum(record.getDatum());
+		r.setUhrzeit(record.getUhrzeit());
+		r.setMitarbeiter(record.getMitarbeiter());
 	}
 
 	@Override
 	public void onDelete(int index) {
-		/* TODO: delete ausgaben record */
+        this.records.remove(index);
+        for(int i=0; i < this.records.size(); i++){
+            this.records.get(i).setWarennummer(i+"");
+        }
 	}
-
+	
 	@Override
 	public void onCommit() {
         ArrayList<String[]> records = new ArrayList<String[]>();
         for(AusgabenRecord r : this.records){
-        	/* TODO: wirte table on commit */
-            records.add(new String[]{});
+            records.add(new String[]{r.getBuchungsnummer(),r.getWarennummer(),r.getBezeichnung(),r.getPreis(),r.getMenge(),r.getEinheit(),r.getSumme(),r.getDatum(),r.getUhrzeit(),r.getMitarbeiter()});
         }
-        // TODO : database.onWrite(records);
+        database.onWrite(records);
 	}
 
 	@Override
 	public int getIndex(AusgabenRecord record) { return this.records.indexOf(record); }
 
 	@Override
-	public int getIndex(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getIndex(String buchungsnummer) {
+		for(int i=0; i<records.size(); i++) {
+			if(buchungsnummer.equals(records.get(i).getBuchungsnummer())) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override

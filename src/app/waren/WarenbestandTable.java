@@ -15,10 +15,17 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.WAREN);
     private ArrayList<WarenbestandRecord> records = new ArrayList<WarenbestandRecord>();
 
+    private int warennummern = 0;
+    
     public WarenbestandTable(){
         ArrayList<String[]> data = database.onRead();
-        for(int i=0; i<data.size(); i++){
-            this.records.add(new WarenbestandRecord(i,data.get(i)));
+        for(int i=0; i<data.size(); i++){          
+            WarenbestandRecord bestand = new WarenbestandRecord(i,data.get(i));
+        	int warennummer = Integer.parseInt(bestand.getWarennummer());
+        	if(warennummer > warennummern) {
+        		warennummern = warennummer;
+        	}
+            this.records.add(bestand);
         }
     }
 
@@ -30,9 +37,9 @@ public class WarenbestandTable implements Database<WarenbestandRecord> {
 
     @Override
     public int onCreate(WarenbestandRecord record){
-        int warennummer = this.records.size();
-        this.records.add(record.setWarennummer(warennummer+""));
-        return warennummer;
+        int index = this.records.size();
+        this.records.add(record.setIndex(index).setWarennummer(++warennummern+""));
+        return index;
     }
 
     @Override

@@ -3,7 +3,6 @@ package app.kraftstoff;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
 import app.csv.CsvConnection;
 /**
  * 
@@ -16,13 +15,20 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     private final CsvConnection database = new CsvConnection(CsvConnection.KRAFTSTOFF_BESTELLUNGEN);
     private ArrayList<KraftstoffbestellungenRecord> records = new ArrayList<KraftstoffbestellungenRecord>();
 
+    private int bestellnummern = 0;
+    
     public KraftstoffbestellungenTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
-            this.records.add(new KraftstoffbestellungenRecord(i,data.get(i)));
+        	KraftstoffbestellungenRecord bestellung = new KraftstoffbestellungenRecord(i,data.get(i));
+        	int bestellnummer = Integer.parseInt(bestellung.getBestellnummer());
+        	if(bestellnummer > bestellnummern) {
+        		bestellnummern = bestellnummer;
+        	}
+            this.records.add(bestellung);
         }
     }
-
+    
     @Override
     public KraftstoffbestellungenRecord onRead(int index) { return this.records.get(index); }
 
@@ -32,7 +38,7 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
     @Override
     public int onCreate(KraftstoffbestellungenRecord record){
         int index = this.records.size();
-        this.records.add(record.setIndex(index).setBestellnummer(""+index));
+        this.records.add(record.setIndex(index).setBestellnummer(++bestellnummern+""));
         return index;
     }
 
@@ -80,7 +86,11 @@ public class KraftstoffbestellungenTable implements Database<Kraftstoffbestellun
 	
 	@Override
 	public int getIndex(String bestellnummer) {
-		/* TODO: search by ... */
+		for(int i=0; i<records.size(); i++) {
+			if(bestellnummer.equals(records.get(i).getBezeichnung())) {
+				return i;
+			}
+		}
 		return -1;
 	}
 }

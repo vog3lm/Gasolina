@@ -1,8 +1,14 @@
 package app.kraftstoff;
 
+import app.controlling.AusgabenRecord;
 import app.controlling.AusgabenTable;
-import app.Lifecycle;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import app.Lifecycle;
+import app.Zustand;
 import javafx.scene.control.TableColumn;
 /**
  * 
@@ -87,7 +93,19 @@ public class KraftstoffController implements Lifecycle {
 		     	bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
 		    }
 			vorrat.setMenge(bestandsmenge+"");
-//		 	TODO : ausgaben.onCreate();
+			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+			DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+			Date date = new Date();
+			ausgaben.onCreate(new AusgabenRecord(-1,""
+					,vorrat.getWarennummer()
+					,vorrat.getBezeichnung()
+					,lieferung.getPreis()
+					,lieferung.getMenge()
+					,vorrat.getEinheit()
+					,(preis*liefermenge)+""
+					,dateFormat.format(date)
+					,timeFormat.format(date)
+					,Zustand.getInstance().getBenutzer().getBenutzername()));
 	    }catch (NumberFormatException | NullPointerException e){
 	    	System.out.println("kraftstoff teilmenge buchen: oooops");
 	    }
@@ -98,6 +116,7 @@ public class KraftstoffController implements Lifecycle {
 	public boolean destroy() {
 		bestand.onCommit();
 		bestellungen.onCommit();
+		ausgaben.onCommit();
 		return true;
 	}
 }

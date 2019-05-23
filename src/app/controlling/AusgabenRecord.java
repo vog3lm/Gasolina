@@ -1,44 +1,47 @@
 package app.controlling;
 
-import app.verkauf.VerkaufRecord;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class AusgabenRecord {
 	
 	private SimpleIntegerProperty index;
+	private SimpleStringProperty buchungsnummer;
 	private SimpleStringProperty warennummer;
 	private SimpleStringProperty bezeichnung;
 	private SimpleStringProperty preis;
 	private SimpleStringProperty menge;
 	private SimpleStringProperty einheit;
 	private SimpleStringProperty summe;
-	private SimpleStringProperty belegnummer;
 	private SimpleStringProperty datum;
 	private SimpleStringProperty uhrzeit;
 	private SimpleStringProperty mitarbeiter;
 	
-    public AusgabenRecord(int index, String warennummer, String bezeichnung, String preis, String menge, String einheit, String summe){
+    public AusgabenRecord(int index, String buchungsnummer, String warennummer, String bezeichnung, String preis, String menge, String einheit, String summe, String datum, String uhrzeit, String mitarbeiter){
     	this.index = new SimpleIntegerProperty(index);
+    	this.buchungsnummer = new SimpleStringProperty(buchungsnummer);
         this.warennummer = new SimpleStringProperty(warennummer);
         this.bezeichnung = new SimpleStringProperty(bezeichnung);
         this.preis = new SimpleStringProperty(preis);
         this.menge = new SimpleStringProperty(menge);
         this.einheit = new SimpleStringProperty(einheit);
         this.summe = new SimpleStringProperty(summe);
+        this.datum = new SimpleStringProperty(datum);
+        this.uhrzeit = new SimpleStringProperty(uhrzeit);
+        this.mitarbeiter = new SimpleStringProperty(mitarbeiter);
     }
 
     public AusgabenRecord(int index, String[] record){
     	this.index = new SimpleIntegerProperty(index);
+    	this.buchungsnummer = new SimpleStringProperty(record[0]);
     	/* kasse values */
-        this.warennummer = new SimpleStringProperty(record[0]);
-        this.bezeichnung = new SimpleStringProperty(record[1]);
-        this.preis = new SimpleStringProperty(record[2]);
-        this.menge = new SimpleStringProperty(record[3]);
-        this.einheit = new SimpleStringProperty(record[4]);
-        this.summe = new SimpleStringProperty(record[5]);
+        this.warennummer = new SimpleStringProperty(record[1]);
+        this.bezeichnung = new SimpleStringProperty(record[2]);
+        this.preis = new SimpleStringProperty(record[3]);
+        this.menge = new SimpleStringProperty(record[4]);
+        this.einheit = new SimpleStringProperty(record[5]);
+        this.summe = new SimpleStringProperty(record[6]);
         /* journal values */
-        this.belegnummer = new SimpleStringProperty(record[6]);
         this.datum = new SimpleStringProperty(record[7]);
         this.uhrzeit = new SimpleStringProperty(record[8]);
         this.mitarbeiter = new SimpleStringProperty(record[9]);
@@ -48,6 +51,13 @@ public class AusgabenRecord {
 
     public AusgabenRecord setIndex(int index) {
         this.index = new SimpleIntegerProperty(index);
+        return this;
+    }
+    
+    public String getBuchungsnummer() { return this.buchungsnummer.get(); }
+    
+    public AusgabenRecord setBuchungsnummer(String buchungsnummer) {
+        this.buchungsnummer = new SimpleStringProperty(buchungsnummer);
         return this;
     }
     
@@ -90,13 +100,6 @@ public class AusgabenRecord {
     
     public AusgabenRecord setSumme(String summe) {
         this.summe = new SimpleStringProperty(summe);
-        return this;
-    }
-    
-    public String getBelegnummer() { return this.belegnummer.get(); }
-    
-    public AusgabenRecord setBelegnummer(String belegnummer) {
-        this.belegnummer = new SimpleStringProperty(belegnummer);
         return this;
     }
     

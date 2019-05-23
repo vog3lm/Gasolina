@@ -3,7 +3,6 @@ package app.kraftstoff;
 import java.util.ArrayList;
 
 import app.Database;
-import app.Zustand;
 import app.csv.CsvConnection;
 /**
  * 
@@ -20,13 +19,20 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
         add("Liter");add("Kubikmeter");add("Kilowattstunden");
     }};
 
+    private int warennummern = 0;
+    
     public KraftstoffbestandTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
-            this.records.add(new KraftstoffbestandRecord(i,data.get(i)));
+        	KraftstoffbestandRecord bestand = new KraftstoffbestandRecord(i,data.get(i));
+        	int warennummer = Integer.parseInt(bestand.getWarennummer());
+        	if(warennummer > warennummern) {
+        		warennummern = warennummer;
+        	}
+            this.records.add(bestand);
         }
     }
-
+    
     @Override
     public KraftstoffbestandRecord onRead(int index) { return this.records.get(index); }
 
@@ -35,9 +41,9 @@ public class KraftstoffbestandTable implements Database<KraftstoffbestandRecord>
     
     @Override
     public int onCreate(KraftstoffbestandRecord record){
-        int warennummer = this.records.size();
-        this.records.add(record.setWarennummer(warennummer+""));
-        return warennummer;
+        int index = this.records.size();
+        this.records.add(record.setIndex(index).setWarennummer(++warennummern+""));
+        return index;
     }
 
     @Override
