@@ -6,7 +6,7 @@ package app;
  * @version 1.0
  * @since   1.0
  */
-public interface Lifecycle /* extends Initializable */{
+public interface Controller{
 	/**
 	 * 
 	 * */

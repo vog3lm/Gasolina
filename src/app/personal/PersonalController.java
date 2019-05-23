@@ -1,7 +1,7 @@
 package app.personal;
 
 import app.personal.PersonalTable;
-import app.Lifecycle;
+import app.Controller;
 
 /**
  * 
@@ -9,7 +9,7 @@ import app.Lifecycle;
  * @version 1.0
  * @since   1.0
  */
-public class PersonalController implements Lifecycle {
+public class PersonalController implements Controller {
 	
 	private PersonalTable bestand = new PersonalTable();
 

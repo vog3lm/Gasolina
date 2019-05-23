@@ -67,15 +67,15 @@ public class Zustand {
 	/**
 	 * Visible view.
 	 * */
-	private Lifecycle current;
+	private Controller current;
 	/**
 	 * Visible view getter.
 	 * */
-	public Lifecycle getCurrent() { return this.current; }
+	public Controller getCurrent() { return this.current; }
 	/**
 	 * Visible view setter.
 	 * */
-	public Zustand setCurrent(Lifecycle current) {
+	public Zustand setCurrent(Controller current) {
 		this.current = current;
 		return this;
 	}

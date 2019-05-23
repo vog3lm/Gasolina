@@ -14,7 +14,7 @@ import app.Zustand;
 import app.fxml.Loader;
 import app.personal.PersonalRecord;
 import app.verkauf.VerkaufRecord;
-import app.Lifecycle;
+import app.Controller;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestandTable;
 import app.kraftstoff.KraftstoffbestandRecord;
@@ -53,7 +53,7 @@ import javafx.util.Callback;
  * @version 1.0
  * @since   1.0
  */
-public class VerkaufController implements Lifecycle, Initializable {
+public class VerkaufController implements Controller, Initializable {
 	
 	private int tab;
 	

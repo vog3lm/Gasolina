@@ -26,7 +26,7 @@ public class Main extends Application {
 	 * @param JavaFX Stage object
 	 */
 	@Override
-	public void start(Stage stage) {		
+	public void start(Stage stage) {
 		Zustand zustand = Zustand.getInstance();
 		/* create root layout */
 		BorderPane root = new BorderPane();
@@ -56,7 +56,7 @@ public class Main extends Application {
 	 */
 	public void destroy() {
 		boolean exit = true;
-		Lifecycle current = Zustand.getInstance().getCurrent();
+		Controller current = Zustand.getInstance().getCurrent();
 		if(null != current) {exit = current.destroy();}
 		if(exit) {
 	        Platform.exit();

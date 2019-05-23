@@ -1,6 +1,6 @@
 package app.controlling;
 
-import app.Lifecycle;
+import app.Controller;
 import app.verkauf.VerkaufTable;
 /**
  * 
@@ -8,7 +8,7 @@ import app.verkauf.VerkaufTable;
  * @version 1.0
  * @since   1.0
  */
-public class ControllingController implements Lifecycle {
+public class ControllingController implements Controller {
 
 	private VerkaufTable einnahmen = new VerkaufTable();
 	
@@ -21,7 +21,6 @@ public class ControllingController implements Lifecycle {
 		view.setIndex(tab);
 		view.setEinnahmen(einnahmen.onRead());
 		view.setAusgaben(ausgaben.onRead());
-		/**/
 	}
 	
 	@Override

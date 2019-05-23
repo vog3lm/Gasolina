@@ -1,14 +1,14 @@
 package app.personal;
 
 import app.Zustand;
-import app.Lifecycle;
+import app.Controller;
 /**
  * 
  * @author vog3lm
  * @version 1.0
  * @since   1.0
  */
-public class BenutzerController implements Lifecycle {
+public class BenutzerController implements Controller {
 	
 	private PersonalTable bestand = new PersonalTable();
 	

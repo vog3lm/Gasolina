@@ -1,6 +1,6 @@
 package app.fxml;
 
-import app.Lifecycle;
+import app.Controller;
 import app.Zustand;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,9 +45,9 @@ public class Loader {
 	 * @param Path to fxml layout
 	 * @param Fxml layout view wrapper
 	 */
-	public void onLoadBorderTop(Lifecycle lc, String layout, Initializable view) {
+	public void onLoadBorderTop(Controller lc, String layout, Initializable view) {
 		Zustand zustand = Zustand.getInstance();
-		Lifecycle current = zustand.getCurrent();
+		Controller current = zustand.getCurrent();
 		if(null != current) {
 			zustand.getCurrent().destroy();
 		}
@@ -60,9 +60,9 @@ public class Loader {
 	 * @param Path to fxml layout
 	 * @param Fxml layout view wrapper
 	 */
-	public void onLoadBorderCenter(Lifecycle lc, String layout, Initializable view) {
+	public void onLoadBorderCenter(Controller lc, String layout, Initializable view) {
 		Zustand zustand = Zustand.getInstance();
-		Lifecycle current = zustand.getCurrent();
+		Controller current = zustand.getCurrent();
 		if(null != current) {
 			zustand.getCurrent().destroy();
 		}

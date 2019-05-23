@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import app.Lifecycle;
+import app.Controller;
 import app.Zustand;
 /**
  * 
@@ -15,7 +15,7 @@ import app.Zustand;
  * @version 1.0
  * @since   1.0
  */
-public class KraftstoffController implements Lifecycle {
+public class KraftstoffController implements Controller {
 		
 	private KraftstoffbestandTable bestand = new KraftstoffbestandTable();
 	

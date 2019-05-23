@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import app.Lifecycle;
+import app.Controller;
 import app.Zustand;
 /**
  * 
@@ -17,7 +17,7 @@ import app.Zustand;
  * @version 1.0
  * @since   1.0
  */
-public class WarenController implements Lifecycle {
+public class WarenController implements Controller {
 		
 	private WarenbestandTable bestand = new WarenbestandTable();
 	
