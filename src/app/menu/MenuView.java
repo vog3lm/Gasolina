@@ -3,15 +3,20 @@ package app.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.Pane;
 
-class MenuView implements Initializable {
-
+class MenuView extends Loadable {
+		
+	private final String layout = "Menu.fxml";
+	
+	@FXML
+	private Pane menu;
+	
 	@FXML
 	private MenuBar nav_bar;
 	@FXML
@@ -57,7 +62,7 @@ class MenuView implements Initializable {
 	
 	MenuView(MenuController controller) {
 		this.controller = controller;
-		new Loader().onLoadBorderTop(null,Loader.MENU,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -100,4 +105,8 @@ class MenuView implements Initializable {
 		this.nav_user.setText("");
 		this.nav_bar.setDisable(true);
 	}
+	
+	public String getId() {return menu.getId();}
+	
+	public Pane getView() {return menu;}
 }

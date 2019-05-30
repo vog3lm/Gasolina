@@ -4,12 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
-
+import app.Loadable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -22,10 +20,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-class BestandView implements Initializable {
+class BestandView extends Loadable<AnchorPane> {
+	
+	private final String layout = "KraftstoffBestand.fxml";
 
 	@FXML
-	private AnchorPane bestand_wrapper;
+	private AnchorPane bestand;
 	@FXML
     private TableView<KraftstoffbestandRecord> bestand_liste;
 	@FXML
@@ -51,7 +51,7 @@ class BestandView implements Initializable {
 	
 	BestandView(KraftstoffController controller) {
 		this.controller = controller;
-		new Loader().onLoadInitializable(Loader.KRAFTSTOFF_BESTAND,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -72,16 +72,10 @@ class BestandView implements Initializable {
 	                public void updateItem(String value, boolean empty) {
 	                    super.updateItem(value, empty);
 	                    this.setText(value);
-	                    int kapazitaet = 1000;
-	                    if(!empty && !value.equals("")) {
-		                    float menge = Float.parseFloat(value);
-		                    if(kapazitaet / 4 >= menge) {
-		                    	this.getStyleClass().add("bestand-traffic-red");
-		                    } else if(kapazitaet / 2 >= menge) {
-		                    	this.getStyleClass().add("bestand-traffic-yellow");
-		                    } else {
-		                    	this.getStyleClass().add("bestand-traffic-green");
-		                    }
+
+	            		TableRow<KraftstoffbestandRecord> row = this.getTableRow();
+	            		if(!empty && !value.equals("") && null != row) {
+	            			this.getStyleClass().add(controller.onBestandAmpel(row.getIndex(),value));
 	                    }
 	                }
 	            };
@@ -97,13 +91,8 @@ class BestandView implements Initializable {
 	    /**/
 	    bestand_liste.setRowFactory(this.createRowListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
-	    	    
 	    /**/
-	    bestand_bestellen.setOnAction(event -> {
-	    	new KraftstoffDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-	    });
+	    bestand_bestellen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
 	
 	private Callback<TableView<KraftstoffbestandRecord>,TableRow<KraftstoffbestandRecord>> createRowListener() {
@@ -123,11 +112,7 @@ class BestandView implements Initializable {
 	private ContextMenu createRowMenu(TableView<KraftstoffbestandRecord> table, TableRow<KraftstoffbestandRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem bestellen = new MenuItem("Bestellen");
-        bestellen.setOnAction(event -> {
-        	new KraftstoffDialoge().createBestandBestellenDialog(row.getItem()).showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-        });
+        bestellen.setOnAction(event -> {controller.onBestandBestellen(row.getIndex());});
         MenuItem remove = new MenuItem("Entfernen");
         remove.setOnAction(event -> { controller.onBestandDelete(row.getIndex()); });
         menu.getItems().addAll(bestellen,remove);
@@ -136,7 +121,7 @@ class BestandView implements Initializable {
 	
 	void setItems(ArrayList<KraftstoffbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
 	
-	AnchorPane getView() { return bestand_wrapper; }
+	protected AnchorPane getView() { return bestand; }
 	
 	void onRefresh() {
 		bestand_liste.refresh();

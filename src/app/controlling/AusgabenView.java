@@ -4,20 +4,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class AusgabenView implements Initializable {
+public class AusgabenView extends Loadable<TableView<AusgabenRecord>> {
 
+	private final String layout = "Ausgaben.fxml";
+	
 	@FXML
-	private TableView<AusgabenRecord> ausgaben_liste;
+	private TableView<AusgabenRecord> ausgaben;
 	@FXML
-	private TableColumn<AusgabenRecord, String> ausgaben_id;
+	private TableColumn<AusgabenRecord, String> ausgaben_buchungsnummer;
 	@FXML
 	private TableColumn<AusgabenRecord, String> ausgaben_warennummer;
 	@FXML
@@ -31,8 +32,6 @@ public class AusgabenView implements Initializable {
 	@FXML
 	private TableColumn<AusgabenRecord, String> ausgaben_summe;
 	@FXML
-	private TableColumn<AusgabenRecord, String> ausgaben_belegnummer;
-	@FXML
 	private TableColumn<AusgabenRecord, String> ausgaben_datum;
 	@FXML
 	private TableColumn<AusgabenRecord, String> ausgaben_uhrzeit;
@@ -40,27 +39,25 @@ public class AusgabenView implements Initializable {
 	private TableColumn<AusgabenRecord, String> ausgaben_mitarbeiter;
 	
 	AusgabenView() {
-		new Loader().onLoadInitializable(Loader.AUSGABEN,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
-		ausgaben_id.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("index"));
+		ausgaben_buchungsnummer.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("buchungsnummer"));
 		ausgaben_warennummer.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("warennummer"));
 		ausgaben_bezeichnung.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("bezeichnung"));
 		ausgaben_preis.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("preis"));
 		ausgaben_menge.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("menge"));
-		ausgaben_menge.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("einheit"));
+		ausgaben_einheit.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("einheit"));
 		ausgaben_summe.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("summe"));
-		ausgaben_belegnummer.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("belegnummer"));
 		ausgaben_datum.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("datum"));
 		ausgaben_uhrzeit.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("uhrzeit"));
 		ausgaben_mitarbeiter.setCellValueFactory(new PropertyValueFactory<AusgabenRecord, String>("mitarbeiter"));
 	}
 	
-	void setItems(ArrayList<AusgabenRecord> items) {
-		ausgaben_liste.setItems(FXCollections.observableList(items));
-	}
+	void setItems(ArrayList<AusgabenRecord> items) { ausgaben.setItems(FXCollections.observableList(items)); }
 	
-	TableView<AusgabenRecord> getView() { return ausgaben_liste; }
+	@Override
+	protected TableView<AusgabenRecord> getView() { return ausgaben; }
 }

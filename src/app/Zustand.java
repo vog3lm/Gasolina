@@ -19,6 +19,37 @@ public class Zustand {
 	 * Path to dark layout css file.
 	 * */
 	public final static String DARK = "app/style/app.main.dark.css";
+	
+	/**
+	 * 
+	 * */
+	private Observer observer;
+	/**
+	 * 
+	 * */
+	public Observer getObserver() { return this.observer; }
+	/**
+	 * 
+	 * */
+	public Zustand setObserver(Observer observer) {
+		this.observer = observer;
+		return this;
+	}
+	/**
+	 * 
+	 * */
+	private Commander commander;
+	/**
+	 * 
+	 * */
+	public Commander getCommander() { return this.commander; }
+	/**
+	 * 
+	 * */
+	public Zustand setCommander(Commander commander) {
+		this.commander = commander;
+		return this;
+	}
 	/**
 	 * Used application stage.
 	 * */

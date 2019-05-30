@@ -17,7 +17,7 @@ import app.Zustand;
  * @version 1.0
  * @since   1.0
  */
-public class WarenController implements Controller {
+public class WarenController implements Controller<WarenView> {
 		
 	private WarenbestandTable bestand = new WarenbestandTable();
 	
@@ -25,14 +25,8 @@ public class WarenController implements Controller {
 	
 	private AusgabenTable ausgaben = new AusgabenTable();
 	
-	private WarenView view = new WarenView(this);
-	
-	public WarenController(int tab) {
-		view.setIndex(tab);
-		view.setBestand(bestand.onRead());
-		view.setBestellungen(bestellungen.onRead());
-	}
-	
+	private WarenView view = new WarenView();
+		
 	void onBestandEdit(int index, String id, String value) {
 		WarenbestandRecord record = bestand.onRead(index);
 		if(id.equals("bezeichnung")) { record.setBezeichnung(value); }
@@ -40,12 +34,29 @@ public class WarenController implements Controller {
 		else if(id.equals("menge")) { record.setMenge(value); }
 		else if(id.equals("preis")) { record.setPreis(value); }
 		else if(id.equals("kategorie")) { record.setKategorie(value); }
-		view.onRefresh();
+	//	view.onRefresh();
 	}
 	
 	void onBestandDelete(int index) {
 		bestand.onDelete(index);
-		view.onRefresh();
+		//	view.onRefresh();
+	}
+	
+	void onBestandBestellen(int index) {
+		WarenbestandRecord record = bestand.onRead(index);
+    	new WarenDialoge().createBestandBestellenDialog(record).showAndWait().ifPresent(bestellung -> {
+    		//	view.setIndex(WarenView.BESTELLUNGEN);
+    		bestellungen.onCreate(bestellung);
+    		//		view.onRefresh();
+		});
+	}
+	
+	void onBestellungAdd() {
+    	new WarenDialoge().createBestellungAddDialog().showAndWait().ifPresent(bestellung -> {
+    		//	view.setIndex(WarenView.BESTELLUNGEN);
+    		bestellungen.onCreate(bestellung);
+    		//	view.onRefresh();
+		});
 	}
 	
 	void onBestellungEdit(int index, String id, String value) {
@@ -54,65 +65,61 @@ public class WarenController implements Controller {
 		else if(id.equals("menge")) { record.setMenge(value); }
 		else if(id.equals("preis")) { record.setPreis(value); }
 		else if(id.equals("lieferdatum")) { record.setLieferdatum(value); }
-		view.onRefresh();
+		//view.onRefresh();
 	}
 	
 	void onBestellungDelete(int index) {
 		bestellungen.onDelete(index);
-		view.onRefresh();
-	}
-	
-	void onBestellen(WarenbestellungenRecord bestellung) {
-		view.setIndex(WarenView.BESTELLUNGEN);
-		bestellungen.onCreate(bestellung);
-		view.onRefresh();
+		//view.onRefresh();
 	}
 
-	void onBuchen(WarenbestellungenRecord lieferung) {
-		view.setIndex(WarenView.BESTAND);
-		WarenbestandRecord vorrat;
-		int index = bestand.getIndex(lieferung.getBezeichnung());
-		if(-1 == index) {
-			index = bestand.onCreate(new WarenbestandRecord(-1
-					,"warennummer"
-					,lieferung.getBezeichnung()
-					,"einheit"
-					,"menge"
-					,lieferung.getPreis()
-					,lieferung.getWaehrung()
-					,"kategorie"));
-		}
-		vorrat = bestand.onRead(index);
-		WarenbestellungenRecord bestellung = bestellungen.onRead(lieferung.getIndex());
-		try {
-			float preis = Float.parseFloat(lieferung.getPreis());
-			float bestandsmenge = Float.parseFloat(vorrat.getMenge());
-			float liefermenge = Float.parseFloat(lieferung.getMenge());
-			bestellungen.onDelete(lieferung.getIndex());
-			if("".equals(lieferung.getLieferdatum())) {
-		    	bestandsmenge = bestandsmenge + liefermenge;
-			} else {
-		    	bestandsmenge = Float.parseFloat(vorrat.getMenge()) + liefermenge;
-		     	bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
+	void onBestellungBuchen(int index) {
+		WarenbestellungenRecord bestellung = bestellungen.onRead(index);
+		new WarenDialoge().createBuchenDialog(bestellung).showAndWait().ifPresent(lieferung -> {
+			//	view.setIndex(WarenView.BESTAND);
+			WarenbestandRecord vorrat;
+			int bidx = bestand.getIndex(lieferung.getBezeichnung());
+			if(-1 == bidx) {
+				bidx = bestand.onCreate(new WarenbestandRecord(-1
+						,"warennummer"
+						,lieferung.getBezeichnung()
+						,"einheit"
+						,"menge"
+						,lieferung.getPreis()
+						,lieferung.getWaehrung()
+						,"kategorie"));
 			}
-			vorrat.setMenge(bestandsmenge+"");	
-			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			DateFormat timeFormat = new SimpleDateFormat("hh:mm");
-			Date date = new Date();
-			ausgaben.onCreate(new AusgabenRecord(-1,""
-					,vorrat.getWarennummer()
-					,vorrat.getBezeichnung()
-					,lieferung.getPreis()
-					,lieferung.getMenge()
-					,vorrat.getEinheit()
-					,(preis*liefermenge)+""
-					,dateFormat.format(date)
-					,timeFormat.format(date)
-					,Zustand.getInstance().getBenutzer().getBenutzername()));
-		}catch (NumberFormatException | NullPointerException e){
-	    	System.out.println("kraftstoff teilmenge buchen: oooops");
-	    }
-		view.onRefresh();
+			vorrat = bestand.onRead(bidx);
+			try {
+				float preis = Float.parseFloat(lieferung.getPreis());
+				float bestandsmenge = Float.parseFloat(vorrat.getMenge());
+				float liefermenge = Float.parseFloat(lieferung.getMenge());
+				bestellungen.onDelete(lieferung.getIndex());
+				if("".equals(lieferung.getLieferdatum())) {
+			    	bestandsmenge = bestandsmenge + liefermenge;
+				} else {
+			    	bestandsmenge = Float.parseFloat(vorrat.getMenge()) + liefermenge;
+			     	bestellungen.onCreate(lieferung.setMenge((Float.parseFloat(bestellung.getMenge()) - liefermenge)+""));
+				}
+				vorrat.setMenge(bestandsmenge+"");	
+				DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+				DateFormat timeFormat = new SimpleDateFormat("hh:mm");
+				Date date = new Date();
+				ausgaben.onCreate(new AusgabenRecord(-1,""
+						,vorrat.getWarennummer()
+						,vorrat.getBezeichnung()
+						,lieferung.getPreis()
+						,lieferung.getMenge()
+						,vorrat.getEinheit()
+						,(preis*liefermenge)+""
+						,dateFormat.format(date)
+						,timeFormat.format(date)
+						,Zustand.getInstance().getBenutzer().getBenutzername()));
+			}catch (NumberFormatException | NullPointerException e){
+		    	System.out.println("kraftstoff teilmenge buchen: oooops");
+		    }
+			//view.onRefresh();
+        });
 	}
 	
 	@Override
@@ -122,4 +129,7 @@ public class WarenController implements Controller {
 		ausgaben.onCommit();
 		return true;
 	}
+
+	@Override
+	public WarenView show() {return view;}
 }

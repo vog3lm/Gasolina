@@ -3,11 +3,10 @@ package app.personal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import app.Loadable;
 import app.Zustand;
-import app.fxml.Loader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,8 +18,10 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
-class AnmeldenView implements Initializable {
+class AnmeldenView extends Loadable<AnchorPane> {
 
+	private static final String layout = "Anmelden.fxml";
+	
 	@FXML
 	private AnchorPane anmelden_pane;
 	@FXML
@@ -38,7 +39,7 @@ class AnmeldenView implements Initializable {
 	
 	AnmeldenView(AnmeldenController controller) {
 		this.controller = controller;
-		new Loader().onLoadBorderCenter(null,Loader.ANMELDEN,this);
+		onLoad(layout,this);
 	}
 
 	@Override
@@ -73,4 +74,7 @@ class AnmeldenView implements Initializable {
 		anmelden_passwort.getStyleClass().add("anmelden-input-error");
 		anmelden_passwort_lbl.getStyleClass().add("anmelden-input-error");
 	}
+
+	@Override
+	protected AnchorPane getView() {return anmelden_pane;}
 }

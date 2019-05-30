@@ -7,7 +7,7 @@ package app.personal;
  */
 public interface Anmelden {
 
-	public void onAnmelden();
+	public void onAnmelden(PersonalRecord benutzer);
 	public void onAbmelden();
 	
 }

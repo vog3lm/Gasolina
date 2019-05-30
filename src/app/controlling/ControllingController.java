@@ -2,6 +2,7 @@ package app.controlling;
 
 import app.Controller;
 import app.verkauf.VerkaufTable;
+import javafx.scene.Node;
 /**
  * 
  * @author vog3lm
@@ -9,18 +10,11 @@ import app.verkauf.VerkaufTable;
  * @since   1.0
  */
 public class ControllingController implements Controller {
-
-	private VerkaufTable einnahmen = new VerkaufTable();
 	
-	private AusgabenTable ausgaben = new AusgabenTable();
-
-	private ControllingView view = new ControllingView(this);
-
+	private ControllingView view = new ControllingView();
 	
-	public ControllingController(int tab) {
-		view.setIndex(tab);
-		view.setEinnahmen(einnahmen.onRead());
-		view.setAusgaben(ausgaben.onRead());
+	public ControllingController() {
+
 	}
 	
 	@Override
@@ -28,4 +22,6 @@ public class ControllingController implements Controller {
 		return true;
 	}
 
+	@Override
+	public ControllingView show() {return view;}
 }

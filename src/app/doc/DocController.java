@@ -4,9 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.web.WebView;
 /**
  * 
@@ -14,13 +13,15 @@ import javafx.scene.web.WebView;
  * @version 1.0
  * @since   1.0
  */
-public class DocController implements Initializable {
+public class DocController extends Loadable<WebView> {
 
+	private final String layout = "Documentation.fxml";
+	
 	@FXML 
 	private WebView webview;
 	
 	public DocController() {
-		new Loader().onLoadBorderCenter(null,Loader.DOCUMENTATION,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -28,5 +29,8 @@ public class DocController implements Initializable {
 		File file = new File("src/app/dox/index.html");
 		webview.getEngine().load(file.toURI().toString());
 	}
+
+	@Override
+	protected WebView getView() {return webview;}
 
 }

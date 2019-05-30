@@ -4,19 +4,20 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
 
-<AnchorPane id="bestellungen_wrapper"
-	fx:id="bestellungen_wrapper"	
+
+<AnchorPane id="bestellungen"
+	fx:id="bestellungen"	
 	xmlns="http://javafx.com/javafx/8" 
-	xmlns:fx="http://javafx.com/fxml/1">
+	xmlns:fx="http://javafx.com/fxml/1" >
 	<children>
 		<TableView id="bestellungen_liste" 
-         	fx:id="bestellungen_liste"
-       		editable="true" 
-			tableMenuButtonVisible="true" 
-          	AnchorPane.bottomAnchor="0.0" 
-       	 	AnchorPane.leftAnchor="0.0" 
-       	 	AnchorPane.rightAnchor="0.0" 
-       	 	AnchorPane.topAnchor="0.0">
+	        fx:id="bestellungen_liste" 
+	        editable="true" 
+	        tableMenuButtonVisible="true"                           
+	        AnchorPane.bottomAnchor="0.0" 
+	        AnchorPane.leftAnchor="0.0" 
+	        AnchorPane.rightAnchor="0.0" 
+	        AnchorPane.topAnchor="0.0">
 			<columns>
 	            <TableColumn id="bestellungen_bestellnummer" fx:id="bestellungen_bestellnummer" text="BN" />
 	            <TableColumn id="bestellungen_warennummer" fx:id="bestellungen_warennummer" text="WN" />
@@ -31,13 +32,11 @@
 			</columns>
 		</TableView>
 		<Button id="bestellungen_hinzufuegen" 
-			fx:id="bestellungen_hinzufuegen" 
-            layoutX="733.3" 
-           	layoutY="385.0" 
-           	mnemonicParsing="false" 
-           	prefWidth="120.0" 
-           	text="Hinzufügen" />
+	      	fx:id="bestellungen_hinzufuegen" 
+	      	layoutX="733.3" 
+	      	layoutY="385.0" 
+	      	mnemonicParsing="false" 
+	      	prefWidth="120.0" 
+	      	text="Hinzufügen" />
 	</children>
 </AnchorPane>
-
-

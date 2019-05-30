@@ -4,15 +4,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import app.Decorateable;
+import app.Loadable;
 import app.Zustand;
-import app.fxml.Loader;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -27,11 +27,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-class PersonalView implements Initializable {
+class PersonalView extends Loadable<AnchorPane> implements Decorateable<PersonalView,ArrayList<PersonalRecord>> {
 
+	private final String layout = "Personal.fxml";
+	
+	@FXML
+	private AnchorPane personal;
 	@FXML
     private TableView<PersonalRecord> personal_liste;
 	@FXML
@@ -53,10 +58,9 @@ class PersonalView implements Initializable {
 	
 	private ObservableList<PersonalRecord> data;
 	
-	PersonalView(PersonalController controller, ArrayList<PersonalRecord> data){
+	PersonalView(PersonalController controller){
 		this.controller = controller;
-		this.data = FXCollections.observableList(data);
-		new Loader().onLoadBorderCenter(controller,Loader.PERSONAL,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -76,11 +80,11 @@ class PersonalView implements Initializable {
 	    personal_passwort.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"passwort",cell.getNewValue());});
 	    personal_einstelldatum.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("einstelldatum"));
 	    /**/
-	    personal_liste.setItems(data);
+	    
 	    personal_liste.setRowFactory(this.createRowListener());
 	    personal_liste.getSortOrder().addAll(personal_nachname);
 	    /**/
-	    personal_hinzufuegen.setOnAction(event -> {showAddDialog();});
+	    personal_hinzufuegen.setOnAction(event -> {createAddDialog();});
 	}
 	
 	private Callback<TableView<PersonalRecord>,TableRow<PersonalRecord>> createRowListener() {
@@ -100,13 +104,12 @@ class PersonalView implements Initializable {
 	private ContextMenu createRowMenu(TableView<PersonalRecord> table, TableRow<PersonalRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem remove = new MenuItem("Entfernen");
-     //   remove.setOnAction(event -> {table.getItems().remove(row.getIndex());});
         remove.setOnAction(event -> {controller.onRemove(row.getIndex());});
         menu.getItems().addAll(remove);
         return menu;
 	}
 	
-	private void showAddDialog() {
+	private void createAddDialog() {
 		/* prepare dialog - one/two */
 		Dialog<PersonalRecord> dialog = new Dialog<PersonalRecord>();
 		dialog.setTitle("Kraftstoffbestellung");
@@ -173,5 +176,14 @@ class PersonalView implements Initializable {
 	void onRefresh() {
 		personal_liste.refresh();
 		personal_liste.getSortOrder().addAll(personal_nachname);
+	}
+
+	@Override
+	protected AnchorPane getView() {return personal;}
+
+	@Override
+	public PersonalView decorate(ArrayList<PersonalRecord> data) {
+		personal_liste.setItems(FXCollections.observableList(data));
+		return this;
 	}
 }

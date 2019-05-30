@@ -5,8 +5,8 @@
 <?import java.lang.*?>
 
 
-<TableView id="einnahmen_liste" 
-	fx:id="einnahmen_liste" 
+<TableView id="einnahmen" 
+	fx:id="einnahmen" 
 	editable="false"
 	tableMenuButtonVisible="true"
 	BorderPane.alignment="CENTER" 

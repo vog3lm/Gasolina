@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -20,10 +19,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-class BestellungenView implements Initializable {
+class BestellungenView extends Loadable<AnchorPane> {
 
+	private final String layout = "WarenBestellungen.fxml";
+	
 	@FXML
-	private AnchorPane bestellungen_wrapper;
+	private AnchorPane bestellungen;
 	@FXML
     private TableView<WarenbestellungenRecord> bestellungen_liste;
 	@FXML
@@ -53,7 +54,7 @@ class BestellungenView implements Initializable {
 	
 	BestellungenView(WarenController controller) {
 		this.controller = controller;
-		new Loader().onLoadInitializable(Loader.WAREN_BESTELLUNGEN,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -79,11 +80,7 @@ class BestellungenView implements Initializable {
 	    /**/
 	    bestellungen_liste.setRowFactory(createRowListener());
 	    /**/
-	    bestellungen_hinzufuegen.setOnAction(event -> {
-	    	new WarenDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-	    });
+	    bestellungen_hinzufuegen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
 	
 	private Callback<TableView<WarenbestellungenRecord>,TableRow<WarenbestellungenRecord>> createRowListener() {
@@ -103,18 +100,16 @@ class BestellungenView implements Initializable {
 	private ContextMenu createRowMenu(TableView<WarenbestellungenRecord> table, TableRow<WarenbestellungenRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem buchen = new MenuItem("Buchen");
-        buchen.setOnAction(event -> {new WarenDialoge().createBuchenDialog(row.getItem()).showAndWait().ifPresent(r -> {
-        	controller.onBuchen(r);});
-        });	
+        buchen.setOnAction(event -> {controller.onBestellungBuchen(row.getIndex());});	
         MenuItem remove = new MenuItem("Entfernen");
-        remove.setOnAction(event -> { controller.onBestellungDelete(row.getIndex()); });
+        remove.setOnAction(event -> { controller.onBestellungDelete(row.getIndex());});
         menu.getItems().addAll(buchen,remove);
         return menu;
 	}
 	
 	void setItems(ArrayList<WarenbestellungenRecord> items) { bestellungen_liste.setItems(FXCollections.observableList(items)); }
 	
-	AnchorPane getView() { return bestellungen_wrapper; }
+	protected AnchorPane getView() { return bestellungen; }
 	
 	void onRefresh() {
 		bestellungen_liste.refresh();

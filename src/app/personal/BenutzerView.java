@@ -3,15 +3,21 @@ package app.personal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
+import app.Zustand;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
-class BenutzerView implements Initializable {
+class BenutzerView extends Loadable<AnchorPane> {
 
+	private final String layout = "Benutzer.fxml";
+	
+	@FXML
+	private AnchorPane benutzer;
+	
 	@FXML
 	private Label benutzer_personalnummer;
 	@FXML
@@ -27,16 +33,14 @@ class BenutzerView implements Initializable {
 	
 	private BenutzerController controller;
 	
-	private PersonalRecord benutzer;
-	
-	BenutzerView(BenutzerController controller, PersonalRecord benutzer) {
+	BenutzerView(BenutzerController controller) {
 		this.controller = controller;
-		this.benutzer = benutzer;
-		new Loader().onLoadBorderCenter(controller,Loader.BENUTZER,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
+		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
 		/* set user data to view */
 		benutzer_personalnummer.setText(benutzer.getPersonalnummer());
 		benutzer_benutzername.setText(benutzer.getBenutzername());
@@ -49,5 +53,8 @@ class BenutzerView implements Initializable {
 																	   ,benutzer_nachname.getText()
 																	   ,benutzer_passwort.getText());});
 	}
+
+	@Override
+	protected AnchorPane getView() {return benutzer;}
 	
 }

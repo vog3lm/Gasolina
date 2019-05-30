@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -19,10 +18,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-class JournalView implements Initializable {
+class JournalView extends Loadable<AnchorPane> {
 
+	private final String layout = "Journal.fxml";
+	
 	@FXML
-	private AnchorPane journal_wrapper;
+	private AnchorPane journal;
 	@FXML
 	private TableView<VerkaufRecord> journal_liste;
 	@FXML
@@ -44,8 +45,11 @@ class JournalView implements Initializable {
 	@FXML
 	private Label journal_total;
 	
+	VerkaufController controller;
+	
 	JournalView(VerkaufController controller) {
-		new Loader().onLoadInitializable(Loader.JOURNAL,this);
+		this.controller = controller;
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -81,12 +85,15 @@ class JournalView implements Initializable {
 	private ContextMenu createRowMenu(TableView<VerkaufRecord> table, TableRow<VerkaufRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem remove = new MenuItem("Entfernen");
-        remove.setOnAction(event -> { table.getItems().remove(row.getIndex());});
+        /* TODO remove from journal */
+     //	remove.setOnAction(event -> {controller.onJournalRemove(row.getIndex());});
+     //	remove.setOnAction(event -> { table.getItems().remove(row.getIndex());});
         menu.getItems().addAll(remove);
         return menu;
 	}
 	
-	AnchorPane getView() { return journal_wrapper; }
+	@Override
+	public AnchorPane getView() { return journal; }
 	
 	void onRefresh() { journal_liste.refresh(); }
 }

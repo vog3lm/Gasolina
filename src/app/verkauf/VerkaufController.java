@@ -12,7 +12,7 @@ import app.kraftstoff.KraftstoffbestandRecord;
 import app.kraftstoff.KraftstoffbestandTable;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 /**
  * 
@@ -20,35 +20,62 @@ import javafx.scene.control.Alert.AlertType;
  * @version 1.0
  * @since   1.0
  */
-public class VerkaufController implements Controller {
+public class VerkaufController implements Controller<VerkaufView> {
 		
 	private KraftstoffbestandTable kraftstoffe = new KraftstoffbestandTable();
 	
 	private WarenbestandTable waren = new WarenbestandTable();
 	
-	private VerkaufView view = new VerkaufView(this);
+	private VerkaufObserver observer = new VerkaufObserver();
 	
-	public VerkaufController(int tab) {
-		view.setIndex(tab);
+	private VerkaufView view = new VerkaufView();
+	
+	VerkaufSimulation onSimulate(SaeuleView view, VerkaufRecord verkauf) {
+		int index = kraftstoffe.getIndex(verkauf.getBezeichnung());
+		if(-1 == index) { return null; }
+		else { 
+			KraftstoffbestandRecord bestand = kraftstoffe.onRead(index);
+			if(0 == Float.parseFloat(bestand.getMenge())) {
+				return null;
+			} else {
+				return new VerkaufSimulation(bestand,observer,verkauf,view);
+			}
+		}
 	}
 	
-	WarenbestandRecord hasWare(String bezeichnung) {
+	WarenbestandRecord serveWare(String bezeichnung) {
 		int index = waren.getIndex(bezeichnung);
 		if(-1 == index) { return null; }
 		else { return waren.onRead(index); }
 	}
 	
-	KraftstoffbestandRecord hasKraftstoff(String bezeichnung) {
+	void commitWare(VerkaufRecord verkauf) {
+		int index = waren.getIndex(verkauf.getBezeichnung());
+		if(-1 != index) {
+			WarenbestandRecord bestand = waren.onRead(index);
+			bestand.setMenge((Float.parseFloat(bestand.getMenge())-Float.parseFloat(verkauf.getMenge()))+"");
+			waren.onUpdate(index,bestand);
+		}
+	}
+	
+	KraftstoffbestandRecord serveKraftstoff(String bezeichnung) {
 		int index = kraftstoffe.getIndex(bezeichnung);
 		if(-1 == index) { return null; }
 		else { return kraftstoffe.onRead(index); }
 	}
 	
+	void commitKraftstoff(VerkaufRecord verkauf) {
+		int index = kraftstoffe.getIndex(verkauf.getBezeichnung());
+		if(-1 != index) {
+			KraftstoffbestandRecord bestand = kraftstoffe.onRead(index);
+			bestand.setMenge((Float.parseFloat(bestand.getMenge())-Float.parseFloat(verkauf.getMenge()))+"");
+			kraftstoffe.onUpdate(index,bestand);
+		}
+	}
 		
-	void onDrucken(String message) {
+	void onVerkaufDrucken(String message) {
 		try {
-			String path = Zustand.getInstance().getPrintUrl();
-			BufferedWriter writer = new BufferedWriter(new FileWriter(path+"beleg.txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(Zustand.getInstance().getPrintUrl()+"beleg.txt"));
 	        writer.write(message);
 	        writer.close();
 		} catch (IOException e) {
@@ -56,8 +83,8 @@ public class VerkaufController implements Controller {
 		}
 	}
 	
-	void onBuchen(ObservableList<VerkaufRecord> records) {
-		/*
+	void onVerkaufBuchen(ObservableList<VerkaufRecord> records) {
+		/* TODO
 		ObservableList<VerkaufRecord> journal = this.journal_liste.getItems();
 		float umsatz = Float.parseFloat(journal_total.getText());
 		for(VerkaufRecord record : posten) {
@@ -74,20 +101,21 @@ public class VerkaufController implements Controller {
 		*/
 	}
 
-
+	void onJournalDelete(int index) {
+		/* TODO */
+	//	view.onRefresh();
+	}
 	
 	@Override
 	public boolean destroy() {
-		/*	journal.onCommit() */
-		if(0 != view.getCount()) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
-			alert.setTitle("Error Dialog");
-			alert.setHeaderText("Offene Kassenvorgänge!");
-			alert.setContentText("Buchen Sie alle Kassenvorgänge,\nbevor Sie das Programm beenden!");
-			alert.showAndWait();
-			return false;
-		} 
+		/*	TODO journal.onCommit() */
+	//	if(0 != view.getCount()) {
+	//		new VerkaufDialoge().createOffeneVorgaenge();
+	//		return false;
+	//	} 
 		return true;
 	}
+	
+	@Override
+	public VerkaufView show() {return view;}
 }

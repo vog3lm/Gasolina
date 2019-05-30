@@ -1,6 +1,7 @@
 package app.personal;
 
 import app.Zustand;
+import javafx.scene.Node;
 import app.Controller;
 /**
  * 
@@ -12,11 +13,10 @@ public class BenutzerController implements Controller {
 	
 	private PersonalTable bestand = new PersonalTable();
 	
-	private PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
-	
-	private BenutzerView view = new BenutzerView(this,benutzer);
+	private BenutzerView view = new BenutzerView(this);
 
 	public void onSpeichern(String un, String vn, String nn, String pw) {
+		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
 		benutzer.setBenutzername(un);
 		benutzer.setVorname(vn);
 		benutzer.setNachname(nn);
@@ -24,9 +24,15 @@ public class BenutzerController implements Controller {
 		bestand.onUpdate(benutzer.getIndex(),benutzer);
 	}
 	
+	
+	
 	@Override
 	public boolean destroy() {
 		bestand.onCommit();
 		return true;
 	}
+
+	@Override
+	public Node show() {return view.getView();}
+	
 }

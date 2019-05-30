@@ -4,19 +4,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import app.verkauf.VerkaufRecord;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-class EinnahmenView implements Initializable {
+class EinnahmenView extends Loadable<TableView<VerkaufRecord>> {
+	
+	private final String layout = "Einnahmen.fxml";
 	
 	@FXML
-	private TableView<VerkaufRecord> einnahmen_liste;
+	private TableView<VerkaufRecord> einnahmen;
 	@FXML
 	private TableColumn<VerkaufRecord, String> einnahmen_id;
 	@FXML
@@ -42,12 +43,11 @@ class EinnahmenView implements Initializable {
 	
 	
 	EinnahmenView() {
-		new Loader().onLoadInitializable(Loader.EINNAHMEN,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
-		/**/
 		einnahmen_id.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("index"));
 		einnahmen_warennummer.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("warennummer"));
 		einnahmen_bezeichnung.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("bezeichnung"));
@@ -59,12 +59,12 @@ class EinnahmenView implements Initializable {
 		einnahmen_datum.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("datum"));
 		einnahmen_uhrzeit.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("uhrzeit"));
 		einnahmen_mitarbeiter.setCellValueFactory(new PropertyValueFactory<VerkaufRecord, String>("mitarbeiter"));
-		/**/
 	}
 	
 	void setItems(ArrayList<VerkaufRecord> items) {
-		einnahmen_liste.setItems(FXCollections.observableList(items));
+		einnahmen.setItems(FXCollections.observableList(items));
 	}
 	
-	TableView<VerkaufRecord> getView() { return einnahmen_liste; }
+	@Override
+	protected TableView<VerkaufRecord> getView() { return einnahmen; }
 }

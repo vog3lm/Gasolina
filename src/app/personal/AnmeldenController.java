@@ -1,8 +1,10 @@
 package app.personal;
 
+import app.Commands;
 import app.Zustand;
 import app.verkauf.VerkaufController;
 import app.verkauf.VerkaufView;
+import javafx.scene.layout.AnchorPane;
 /**
  * 
  * @author vog3lm
@@ -10,17 +12,11 @@ import app.verkauf.VerkaufView;
  * @since   1.0
  */
 public class AnmeldenController {
-	
-	private Anmelden anmelden;
-	
+		
 	private PersonalTable bestand = new PersonalTable();
 	
 	private AnmeldenView view = new AnmeldenView(this);
-	
-	public AnmeldenController(Anmelden anmelden) {
-		this.anmelden = anmelden;
-	}
-		
+			
 	void onAnmelden(String benutzername, String passwort) {
 		if(benutzername.equals("o$ter") && passwort.equals("ha$e")) {
 			view.showEasterEgg();
@@ -29,9 +25,9 @@ public class AnmeldenController {
 			if(-1 != index) {
 				PersonalRecord benutzer = bestand.onRead(index);
 				if(passwort.equals(benutzer.getPasswort())) {
-					Zustand.getInstance().setBenutzer(benutzer);
-					this.anmelden.onAnmelden();
-					new VerkaufController(VerkaufView.SAEULE1);				
+					Zustand zustand = Zustand.getInstance();
+					zustand.getObserver().onAnmelden(benutzer);
+					zustand.getCommander().execute(Commands.SAEULE1);		
 				}else {
 					view.showPasswortError();
 				}
@@ -40,4 +36,6 @@ public class AnmeldenController {
 			}			
 		}
 	}
+	
+	AnchorPane show() {return view.getView();}
 }

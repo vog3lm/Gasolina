@@ -4,12 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
-
+import app.Loadable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -21,10 +19,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-class BestellungenView implements Initializable {
+class BestellungenView extends Loadable<AnchorPane> {
+	
+	private final String layout = "KraftstoffBestellungen.fxml";
 
 	@FXML
-	private AnchorPane bestellungen_wrapper;
+	private AnchorPane bestellungen;
 	@FXML
     private TableView<KraftstoffbestellungenRecord> bestellungen_liste;
 	@FXML
@@ -54,7 +54,7 @@ class BestellungenView implements Initializable {
 	
 	BestellungenView(KraftstoffController controller) {
 		this.controller = controller;
-		new Loader().onLoadInitializable(Loader.KRAFTSTOFF_BESTELLUNGEN,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -63,32 +63,26 @@ class BestellungenView implements Initializable {
 	    bestellungen_warennummer.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("warennummer"));
 	    bestellungen_bezeichnung.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("bezeichnung"));
 	    bestellungen_bezeichnung.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestellungen_bezeichnung.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"bezeichnung",cell.getNewValue());});
+	    bestellungen_bezeichnung.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"bezeichnung",cell.getNewValue());});
 	    bestellungen_menge.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("menge"));
 	    bestellungen_menge.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestellungen_menge.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});
-	    
+	    bestellungen_menge.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});
 	    bestellungen_einheit.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("einheit"));
 	    bestellungen_einheit.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestellungen_einheit.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});
-	    
+	    bestellungen_einheit.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"menge",cell.getNewValue());});
 	    bestellungen_preis.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("preis"));
 	    bestellungen_preis.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestellungen_preis.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"preis",cell.getNewValue());});
+	    bestellungen_preis.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"preis",cell.getNewValue());});
 	    bestellungen_waehrung.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("waehrung"));
 	    bestellungen_lieferdatum.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("lieferdatum"));
 	    bestellungen_lieferdatum.setCellFactory(TextFieldTableCell.forTableColumn());
-	    bestellungen_lieferdatum.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"lieferdatum",cell.getNewValue());});
+	    bestellungen_lieferdatum.setOnEditCommit(cell -> {controller.onBestellungEdit(cell.getTablePosition().getRow(),"lieferdatum",cell.getNewValue());});
 	    bestellungen_bestelldatum.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("bestelldatum"));
 	    bestellungen_mitarbeiter.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("mitarbeiter"));
 	    /**/
 	    bestellungen_liste.setRowFactory(this.createRowListener());
 	    /**/
-	    bestellungen_hinzufuegen.setOnAction(event -> {
-	    	new KraftstoffDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-	    });
+	    bestellungen_hinzufuegen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
 	
 	private Callback<TableView<KraftstoffbestellungenRecord>,TableRow<KraftstoffbestellungenRecord>> createRowListener() {
@@ -108,9 +102,7 @@ class BestellungenView implements Initializable {
 	private ContextMenu createRowMenu(TableView<KraftstoffbestellungenRecord> table, TableRow<KraftstoffbestellungenRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem buchen = new MenuItem("Buchen");
-        buchen.setOnAction(event -> {new KraftstoffDialoge().createBuchenDialog(row.getItem()).showAndWait().ifPresent(r -> {
-        	controller.onBuchen(r);
-        });});
+        buchen.setOnAction(event -> {controller.onBestellungBuchen(row.getIndex());});
         MenuItem remove = new MenuItem("Entfernen");
         remove.setOnAction(event -> { controller.onBestellungDelete(row.getIndex());});
         menu.getItems().addAll(buchen,remove);
@@ -121,7 +113,7 @@ class BestellungenView implements Initializable {
 		bestellungen_liste.setItems(FXCollections.observableList(items));
 	}
 	
-	AnchorPane getView() { return bestellungen_wrapper; }
+	protected AnchorPane getView() { return bestellungen; }
 	
 	void onRefresh() {
 		bestellungen_liste.refresh();

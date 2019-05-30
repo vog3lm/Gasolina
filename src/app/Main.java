@@ -1,8 +1,5 @@
 package app;
 
-import app.personal.AnmeldenController;
-import app.menu.MenuController;
-import app.verkauf.VerkaufController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -28,6 +25,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		Zustand zustand = Zustand.getInstance();
+		zustand.setObserver(new Observer());
+		zustand.setCommander(new Commander());
 		/* create root layout */
 		BorderPane root = new BorderPane();
 		root.setPrefWidth(853.3);
@@ -47,9 +46,7 @@ public class Main extends Application {
 		stage.setScene(scene);
 		stage.show();
 		/* load entry point view */
-		MenuController menu = new MenuController();
-		if(null == zustand.getBenutzer()){new AnmeldenController(menu);}
-		else {new VerkaufController(1);}
+		zustand.getCommander().execute(Commands.MENU);
 	}
 	/**
 	 * Application shutdown strategy. Makes sure all data is been written on shutdown.

@@ -3,20 +3,23 @@ package app.kraftstoff;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
-import javafx.fxml.Initializable;
+import app.Loadable;
+import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-class TankView implements Initializable {
+class TankView extends Loadable<AnchorPane> {
+	
+	private final String layout = "Tanks.fxml";
+	
+	@FXML
+	private AnchorPane tanks;
 	
 	TankView() {
-		new Loader().onLoadInitializable(Loader.KRAFTSTOFF_BESTELLUNGEN,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
-	public void initialize(URL arg, ResourceBundle res) {
-		
-	}
+	public void initialize(URL arg, ResourceBundle res) {}
 	
-	AnchorPane getView() { return null; }
+	protected AnchorPane getView() { return tanks; }
 }

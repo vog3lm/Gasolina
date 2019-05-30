@@ -1,6 +1,7 @@
 package app.personal;
 
 import app.personal.PersonalTable;
+import javafx.scene.layout.AnchorPane;
 import app.Controller;
 
 /**
@@ -12,8 +13,8 @@ import app.Controller;
 public class PersonalController implements Controller {
 	
 	private PersonalTable bestand = new PersonalTable();
-
-	private PersonalView view = new PersonalView(this,bestand.onRead());
+	
+	private PersonalView view = new PersonalView(this);
 		
 	void onAdd(String bn, String vn, String nn, String pw, String d) {
 		bestand.onCreate(new PersonalRecord(-1,"-1",bn,vn,nn,pw,d));
@@ -39,4 +40,6 @@ public class PersonalController implements Controller {
 		bestand.onCommit();
 		return true;
 	}
+
+	public AnchorPane show() {return view.getView();}
 }

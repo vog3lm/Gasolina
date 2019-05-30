@@ -1,60 +1,32 @@
 package app.kraftstoff;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import app.fxml.Loader;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import app.Decorateable;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-public class KraftstoffView implements Initializable {
-	
-	public static final int BESTAND = 0;
-	public static final int BESTELLUNGEN = 1;
-	public static final int TANKS = 2;
-	
-	@FXML
-	private TabPane kraftstoff_tabs;
-	
-	private BestandView bestand;
-	
-	private BestellungenView bestellungen;
-	
-	private TankView tanks = new TankView();
-	
-	KraftstoffView(KraftstoffController controller) {
-		bestand = new BestandView(controller);
-		bestellungen = new BestellungenView(controller);
-		new Loader().onLoadBorderCenter(controller,Loader.KRAFTSTOFF,this);
-	}
-	
+public class KraftstoffView extends TabPane implements Decorateable<KraftstoffView,Node> {
+			
 	@Override
-	public void initialize(URL arg, ResourceBundle res) {
-		ObservableList<Tab> tabs = kraftstoff_tabs.getTabs();
-		tabs.get(BESTAND).setContent(bestand.getView());
-		tabs.get(BESTELLUNGEN).setContent(bestellungen.getView());
-		tabs.get(TANKS).setContent(tanks.getView());
-	}
-	
-	void setBestand(ArrayList<KraftstoffbestandRecord> items) { bestand.setItems(items); }
-	
-	void setBestellungen(ArrayList<KraftstoffbestellungenRecord> items) { bestellungen.setItems(items); }
-	
-	void setEinnahmen() {  }
-	
-	int getIndex() { return kraftstoff_tabs.getSelectionModel().getSelectedIndex(); }
-	
-	KraftstoffView setIndex(int tab) {
-		kraftstoff_tabs.getSelectionModel().select(tab);
+	public KraftstoffView decorate(Node node) {
+		String id = node.getId();
+		if("bestand".equals(id)) {addTab(id,node);}
+		else if("bestellungen".equals(id)) {addTab(id,node);}
+		else if("tanks".equals(id)) {addTab(id,node);}
+		else {System.err.println("id unknown ::" + id);}
 		return this;
 	}
 	
-	void onRefresh() {
-		bestand.onRefresh();
-		bestellungen.onRefresh();
+	private void addTab(String id, Node node) {
+		Tab tab = new Tab(id.substring(0, 1).toUpperCase()+id.substring(1));
+		tab.setContent(node);
+		getTabs().add(tab);
+	}
+	
+	int getIndex() { return getSelectionModel().getSelectedIndex(); }
+	
+	KraftstoffView setIndex(int tab) {
+		getSelectionModel().select(tab);
+		return this;
 	}
 }

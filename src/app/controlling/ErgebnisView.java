@@ -3,18 +3,20 @@ package app.controlling;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-class ErgebnisView  implements Initializable {
+class ErgebnisView extends Loadable<AnchorPane> {
 
+	private final String layout = "Ergebnis.fxml";
+	
 	@FXML
-	private AnchorPane controlling_ergebnis;
+	private AnchorPane ergebnis;
 	
 	ErgebnisView() {
-		new Loader().onLoadInitializable(Loader.ERGEBNIS,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
@@ -22,6 +24,7 @@ class ErgebnisView  implements Initializable {
 
 	}
 	
-	AnchorPane getView() { return controlling_ergebnis; }
+	@Override
+	protected AnchorPane getView() { return ergebnis; }
 	
 }

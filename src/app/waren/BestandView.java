@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.fxml.Loader;
+import app.Loadable;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -20,10 +19,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-class BestandView implements Initializable {
+class BestandView extends Loadable<AnchorPane> {
 
+	private final String layout = "WarenBestand.fxml";
+	
 	@FXML
-	private AnchorPane bestand_wrapper;
+	private AnchorPane bestand;
 	@FXML
     private TableView<WarenbestandRecord> bestand_liste;
 	@FXML
@@ -47,12 +48,11 @@ class BestandView implements Initializable {
 	
 	BestandView(WarenController controller) {
 		this.controller = controller;
-		new Loader().onLoadInitializable(Loader.WAREN_BESTAND,this);
+		onLoad(layout,this);
 	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
-		/**/
 		bestand_warennummer.setCellValueFactory(new PropertyValueFactory<WarenbestandRecord, String>("warennummer"));
 	    bestand_bezeichnung.setCellValueFactory(new PropertyValueFactory<WarenbestandRecord, String>("bezeichnung"));
 	    bestand_bezeichnung.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -75,11 +75,7 @@ class BestandView implements Initializable {
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    /**/
 //	    bestand_bestellen.setOnAction(this::onClickHinzufuegen);
-	    bestand_bestellen.setOnAction(event -> {
-	    	new WarenDialoge().createBestellungAddDialog().showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-	    });
+	    bestand_bestellen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
 	
 	private Callback<TableView<WarenbestandRecord>,TableRow<WarenbestandRecord>> createRowListener() {
@@ -99,12 +95,7 @@ class BestandView implements Initializable {
 	private ContextMenu createRowMenu(TableView<WarenbestandRecord> table, TableRow<WarenbestandRecord> row) {
         ContextMenu menu = new ContextMenu();
         MenuItem bestellen = new MenuItem("Bestellen");
-//        bestellen.setOnAction(event -> {onClickBestellen(row.getItem());});
-        bestellen.setOnAction(event -> {
-        	new WarenDialoge().createBestandBestellenDialog(row.getItem()).showAndWait().ifPresent(record -> {
-	    		controller.onBestellen(record);
-			});
-        });
+        bestellen.setOnAction(event -> {controller.onBestandBestellen(row.getIndex()); });
         MenuItem remove = new MenuItem("Entfernen");
         remove.setOnAction(event -> { controller.onBestandDelete(row.getIndex()); });
         menu.getItems().addAll(bestellen,remove);
@@ -113,7 +104,7 @@ class BestandView implements Initializable {
 
 	void setItems(ArrayList<WarenbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
 	
-	AnchorPane getView() { return bestand_wrapper; }
+	protected AnchorPane getView() { return bestand; }
 	
 	void onRefresh() {
 		bestand_liste.refresh();
