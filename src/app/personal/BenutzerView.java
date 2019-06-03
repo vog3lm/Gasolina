@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Zustand;
+import app.Settings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,7 +40,7 @@ class BenutzerView extends Loadable<AnchorPane> {
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
-		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
+		PersonalRecord benutzer = Settings.getInstance().getBenutzer();
 		/* set user data to view */
 		benutzer_personalnummer.setText(benutzer.getPersonalnummer());
 		benutzer_benutzername.setText(benutzer.getBenutzername());
@@ -55,6 +55,6 @@ class BenutzerView extends Loadable<AnchorPane> {
 	}
 
 	@Override
-	protected AnchorPane getView() {return benutzer;}
+	protected AnchorPane show() {return benutzer;}
 	
 }

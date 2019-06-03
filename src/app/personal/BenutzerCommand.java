@@ -1,14 +1,18 @@
 package app.personal;
 
-import app.Command;
+import app.command.Command;
+import app.command.Commander;
 
 public class BenutzerCommand extends Command {
 	
+	public BenutzerCommand(Commander commander) {
+		super(commander);
+	}
+
 	@Override
-	public void execute(String command) {
+	public void onExecute(String command) {
 		BenutzerController controller = new BenutzerController();
-		onLoadCurrent(controller);	
-		zustand.getRoot().setCenter(controller.show());
+		commander.getRuntime().setCenter(controller.show()).setCurrent(controller);
 	}
 
 }

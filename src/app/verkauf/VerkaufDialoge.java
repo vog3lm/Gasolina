@@ -1,6 +1,6 @@
 package app.verkauf;
 
-import app.Zustand;
+import app.Settings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -8,7 +8,7 @@ public class VerkaufDialoge {
 	
 	Alert createNurZahlen() {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
+		alert.getDialogPane().getStylesheets().add(Settings.getInstance().getDesign());
 		alert.setTitle("Error Dialog");
 		alert.setHeaderText("Numerisches Feld!");
 		alert.setContentText("Ausschließlich numerische Eingaben erlaubt!");
@@ -17,7 +17,7 @@ public class VerkaufDialoge {
 	
 	Alert createVorratNichtAusreichend(String bezeichnung) {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
+		alert.getDialogPane().getStylesheets().add(Settings.getInstance().getDesign());
 		alert.setTitle("Error Dialog");
 		alert.setHeaderText(bezeichnung+" Vorrat nicht ausreichend!");
 		alert.setContentText(bezeichnung+" bestellen oder kleinere Menge eingeben.");
@@ -26,7 +26,7 @@ public class VerkaufDialoge {
 	
 	Alert createVorratVerbraucht(String bezeichnung){
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
+		alert.getDialogPane().getStylesheets().add(Settings.getInstance().getDesign());
 		alert.setTitle("Error Dialog");
 		alert.setHeaderText(bezeichnung+" Vorrat verbraucht!");
 		alert.setContentText(bezeichnung+" bestellen.");
@@ -35,7 +35,7 @@ public class VerkaufDialoge {
 	
 	Alert createOffeneVorgaenge() {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.getDialogPane().getStylesheets().add(Zustand.getInstance().getDesign());
+		alert.getDialogPane().getStylesheets().add(Settings.getInstance().getDesign());
 		alert.setTitle("Error Dialog");
 		alert.setHeaderText("Offene Kassenvorgänge!");
 		alert.setContentText("Buchen Sie alle Kassenvorgänge,\nbevor Sie das Programm beenden!");

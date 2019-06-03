@@ -113,7 +113,7 @@ class BestellungenView extends Loadable<AnchorPane> {
 		bestellungen_liste.setItems(FXCollections.observableList(items));
 	}
 	
-	protected AnchorPane getView() { return bestellungen; }
+	protected AnchorPane show() { return bestellungen; }
 	
 	void onRefresh() {
 		bestellungen_liste.refresh();

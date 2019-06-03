@@ -41,5 +41,5 @@ public class PersonalController implements Controller {
 		return true;
 	}
 
-	public AnchorPane show() {return view.getView();}
+	public AnchorPane show() {return view.show();}
 }

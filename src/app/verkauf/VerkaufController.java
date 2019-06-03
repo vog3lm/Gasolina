@@ -3,7 +3,7 @@ package app.verkauf;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import app.Zustand;
+import app.Settings;
 import app.verkauf.VerkaufRecord;
 import app.Controller;
 import app.waren.WarenbestandRecord;
@@ -75,7 +75,7 @@ public class VerkaufController implements Controller<VerkaufView> {
 		
 	void onVerkaufDrucken(String message) {
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(Zustand.getInstance().getPrintUrl()+"beleg.txt"));
+			BufferedWriter writer = new BufferedWriter(new FileWriter(Settings.getInstance().getPrintUrl()+"beleg.txt"));
 	        writer.write(message);
 	        writer.close();
 		} catch (IOException e) {

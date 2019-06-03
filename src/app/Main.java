@@ -1,5 +1,7 @@
 package app;
 
+import app.command.Commander;
+import app.command.Commands;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -24,41 +26,30 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) {
-		Zustand zustand = Zustand.getInstance();
-		zustand.setObserver(new Observer());
-		zustand.setCommander(new Commander());
+		Settings settings = Settings.getInstance();
 		/* create root layout */
 		BorderPane root = new BorderPane();
 		root.setPrefWidth(853.3);
 		root.setPrefHeight(505);
 		/**/
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(zustand.getDesign());
-		/* store stage and root layout to current state */
-		zustand.setStage(stage).setScene(scene).setRoot(root);
+		scene.getStylesheets().add(settings.getDesign());
+		/**/
+		Commander commander = new Commander(new Runtime(stage,scene,root,settings));
 		/* create custom exit strategy */
 		Platform.setImplicitExit(false);
 		stage.setOnCloseRequest(event -> {
 			event.consume();
-			this.destroy();
+			commander.onExecute(Commands.EXIT);
 		});
 		stage.setTitle("Tankstellenverwaltung"); // TODO : Main.java Title String
 		stage.setScene(scene);
 		stage.show();
+		/**/
+		settings.setObserver(new Observer());
+		settings.setCommander(commander);
 		/* load entry point view */
-		zustand.getCommander().execute(Commands.MENU);
-	}
-	/**
-	 * Application shutdown strategy. Makes sure all data is been written on shutdown.
-	 */
-	public void destroy() {
-		boolean exit = true;
-		Controller current = Zustand.getInstance().getCurrent();
-		if(null != current) {exit = current.destroy();}
-		if(exit) {
-	        Platform.exit();
-	        System.exit(0);
-		}
+		commander.onExecute(Commands.START);
 	}
 	/**
 	 * Application entry point.

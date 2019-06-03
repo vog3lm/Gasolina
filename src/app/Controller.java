@@ -6,7 +6,8 @@ package app;
  * @since   1.0
  */
 public interface Controller<V>{
-	
+	/**
+	 * */
 	public V show();
 	/**
 	 * */

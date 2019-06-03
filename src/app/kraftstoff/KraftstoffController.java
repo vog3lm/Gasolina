@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Controller;
-import app.Zustand;
+import app.Settings;
 /**
  * 
  * @author vog3lm
@@ -128,7 +128,7 @@ public class KraftstoffController implements Controller<KraftstoffView> {
 						,(preis*liefermenge)+""
 						,dateFormat.format(date)
 						,timeFormat.format(date)
-						,Zustand.getInstance().getBenutzer().getBenutzername()));
+						,Settings.getInstance().getBenutzer().getBenutzername()));
 		    }catch (NumberFormatException | NullPointerException e){
 		    	System.out.println("kraftstoff teilmenge buchen: oooops");
 		    }

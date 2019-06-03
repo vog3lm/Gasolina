@@ -1,5 +1,6 @@
 package app;
 
+import app.command.Commander;
 import app.personal.PersonalRecord;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
  * @version 1.0
  * @since   1.0
  */
-public class Zustand {
+public class Settings {
 	/**
 	 * Path to light layout css file.
 	 * */
@@ -31,7 +32,7 @@ public class Zustand {
 	/**
 	 * 
 	 * */
-	public Zustand setObserver(Observer observer) {
+	public Settings setObserver(Observer observer) {
 		this.observer = observer;
 		return this;
 	}
@@ -46,68 +47,8 @@ public class Zustand {
 	/**
 	 * 
 	 * */
-	public Zustand setCommander(Commander commander) {
+	public Settings setCommander(Commander commander) {
 		this.commander = commander;
-		return this;
-	}
-	/**
-	 * Used application stage.
-	 * */
-	private Stage stage;
-	/**
-	 * Application stage getter.
-	 * */
-	public Stage getStage() { return this.stage; }
-	/**
-	 * Application stage setter.
-	 * */
-	public Zustand setStage(Stage stage) {
-		this.stage = stage;
-		return this;
-	}
-	/**
-	 * Used application scene.
-	 * */
-	private Scene scene;
-	/**
-	 * Application scene getter.
-	 * */
-	public Scene getScene() { return this.scene; }
-	/**
-	 * Application scene setter.
-	 * */
-	public Zustand setScene(Scene scene) {
-		this.scene = scene;
-		return this;
-	}
-	/**
-	 * Used application root layout.
-	 * */
-	private BorderPane root;
-	/**
-	 * Application root layout getter.
-	 * */
-	public BorderPane getRoot() { return this.root; }
-	/**
-	 * Application root layout setter.
-	 * */
-	public Zustand setRoot(BorderPane root) {
-		this.root = root;
-		return this;
-	}
-	/**
-	 * Visible view.
-	 * */
-	private Controller current;
-	/**
-	 * Visible view getter.
-	 * */
-	public Controller getCurrent() { return this.current; }
-	/**
-	 * Visible view setter.
-	 * */
-	public Zustand setCurrent(Controller current) {
-		this.current = current;
 		return this;
 	}
 	/**
@@ -121,7 +62,7 @@ public class Zustand {
 	/**
 	 * Design setter.
 	 * */
-	public Zustand setDesign(String design) {
+	public Settings setDesign(String design) {
 		this.design = design;
 		return this;
 	}
@@ -136,7 +77,7 @@ public class Zustand {
 	/**
 	 * User setter.
 	 * */
-	public Zustand setBenutzer(PersonalRecord benutzer) {
+	public Settings setBenutzer(PersonalRecord benutzer) {
 		this.benutzer = benutzer;
 		return this;
 	}
@@ -151,16 +92,16 @@ public class Zustand {
 	/**
 	 * Print path setter.
 	 * */
-	public Zustand setPrintUrl(String printUrl) {
+	public Settings setPrintUrl(String printUrl) {
 		this.printUrl = printUrl;
 		return this;
 	}
 	/**
 	 * Singleton instance.
 	 * */
-	private static Zustand instance = new Zustand();
+	private static Settings instance = new Settings();
 	/**
 	 * Singleton instance getter.
 	 * */
-	public static Zustand getInstance() { return instance; }
+	public static Settings getInstance() { return instance; }
 }

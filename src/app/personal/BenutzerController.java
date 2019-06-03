@@ -1,6 +1,6 @@
 package app.personal;
 
-import app.Zustand;
+import app.Settings;
 import javafx.scene.Node;
 import app.Controller;
 /**
@@ -16,7 +16,7 @@ public class BenutzerController implements Controller {
 	private BenutzerView view = new BenutzerView(this);
 
 	public void onSpeichern(String un, String vn, String nn, String pw) {
-		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
+		PersonalRecord benutzer = Settings.getInstance().getBenutzer();
 		benutzer.setBenutzername(un);
 		benutzer.setVorname(vn);
 		benutzer.setNachname(nn);
@@ -33,6 +33,6 @@ public class BenutzerController implements Controller {
 	}
 
 	@Override
-	public Node show() {return view.getView();}
+	public Node show() {return view.show();}
 	
 }

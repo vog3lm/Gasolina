@@ -59,5 +59,5 @@ public class AusgabenView extends Loadable<TableView<AusgabenRecord>> {
 	void setItems(ArrayList<AusgabenRecord> items) { ausgaben.setItems(FXCollections.observableList(items)); }
 	
 	@Override
-	protected TableView<AusgabenRecord> getView() { return ausgaben; }
+	protected TableView<AusgabenRecord> show() { return ausgaben; }
 }

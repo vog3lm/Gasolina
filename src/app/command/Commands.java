@@ -1,8 +1,11 @@
-package app;
+package app.command;
 
 public class Commands {
 
 	public static final String ANMELDEN = "anmelden";
+	
+	public static final String START = "application-start";
+	public static final String EXIT = "application-exit";
 	
 	public static final String BENUTZER = "benutzer";
 	
@@ -16,9 +19,11 @@ public class Commands {
 	public static final String KRAFTSTOFF_BESTELLUNGEN = "kraftstoff-bestellungen";
 	public static final String KRAFTSTOFF_TANKS = "kraftstoff-tanks";
 	
-	public static final String MENU = "menu";
-	
 	public static final String PERSONAL = "personal";
+	
+	public static final String STYLE = "style";
+	public static final String STYLE_DARK = "style-dark";
+	public static final String STYLE_LIGHT = "style-light";
 	
 	public static final String SAEULE1 = "verkauf-saeule-eins";
 	public static final String SAEULE2 = "verkauf-saeule-zwei";

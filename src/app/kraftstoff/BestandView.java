@@ -121,7 +121,7 @@ class BestandView extends Loadable<AnchorPane> {
 	
 	void setItems(ArrayList<KraftstoffbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
 	
-	protected AnchorPane getView() { return bestand; }
+	protected AnchorPane show() { return bestand; }
 	
 	void onRefresh() {
 		bestand_liste.refresh();

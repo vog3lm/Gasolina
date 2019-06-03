@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Zustand;
+import app.Settings;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.personal.PersonalRecord;
 import app.waren.WarenbestandRecord;
@@ -126,7 +126,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 		dialog.setTitle("Warenverkauf");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -259,7 +259,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 		dialog.setTitle("Kraftstoffverkauf");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		ButtonType button = new ButtonType("Simulieren",ButtonData.YES);
@@ -372,7 +372,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 		Date date = new Date();
 		String datum = dateFormat.format(date);
 		String uhrzeit = timeFormat.format(date);
-		PersonalRecord benutzer = Zustand.getInstance().getBenutzer();
+		PersonalRecord benutzer = Settings.getInstance().getBenutzer();
 		String message = "Max Maier Tankstelle\n\n" + 
 			"Belegnummer: "+belegnummer+"\n" + 
 			"Datum: "+datum+" "+uhrzeit+"\n" + 
@@ -389,7 +389,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 		/**/
 		Alert alert = new Alert(AlertType.INFORMATION);
 		DialogPane pane = alert.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		pane.setMinHeight(Region.USE_PREF_SIZE);
 		alert.setTitle("Print Dialog");
 		alert.setHeaderText(null);
@@ -404,7 +404,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 	}
 	
 	@Override
-	protected AnchorPane getView() {return saeule;}
+	protected AnchorPane show() {return saeule;}
 	
 	String getTitle() {return id;}
 	

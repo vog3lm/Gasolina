@@ -1,9 +1,7 @@
 package app.personal;
 
-import app.Commands;
-import app.Zustand;
-import app.verkauf.VerkaufController;
-import app.verkauf.VerkaufView;
+import app.Settings;
+import app.command.Commands;
 import javafx.scene.layout.AnchorPane;
 /**
  * 
@@ -25,9 +23,9 @@ public class AnmeldenController {
 			if(-1 != index) {
 				PersonalRecord benutzer = bestand.onRead(index);
 				if(passwort.equals(benutzer.getPasswort())) {
-					Zustand zustand = Zustand.getInstance();
+					Settings zustand = Settings.getInstance();
 					zustand.getObserver().onAnmelden(benutzer);
-					zustand.getCommander().execute(Commands.SAEULE1);		
+					zustand.getCommander().onExecute(Commands.SAEULE1);		
 				}else {
 					view.showPasswortError();
 				}
@@ -37,5 +35,5 @@ public class AnmeldenController {
 		}
 	}
 	
-	AnchorPane show() {return view.getView();}
+	AnchorPane show() {return view.show();}
 }

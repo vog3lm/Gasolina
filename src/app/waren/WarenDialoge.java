@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import app.Zustand;
+import app.Settings;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
@@ -22,7 +22,7 @@ class WarenDialoge {
 		dialog.setTitle("Waren Einbuchen");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -148,7 +148,7 @@ class WarenDialoge {
 		dialog.setTitle("Warenbestellung");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		// Set the icon (must be included in the project).
 		// dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -229,7 +229,7 @@ class WarenDialoge {
 		        		,"EUR"
 		        		,dateFormat.format(new Date())
 		        		,lieferdatum.getText()
-		        		,Zustand.getInstance().getBenutzer().getBenutzername()
+		        		,Settings.getInstance().getBenutzer().getBenutzername()
 		        		,"aktiv");
 		    }
 		    return null;

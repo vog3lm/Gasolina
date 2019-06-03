@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import app.Decorateable;
 import app.Loadable;
-import app.Zustand;
+import app.Settings;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -115,7 +115,7 @@ class PersonalView extends Loadable<AnchorPane> implements Decorateable<Personal
 		dialog.setTitle("Kraftstoffbestellung");
 		dialog.setHeaderText(null);
 		DialogPane pane = dialog.getDialogPane();
-		pane.getStylesheets().add(Zustand.getInstance().getDesign());
+		pane.getStylesheets().add(Settings.getInstance().getDesign());
 		pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 		pane.lookupButton(ButtonType.OK).setDisable(true);
 		/* build dialog layout components */
@@ -179,7 +179,7 @@ class PersonalView extends Loadable<AnchorPane> implements Decorateable<Personal
 	}
 
 	@Override
-	protected AnchorPane getView() {return personal;}
+	protected AnchorPane show() {return personal;}
 
 	@Override
 	public PersonalView decorate(ArrayList<PersonalRecord> data) {

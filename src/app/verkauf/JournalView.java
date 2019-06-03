@@ -93,7 +93,7 @@ class JournalView extends Loadable<AnchorPane> {
 	}
 	
 	@Override
-	public AnchorPane getView() { return journal; }
+	public AnchorPane show() { return journal; }
 	
 	void onRefresh() { journal_liste.refresh(); }
 }

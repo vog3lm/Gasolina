@@ -1,13 +1,17 @@
 package app.personal;
 
-import app.Command;
+import app.command.Command;
+import app.command.Commander;
 
 public class AnmeldenCommand extends Command {
-	
+			
+	public AnmeldenCommand(Commander commander) {
+		super(commander);
+	}
+
 	@Override
-	public void execute(String command) {
-		onLoadCurrent(null);	
-		zustand.getRoot().setCenter(new AnmeldenController().show());
+	public void onExecute(String command) {
+		commander.getRuntime().setCenter(new AnmeldenController().show());
 	}
 
 }

@@ -1,22 +1,27 @@
 package app.verkauf;
 
-import app.Command;
-import app.Commands;
+import app.command.Command;
+import app.command.Commander;
+import app.command.Commands;
 
 public class VerkaufCommand extends Command {
+	
+	public VerkaufCommand(Commander commander) {
+		super(commander);
+	}
+
 	@Override
-	public void execute(String command) {
+	public void onExecute(String command) {
 		VerkaufController controller = new VerkaufController();
-		onLoadCurrent(controller);	
 		VerkaufView view = controller.show();
-		view.decorate(new SaeuleView(controller,"Säule 1").getView())
-			.decorate(new SaeuleView(controller,"Säule 2").getView())
-			.decorate(new SaeuleView(controller,"Säule 3").getView())
-			.decorate(new JournalView(controller).getView());
+		view.decorate(new SaeuleView(controller,"Säule 1").show())
+			.decorate(new SaeuleView(controller,"Säule 2").show())
+			.decorate(new SaeuleView(controller,"Säule 3").show())
+			.decorate(new JournalView(controller).show());
 		if(Commands.SAEULE1.equals(command)) {view.setIndex(0);}
 		else if(Commands.SAEULE2.equals(command)) {view.setIndex(1);}
 		else if(Commands.SAEULE3.equals(command)) {view.setIndex(2);}
 		else if(Commands.JOURNAL.equals(command)) {view.setIndex(3);}
-		zustand.getRoot().setCenter(view);
+		commander.getRuntime().setCenter(view).setCurrent(controller);
 	}
 }

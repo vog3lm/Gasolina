@@ -66,5 +66,5 @@ class EinnahmenView extends Loadable<TableView<VerkaufRecord>> {
 	}
 	
 	@Override
-	protected TableView<VerkaufRecord> getView() { return einnahmen; }
+	protected TableView<VerkaufRecord> show() { return einnahmen; }
 }

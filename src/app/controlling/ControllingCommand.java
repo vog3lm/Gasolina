@@ -1,20 +1,25 @@
 package app.controlling;
 
-import app.Command;
-import app.Commands;
+import app.command.Command;
+import app.command.Commander;
+import app.command.Commands;
 
 public class ControllingCommand extends Command {
+	
+	public ControllingCommand(Commander commander) {
+		super(commander);
+	}
+
 	@Override
-	public void execute(String command) {
+	public void onExecute(String command) {
 		ControllingController controller = new ControllingController();
-		onLoadCurrent(controller);	
 		ControllingView view = controller.show();
-		view.decorate(new EinnahmenView().getView())
-			.decorate(new AusgabenView().getView())
-			.decorate(new ErgebnisView().getView());
+		view.decorate(new EinnahmenView().show())
+			.decorate(new AusgabenView().show())
+			.decorate(new ErgebnisView().show());
 		if(Commands.EINNAHMEN.equals(command)) {view.setIndex(0);}
 		else if(Commands.AUSGABEN.equals(command)) {view.setIndex(1);}
 		else if(Commands.ERGEBNIS.equals(command)) {view.setIndex(2);}
-		zustand.getRoot().setCenter(view);
+		commander.getRuntime().setCenter(view).setCurrent(controller);
 	}
 }

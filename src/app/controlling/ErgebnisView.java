@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import app.Loadable;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
 class ErgebnisView extends Loadable<AnchorPane> {
@@ -25,6 +24,6 @@ class ErgebnisView extends Loadable<AnchorPane> {
 	}
 	
 	@Override
-	protected AnchorPane getView() { return ergebnis; }
+	protected AnchorPane show() { return ergebnis; }
 	
 }

@@ -1,13 +1,17 @@
 package app.doc;
 
-import app.Command;
+import app.command.Command;
+import app.command.Commander;
 
 public class DocCommand extends Command {
 
+	public DocCommand(Commander commander) {
+		super(commander);
+	}
+
 	@Override
-	public void execute(String command) {
-		onLoadCurrent(null);	
-		zustand.getRoot().setCenter(new DocController().getView());		
+	public void onExecute(String command) {
+		commander.getRuntime().setCenter(new DocController().show());		
 	}
 
 }
