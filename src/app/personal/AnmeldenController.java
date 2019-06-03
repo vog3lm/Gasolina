@@ -29,8 +29,7 @@ public class AnmeldenController {
 			if(-1 != index) {
 				PersonalRecord benutzer = bestand.onRead(index);
 				if(passwort.equals(benutzer.getPasswort())) {
-					commander.getObserver().onAnmelden(benutzer);
-					commander.onExecute(Commands.SAEULE1);		
+					commander.getObserver().onAnmelden(benutzer);	
 				}else {
 					view.showPasswortError();
 				}
