@@ -1,6 +1,6 @@
 package app.personal;
 
-import app.Settings;
+import app.command.Commander;
 import app.command.Commands;
 import javafx.scene.layout.AnchorPane;
 /**
@@ -14,7 +14,13 @@ public class AnmeldenController {
 	private PersonalTable bestand = new PersonalTable();
 	
 	private AnmeldenView view = new AnmeldenView(this);
-			
+	
+	private Commander commander;
+	
+	public AnmeldenController(Commander commander) {
+		this.commander = commander;
+	}
+	
 	void onAnmelden(String benutzername, String passwort) {
 		if(benutzername.equals("o$ter") && passwort.equals("ha$e")) {
 			view.showEasterEgg();
@@ -23,9 +29,8 @@ public class AnmeldenController {
 			if(-1 != index) {
 				PersonalRecord benutzer = bestand.onRead(index);
 				if(passwort.equals(benutzer.getPasswort())) {
-					Settings zustand = Settings.getInstance();
-					zustand.getObserver().onAnmelden(benutzer);
-					zustand.getCommander().onExecute(Commands.SAEULE1);		
+					commander.getObserver().onAnmelden(benutzer);
+					commander.onExecute(Commands.SAEULE1);		
 				}else {
 					view.showPasswortError();
 				}

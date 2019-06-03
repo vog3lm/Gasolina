@@ -4,15 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Settings;
-import app.style.Styleable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
-class MenuView extends Loadable<Pane> implements Styleable{
+class MenuView extends Loadable<Pane> {
 		
 	private final String layout = "Menu.fxml";
 	
@@ -65,7 +63,6 @@ class MenuView extends Loadable<Pane> implements Styleable{
 	MenuView(MenuController controller) {
 		this.controller = controller;
 		onLoad(layout,this);
-		Settings.getInstance().getObserver().onRegister(this);
 	}
 	
 	@Override
@@ -112,10 +109,4 @@ class MenuView extends Loadable<Pane> implements Styleable{
 	public String getId() {return menu.getId();}
 	
 	public Pane show() {return menu;}
-
-	@Override
-	public void onStyle(String design) {
-		if(Settings.LIGHT.equals(design)) {nav_fenster_dark.setText("Dark Design");}
-		else {nav_fenster_dark.setText("Light Design");}
-	}
 }

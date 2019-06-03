@@ -11,7 +11,6 @@ public class AnmeldenCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		commander.getRuntime().setCenter(new AnmeldenController().show());
+		commander.getRuntime().setCenter(new AnmeldenController(commander).show());
 	}
-
 }

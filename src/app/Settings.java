@@ -20,37 +20,6 @@ public class Settings {
 	 * Path to dark layout css file.
 	 * */
 	public final static String DARK = "app/style/app.main.dark.css";
-	
-	/**
-	 * 
-	 * */
-	private Observer observer;
-	/**
-	 * 
-	 * */
-	public Observer getObserver() { return this.observer; }
-	/**
-	 * 
-	 * */
-	public Settings setObserver(Observer observer) {
-		this.observer = observer;
-		return this;
-	}
-	/**
-	 * 
-	 * */
-	private Commander commander;
-	/**
-	 * 
-	 * */
-	public Commander getCommander() { return this.commander; }
-	/**
-	 * 
-	 * */
-	public Settings setCommander(Commander commander) {
-		this.commander = commander;
-		return this;
-	}
 	/**
 	 * Currently visible design.
 	 * */

@@ -2,6 +2,7 @@ package app.command;
 
 import java.util.HashMap;
 
+import app.Observer;
 import app.Runtime;
 import app.controlling.ControllingCommand;
 import app.doc.DocCommand;
@@ -73,5 +74,7 @@ public class Commander {
 	}
 	
 	public Runtime getRuntime() {return runtime;}
+	
+	public Observer getObserver() {return runtime.getObserver();}
 
 }

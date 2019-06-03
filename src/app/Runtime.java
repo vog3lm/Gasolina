@@ -15,15 +15,16 @@ public class Runtime {
 	
 	private BorderPane layout;
 	
-	private Settings settings;
+	private Settings settings = Settings.getInstance();
+	
+	private Observer observer = new Observer();
 	
 	private Controller<?> current; 
 	
-	public Runtime(Stage stage, Scene scene, BorderPane layout, Settings settings) {
+	public Runtime(Stage stage, Scene scene, BorderPane layout) {
 		this.stage = stage;
 		this.scene = scene;
 		this.layout = layout;
-		this.settings = settings;
 	}
 		
 	/**
@@ -64,5 +65,7 @@ public class Runtime {
 	
 	/**/
 	public PersonalRecord getBenutzer() {return settings.getBenutzer();}
+	
+	public Observer getObserver() {return observer;}
 	
 }

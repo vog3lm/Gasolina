@@ -26,28 +26,23 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) {
-		Settings settings = Settings.getInstance();
 		/* create root layout */
 		BorderPane root = new BorderPane();
 		root.setPrefWidth(853.3);
 		root.setPrefHeight(505);
 		/**/
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(settings.getDesign());
 		/**/
-		Commander commander = new Commander(new Runtime(stage,scene,root,settings));
+		Commander commander = new Commander(new Runtime(stage,scene,root));
 		/* create custom exit strategy */
 		Platform.setImplicitExit(false);
 		stage.setOnCloseRequest(event -> {
 			event.consume();
 			commander.onExecute(Commands.EXIT);
 		});
-		stage.setTitle("Tankstellenverwaltung"); // TODO : Main.java Title String
 		stage.setScene(scene);
 		stage.show();
 		/**/
-		settings.setObserver(new Observer());
-		settings.setCommander(commander);
 		/* load entry point view */
 		commander.onExecute(Commands.START);
 	}
