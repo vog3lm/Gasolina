@@ -1,6 +1,6 @@
 package app.verkauf;
 
-import app.Settings;
+import app.settings.Settings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 

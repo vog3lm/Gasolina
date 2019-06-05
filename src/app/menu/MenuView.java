@@ -54,6 +54,8 @@ class MenuView extends Loadable<Pane> {
 	@FXML
 	private MenuItem nav_fenster_light;
 	@FXML
+	private MenuItem nav_settings;
+	@FXML
 	private MenuItem nav_fenster_doc;
 	@FXML
 	private Button nav_user;
@@ -92,6 +94,7 @@ class MenuView extends Loadable<Pane> {
 		nav_fenster_dark.setOnAction(event -> {controller.onCall(nav_fenster_dark.getId());});
 		nav_fenster_light.setOnAction(event -> {controller.onCall(nav_fenster_light.getId());});
 		nav_fenster_doc.setOnAction(event -> {controller.onCall(nav_fenster_doc.getId());});
+		nav_settings.setOnAction(event -> {controller.onCall(nav_settings.getId());});
 		/**/
 		nav_user.setOnAction(event -> {controller.onCall(nav_user.getId());});
 	}

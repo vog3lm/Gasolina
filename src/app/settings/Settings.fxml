@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane BorderPane.alignment="CENTER" 
+	id="settings" fx:id="settings"
+	xmlns="http://javafx.com/javafx/8" 
+	xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TableView id="settings_liste" 
+			fx:id="settings_liste"
+			editable="true" 
+			tableMenuButtonVisible="true" 
+			AnchorPane.bottomAnchor="0.0" 
+			AnchorPane.leftAnchor="0.0" 
+			AnchorPane.rightAnchor="0.0" 
+			AnchorPane.topAnchor="0.0">
+			<columns>
+				<TableColumn id="settings_key" fx:id="settings_key" text="Key" />
+				<TableColumn id="settings_value" fx:id="settings_value" text="Value" />
+				<TableColumn id="settings_default" fx:id="settings_default" text="Default" />
+			</columns>
+		</TableView>
+		<Button id="settings_persist" fx:id="settings_persist" layoutX="733.3" layoutY="420.0" mnemonicParsing="false" prefWidth="120.0" text="Speichern" />
+	</children>
+</AnchorPane>

@@ -4,7 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Settings;
+import app.settings.Settings;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,20 +34,22 @@ class BenutzerView extends Loadable<AnchorPane> {
 	
 	private BenutzerController controller;
 	
-	BenutzerView(BenutzerController controller) {
+	private PersonalRecord user;
+	
+	BenutzerView(BenutzerController controller, PersonalRecord user) {
 		this.controller = controller;
+		this.user = user;
 		onLoad(layout,this);
 	}
 	
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {
-		PersonalRecord benutzer = Settings.getInstance().getBenutzer();
 		/* set user data to view */
-		benutzer_personalnummer.setText(benutzer.getPersonalnummer());
-		benutzer_benutzername.setText(benutzer.getBenutzername());
-		benutzer_vorname.setText(benutzer.getVorname());
-		benutzer_nachname.setText(benutzer.getNachname());
-		benutzer_passwort.setText(benutzer.getPasswort());
+		benutzer_personalnummer.setText(user.getPersonalnummer());
+		benutzer_benutzername.setText(user.getBenutzername());
+		benutzer_vorname.setText(user.getVorname());
+		benutzer_nachname.setText(user.getNachname());
+		benutzer_passwort.setText(user.getPasswort());
 		/* process user data to controller */
 		benutzer_speichern.setOnAction(event -> {controller.onSpeichern(benutzer_benutzername.getText()
 																	   ,benutzer_vorname.getText()

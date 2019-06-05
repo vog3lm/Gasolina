@@ -11,7 +11,9 @@ public class DocCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		commander.getRuntime().setCenter(new DocController().show());		
+		commander.getRuntime().setCenter(new DocController().show())
+							  .setTitle("Dokumentation")
+							  .setCurrent(null);		
 	}
 
 }

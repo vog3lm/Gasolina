@@ -1,7 +1,7 @@
 package app.command;
 
-import app.Settings;
 import app.menu.MenuController;
+import app.settings.Settings;
 
 public class Start extends Command {		
 
@@ -11,11 +11,12 @@ public class Start extends Command {
 
 	@Override
 	public void onExecute(String command) {
+		Settings settings = Settings.getInstance();
 		if(null == commander.getRuntime()
 				.setTop(new MenuController(commander).show())
 				.setTitle("Tankstellenverwaltung")
-				.setStyle(Settings.DARK)
+				.setStyle(settings.getDesign())
 				.getBenutzer()){commander.onExecute(Commands.ANMELDEN);}
-		else {commander.onExecute(Commands.SAEULE1);}
+		else {commander.onExecute(settings.getLastView());}
 	}
 }

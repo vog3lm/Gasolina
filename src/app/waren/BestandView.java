@@ -74,7 +74,6 @@ class BestandView extends Loadable<AnchorPane> {
 	    bestand_liste.setRowFactory(createRowListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    /**/
-//	    bestand_bestellen.setOnAction(this::onClickHinzufuegen);
 	    bestand_bestellen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
 	
@@ -102,7 +101,10 @@ class BestandView extends Loadable<AnchorPane> {
         return menu;
 	}
 
-	void setItems(ArrayList<WarenbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
+	BestandView setItems(ArrayList<WarenbestandRecord> items) { 
+		bestand_liste.setItems(FXCollections.observableList(items));
+		return this;
+	}
 	
 	protected AnchorPane show() { return bestand; }
 	

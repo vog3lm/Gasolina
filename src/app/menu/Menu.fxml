@@ -57,6 +57,7 @@
                 <MenuItem id="nav_fenster_dark" fx:id="nav_fenster_dark" mnemonicParsing="false" text="Dark Design" />
                 <MenuItem id="nav_fenster_light" fx:id="nav_fenster_light" mnemonicParsing="false" text="Light Design" />
 				<SeparatorMenuItem mnemonicParsing="false" />
+				<MenuItem id="nav_settings" fx:id="nav_settings" mnemonicParsing="false" text="Einstellungen" />
 				<MenuItem id="nav_fenster_doc" fx:id="nav_fenster_doc" mnemonicParsing="false" text="Dokumentation" />
              </items>
            </Menu>

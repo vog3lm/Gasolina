@@ -109,8 +109,9 @@ class BestellungenView extends Loadable<AnchorPane> {
         return menu;
 	}
 		
-	void setItems(ArrayList<KraftstoffbestellungenRecord> items) {
+	BestellungenView setItems(ArrayList<KraftstoffbestellungenRecord> items) {
 		bestellungen_liste.setItems(FXCollections.observableList(items));
+		return this;
 	}
 	
 	protected AnchorPane show() { return bestellungen; }

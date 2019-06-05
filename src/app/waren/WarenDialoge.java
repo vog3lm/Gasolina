@@ -4,7 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import app.Settings;
+import app.settings.Settings;
+
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonType;
@@ -229,7 +230,7 @@ class WarenDialoge {
 		        		,"EUR"
 		        		,dateFormat.format(new Date())
 		        		,lieferdatum.getText()
-		        		,Settings.getInstance().getBenutzer().getBenutzername()
+		        		,Settings.getInstance().getBenutzer()
 		        		,"aktiv");
 		    }
 		    return null;

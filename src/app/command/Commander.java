@@ -10,6 +10,7 @@ import app.kraftstoff.KraftstoffCommand;
 import app.personal.AnmeldenCommand;
 import app.personal.BenutzerCommand;
 import app.personal.PersonalCommand;
+import app.settings.SettingsCommand;
 import app.style.StyleCommand;
 import app.verkauf.VerkaufCommand;
 import app.waren.WarenCommand;
@@ -37,6 +38,7 @@ public class Commander {
 		commands.put(Commands.EXIT,new Exit(this));
 		commands.put(Commands.PERSONAL,new PersonalCommand(this));
 		commands.put(Commands.STYLE,new StyleCommand(this));
+		commands.put(Commands.SETTINGS,new SettingsCommand(this));
 		commands.put("verkauf",new VerkaufCommand(this));
 		commands.put("waren",new WarenCommand(this));
 		/**/
@@ -55,6 +57,7 @@ public class Commander {
 		mapping.put(Commands.STYLE,Commands.STYLE);
 		mapping.put(Commands.STYLE_DARK,Commands.STYLE);
 		mapping.put(Commands.STYLE_LIGHT,Commands.STYLE);
+		mapping.put(Commands.SETTINGS,Commands.SETTINGS);
 		mapping.put(Commands.SAEULE1,"verkauf");
 		mapping.put(Commands.SAEULE2,"verkauf");
 		mapping.put(Commands.SAEULE3,"verkauf");

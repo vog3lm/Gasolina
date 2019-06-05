@@ -3,17 +3,17 @@ package app.verkauf;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import app.Settings;
+
+import app.settings.Settings;
 import app.verkauf.VerkaufRecord;
 import app.Controller;
+import app.command.Commands;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestandTable;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.kraftstoff.KraftstoffbestandTable;
+
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
 /**
  * 
  * @author vog3lm
@@ -28,7 +28,19 @@ public class VerkaufController implements Controller<VerkaufView> {
 	
 	private VerkaufObserver observer = new VerkaufObserver();
 	
-	private VerkaufView view = new VerkaufView();
+	private VerkaufView view = new VerkaufView()
+			.decorate(new SaeuleView(this,"Säule 1").show())
+			.decorate(new SaeuleView(this,"Säule 2").show())
+			.decorate(new SaeuleView(this,"Säule 3").show())
+			.decorate(new JournalView(this).show());
+	
+	VerkaufController onStart(String command) {
+		if(Commands.SAEULE1.equals(command)) {view.setIndex(0);}
+		else if(Commands.SAEULE2.equals(command)) {view.setIndex(1);}
+		else if(Commands.SAEULE3.equals(command)) {view.setIndex(2);}
+		else if(Commands.JOURNAL.equals(command)) {view.setIndex(3);}
+		return this;
+	}
 	
 	VerkaufSimulation onSimulate(SaeuleView view, VerkaufRecord verkauf) {
 		int index = kraftstoffe.getIndex(verkauf.getBezeichnung());

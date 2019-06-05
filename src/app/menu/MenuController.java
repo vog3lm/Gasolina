@@ -42,6 +42,7 @@ public class MenuController implements Anmelden {
 		else if(id.equals("nav_fenster_dark")){commander.onExecute(Commands.STYLE_DARK);}
 		else if(id.equals("nav_fenster_light")){commander.onExecute(Commands.STYLE_LIGHT);}
 		else if(id.equals("nav_fenster_doc")){commander.onExecute(Commands.DOC);}
+		else if(id.equals("nav_settings")){commander.onExecute(Commands.SETTINGS);}
 		else if(id.equals("nav_user")){commander.getObserver().onAbmelden();}
 		else {System.out.println("no id found "+id);}
 	}

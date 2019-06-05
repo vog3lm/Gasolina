@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 
 import app.Decorateable;
 import app.Loadable;
-import app.Settings;
+import app.settings.Settings;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 
-class PersonalView extends Loadable<AnchorPane> implements Decorateable<PersonalView,ArrayList<PersonalRecord>> {
+class PersonalView extends Loadable<AnchorPane> {
 
 	private final String layout = "Personal.fxml";
 	
@@ -55,8 +56,6 @@ class PersonalView extends Loadable<AnchorPane> implements Decorateable<Personal
 	private Button personal_hinzufuegen;
 	
 	private PersonalController controller;
-	
-	private ObservableList<PersonalRecord> data;
 	
 	PersonalView(PersonalController controller){
 		this.controller = controller;
@@ -181,8 +180,7 @@ class PersonalView extends Loadable<AnchorPane> implements Decorateable<Personal
 	@Override
 	protected AnchorPane show() {return personal;}
 
-	@Override
-	public PersonalView decorate(ArrayList<PersonalRecord> data) {
+	public PersonalView onData(ArrayList<PersonalRecord> data) {
 		personal_liste.setItems(FXCollections.observableList(data));
 		return this;
 	}

@@ -13,7 +13,9 @@ public class AnmeldenCommand extends Command implements Anmelden {
 
 	@Override
 	public void onExecute(String command) {
-		commander.getRuntime().setCenter(new AnmeldenController(commander).show());
+		commander.getRuntime().setCenter(new AnmeldenController(commander).onShow())
+							  .setTitle("Tankstellenverwaltung")
+					  		  .setCurrent(null);
 	}
 
 	@Override
@@ -23,6 +25,8 @@ public class AnmeldenCommand extends Command implements Anmelden {
 
 	@Override
 	public void onAbmelden() {
-		commander.getRuntime().setCenter(new AnmeldenController(commander).show());
+		commander.getRuntime().setCenter(new AnmeldenController(commander).onShow())
+		  					  .setTitle("Tankstellenverwaltung")
+  					  		  .setCurrent(null);
 	}
 }

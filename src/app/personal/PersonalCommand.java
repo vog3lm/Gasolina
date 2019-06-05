@@ -12,7 +12,9 @@ public class PersonalCommand extends Command {
 	@Override
 	public void onExecute(String command) {
 		PersonalController controller = new PersonalController();
-		commander.getRuntime().setCenter(controller.show()).setCurrent(controller);
+		commander.getRuntime().setCenter(controller.show())
+		  					  .setTitle("Personalverwaltung")
+  					  		  .setCurrent(controller);
 	}
 
 }

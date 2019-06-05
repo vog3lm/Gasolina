@@ -4,7 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Settings;
+import app.settings.Settings;
+import app.settings.SettingsDefault;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,7 +54,7 @@ class AnmeldenView extends Loadable<AnchorPane> {
 		double width = anmelden_pane.getWidth();
 		double height = anmelden_pane.getHeight();
 		String url = "app/style/egg.dark.jpg";
-		if(Settings.getInstance().getDesign().equals(Settings.LIGHT)) {
+		if(Settings.getInstance().getDesign().equals(SettingsDefault.LIGHT)) {
 			url = "app/style/egg.light.jpg";
 		}
 		BackgroundSize size = new BackgroundSize(width, height, false, false, false, false);

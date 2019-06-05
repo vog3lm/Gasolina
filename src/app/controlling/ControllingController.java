@@ -1,20 +1,25 @@
 package app.controlling;
 
 import app.Controller;
-import app.verkauf.VerkaufTable;
-import javafx.scene.Node;
+import app.command.Commands;
 /**
  * 
  * @author vog3lm
  * @version 1.0
  * @since   1.0
  */
-public class ControllingController implements Controller {
+public class ControllingController implements Controller<ControllingView> {
 	
-	private ControllingView view = new ControllingView();
+	private ControllingView view = new ControllingView()
+			.decorate(new EinnahmenView().show())
+			.decorate(new AusgabenView().show())
+			.decorate(new ErgebnisView().show());
 	
-	public ControllingController() {
-
+	ControllingController onStart(String command) {
+		if(Commands.EINNAHMEN.equals(command)) {view.setIndex(0);}
+		else if(Commands.AUSGABEN.equals(command)) {view.setIndex(1);}
+		else if(Commands.ERGEBNIS.equals(command)) {view.setIndex(2);}
+		return this;
 	}
 	
 	@Override

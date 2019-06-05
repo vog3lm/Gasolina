@@ -7,10 +7,11 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import app.Loadable;
-import app.Settings;
+import app.settings.Settings;
 import app.kraftstoff.KraftstoffbestandRecord;
 import app.personal.PersonalRecord;
 import app.waren.WarenbestandRecord;
+
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
@@ -372,11 +373,11 @@ public class SaeuleView extends Loadable<AnchorPane> {
 		Date date = new Date();
 		String datum = dateFormat.format(date);
 		String uhrzeit = timeFormat.format(date);
-		PersonalRecord benutzer = Settings.getInstance().getBenutzer();
+		String benutzer = Settings.getInstance().getBenutzer();
 		String message = "Max Maier Tankstelle\n\n" + 
 			"Belegnummer: "+belegnummer+"\n" + 
 			"Datum: "+datum+" "+uhrzeit+"\n" + 
-			"Mitarbeiter: "+benutzer.getVorname()+" "+benutzer.getNachname()+"\n\n";
+			"Mitarbeiter: "+benutzer+"\n\n";
 		float summe = 0;
 		for(VerkaufRecord p : posten) {
 			String s = p.getSumme();

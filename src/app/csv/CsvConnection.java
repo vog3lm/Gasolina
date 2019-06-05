@@ -33,6 +33,8 @@ public class CsvConnection {
 	/** */
 	public static final String PERSONAL = path+"gs_personal.csv";
 	/** */
+	public static final String SETTINGS = path+"gs_settings.csv";
+	/** */
     private final String filename;
     /**
      * 

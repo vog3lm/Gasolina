@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Controller;
-import app.Settings;
+import app.command.Commands;
+import app.settings.Settings;
 /**
  * 
  * @author vog3lm
@@ -25,8 +26,16 @@ public class WarenController implements Controller<WarenView> {
 	
 	private AusgabenTable ausgaben = new AusgabenTable();
 	
-	private WarenView view = new WarenView();
+	private WarenView view = new WarenView()
+			.decorate(new BestandView(this).setItems(bestand.onRead()).show())
+			.decorate(new BestellungenView(this).setItems(bestellungen.onRead()).show());
 		
+	WarenController onStart(String command) {
+		if(Commands.WAREN_BESTAND.equals(command)) {view.setIndex(0);}
+		else if(Commands.WAREN_BESTELLUNGEN.equals(command)) {view.setIndex(1);}
+		return this;
+	}
+	
 	void onBestandEdit(int index, String id, String value) {
 		WarenbestandRecord record = bestand.onRead(index);
 		if(id.equals("bezeichnung")) { record.setBezeichnung(value); }
@@ -114,7 +123,7 @@ public class WarenController implements Controller<WarenView> {
 						,(preis*liefermenge)+""
 						,dateFormat.format(date)
 						,timeFormat.format(date)
-						,Settings.getInstance().getBenutzer().getBenutzername()));
+						,Settings.getInstance().getBenutzer()));
 			}catch (NumberFormatException | NullPointerException e){
 		    	System.out.println("kraftstoff teilmenge buchen: oooops");
 		    }

@@ -26,5 +26,5 @@ public abstract class Loadable<R> implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+		
 }

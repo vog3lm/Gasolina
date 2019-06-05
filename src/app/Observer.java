@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import app.personal.Anmelden;
 import app.personal.PersonalRecord;
+import app.settings.Settings;
 
 public class Observer implements Anmelden {
 
@@ -13,8 +14,6 @@ public class Observer implements Anmelden {
 
 	@Override
 	public void onAnmelden(PersonalRecord benutzer) {
-		Settings settings = Settings.getInstance();
-		settings.setBenutzer(benutzer);
 		for(Anmelden anmelden : this.anmelden) {
 			anmelden.onAnmelden(benutzer);
 		}
@@ -22,12 +21,9 @@ public class Observer implements Anmelden {
 
 	@Override
 	public void onAbmelden() {
-		Settings settings = Settings.getInstance();
-		settings.setBenutzer(null);
 		for(Anmelden anmelden : this.anmelden) {
 			anmelden.onAbmelden();
 		}
-	// TODO	settings.getCommander().onExecute(Commands.ANMELDEN);
 	}
 	
 }

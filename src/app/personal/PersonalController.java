@@ -10,11 +10,11 @@ import app.Controller;
  * @version 1.0
  * @since   1.0
  */
-public class PersonalController implements Controller {
+public class PersonalController implements Controller<AnchorPane> {
 	
 	private PersonalTable bestand = new PersonalTable();
 	
-	private PersonalView view = new PersonalView(this);
+	private PersonalView view = new PersonalView(this).onData(bestand.onRead());
 		
 	void onAdd(String bn, String vn, String nn, String pw, String d) {
 		bestand.onCreate(new PersonalRecord(-1,"-1",bn,vn,nn,pw,d));
@@ -41,5 +41,6 @@ public class PersonalController implements Controller {
 		return true;
 	}
 
+	@Override
 	public AnchorPane show() {return view.show();}
 }

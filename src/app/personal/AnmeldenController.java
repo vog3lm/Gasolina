@@ -39,5 +39,5 @@ public class AnmeldenController {
 		}
 	}
 	
-	AnchorPane show() {return view.show();}
+	AnchorPane onShow() {return view.show();}
 }

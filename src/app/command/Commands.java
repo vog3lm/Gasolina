@@ -25,6 +25,8 @@ public class Commands {
 	public static final String STYLE_DARK = "style-dark";
 	public static final String STYLE_LIGHT = "style-light";
 	
+	public static final String SETTINGS = "settings";
+	
 	public static final String SAEULE1 = "verkauf-saeule-eins";
 	public static final String SAEULE2 = "verkauf-saeule-zwei";
 	public static final String SAEULE3 = "verkauf-saeule-drei";

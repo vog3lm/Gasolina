@@ -91,8 +91,10 @@ class BestandView extends Loadable<AnchorPane> {
 	    /**/
 	    bestand_liste.setRowFactory(this.createRowListener());
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
+	    // bestand_liste.setItems(FXCollections.observableList(controller.onData()));
 	    /**/
 	    bestand_bestellen.setOnAction(event -> {controller.onBestellungAdd();});
+	    /**/
 	}
 	
 	private Callback<TableView<KraftstoffbestandRecord>,TableRow<KraftstoffbestandRecord>> createRowListener() {
@@ -119,7 +121,10 @@ class BestandView extends Loadable<AnchorPane> {
         return menu;
 	}
 	
-	void setItems(ArrayList<KraftstoffbestandRecord> items) { bestand_liste.setItems(FXCollections.observableList(items)); }
+	BestandView setItems(ArrayList<KraftstoffbestandRecord> items) { 
+		bestand_liste.setItems(FXCollections.observableList(items)); 
+		return this;
+	}
 	
 	protected AnchorPane show() { return bestand; }
 	

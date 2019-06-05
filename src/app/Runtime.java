@@ -1,19 +1,26 @@
 package app;
 
+import app.personal.Anmelden;
 import app.personal.PersonalRecord;
+import app.settings.Settings;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Runtime {
+public class Runtime implements Anmelden {
 
 	private Stage stage;
 	
 	private Scene scene;
 	
 	private BorderPane layout;
+	/**
+	 * Currently logged in user.
+	 * */
+	private PersonalRecord benutzer;
 	
 	private Settings settings = Settings.getInstance();
 	
@@ -25,6 +32,7 @@ public class Runtime {
 		this.stage = stage;
 		this.scene = scene;
 		this.layout = layout;
+		observer.onRegister(this);
 	}
 		
 	/**
@@ -64,8 +72,18 @@ public class Runtime {
 	}
 	
 	/**/
-	public PersonalRecord getBenutzer() {return settings.getBenutzer();}
-	
 	public Observer getObserver() {return observer;}
+	
+	public PersonalRecord getBenutzer() {return benutzer;}
+
+	@Override
+	public void onAnmelden(PersonalRecord benutzer) {
+		this.benutzer = benutzer;
+	}
+
+	@Override
+	public void onAbmelden() {
+		benutzer = null;
+	}
 	
 }

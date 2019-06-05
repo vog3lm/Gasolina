@@ -60,4 +60,5 @@ public class AusgabenView extends Loadable<TableView<AusgabenRecord>> {
 	
 	@Override
 	protected TableView<AusgabenRecord> show() { return ausgaben; }
+
 }

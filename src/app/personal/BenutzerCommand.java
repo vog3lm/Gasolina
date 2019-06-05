@@ -11,8 +11,10 @@ public class BenutzerCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		BenutzerController controller = new BenutzerController();
-		commander.getRuntime().setCenter(controller.show()).setCurrent(controller);
+		BenutzerController controller = new BenutzerController(commander.getRuntime().getBenutzer());
+		commander.getRuntime().setCenter(controller.show())
+							  .setTitle("Benutzervweraltung")
+							  .setCurrent(controller);
 	}
 
 }

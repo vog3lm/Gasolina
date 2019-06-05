@@ -2,18 +2,14 @@ package app.kraftstoff;
 
 import app.controlling.AusgabenRecord;
 import app.controlling.AusgabenTable;
-import app.waren.WarenbestandRecord;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Controller;
-import app.Settings;
+import app.command.Commands;
+import app.settings.Settings;
 /**
  * 
  * @author vog3lm
@@ -28,7 +24,17 @@ public class KraftstoffController implements Controller<KraftstoffView> {
 	
 	private AusgabenTable ausgaben = new AusgabenTable();
 	
-	private KraftstoffView view = new KraftstoffView();
+	private KraftstoffView view = new KraftstoffView()
+			.decorate(new BestandView(this).setItems(bestand.onRead()).show())
+			.decorate(new BestellungenView(this).setItems(bestellungen.onRead()).show())
+			.decorate(new TankView().show());
+	
+	KraftstoffController onStart(String command) {
+		if(Commands.KRAFTSTOFF_BESTAND.equals(command)) {view.setIndex(0);}
+		else if(Commands.KRAFTSTOFF_BESTELLUNGEN.equals(command)) {view.setIndex(1);}
+		else if(Commands.KRAFTSTOFF_TANKS.equals(command)) {view.setIndex(2);}
+		return this;
+	}
 	
 	void onBestandEdit(int index, String id, String value) {
 		KraftstoffbestandRecord record = bestand.onRead(index);
@@ -128,7 +134,7 @@ public class KraftstoffController implements Controller<KraftstoffView> {
 						,(preis*liefermenge)+""
 						,dateFormat.format(date)
 						,timeFormat.format(date)
-						,Settings.getInstance().getBenutzer().getBenutzername()));
+						,Settings.getInstance().getBenutzer()));
 		    }catch (NumberFormatException | NullPointerException e){
 		    	System.out.println("kraftstoff teilmenge buchen: oooops");
 		    }
