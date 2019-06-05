@@ -1,7 +1,7 @@
 package app;
 
 public interface Decorateable<R,T> {
-
-	public R decorate(T decoration);
+	
+	public R onDecorate(T decoration);
 	
 }

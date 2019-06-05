@@ -11,7 +11,7 @@ public class VerkaufView extends TabPane implements Decorateable<VerkaufView,Nod
 	private int saeulen = 1;
 	
 	@Override
-	public VerkaufView decorate(Node node) {
+	public VerkaufView onDecorate(Node node) {
 		String id = node.getId();
 		if("saeule".equals(id)) {addSaeule(node);}
 		else if("journal".equals(id)) {addTab(id,node);}

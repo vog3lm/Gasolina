@@ -1,5 +1,6 @@
 package app.personal;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
 
@@ -11,10 +12,15 @@ public class BenutzerCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		BenutzerController controller = new BenutzerController(commander.getRuntime().getBenutzer());
-		commander.getRuntime().setCenter(controller.show())
-							  .setTitle("Benutzervweraltung")
-							  .setCurrent(controller);
+		Runtime runtime = commander.getRuntime();
+		if("Benutzervweraltung".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{	
+			BenutzerController controller = new BenutzerController(runtime.getBenutzer());
+			runtime.setCenter(controller.onShow())
+				   .setTitle("Benutzervweraltung")
+				   .setCurrent(controller);
+		}
 	}
 
 }

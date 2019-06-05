@@ -8,7 +8,7 @@ import javafx.scene.control.TabPane;
 public class KraftstoffView extends TabPane implements Decorateable<KraftstoffView,Node> {
 			
 	@Override
-	public KraftstoffView decorate(Node node) {
+	public KraftstoffView onDecorate(Node node) {
 		String id = node.getId();
 		if("bestand".equals(id)) {addTab(id,node);}
 		else if("bestellungen".equals(id)) {addTab(id,node);}

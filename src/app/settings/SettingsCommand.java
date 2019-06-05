@@ -1,5 +1,6 @@
 package app.settings;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
 
@@ -11,10 +12,15 @@ public class SettingsCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		SettingsController controller = new SettingsController();
-		commander.getRuntime().setCenter(controller.show())
-							  .setTitle("Einstellungen")
-							  .setCurrent(controller);
+		Runtime runtime = commander.getRuntime();
+		if("Einstellungen".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{
+			SettingsController controller = new SettingsController();
+			runtime.setCenter(controller.onShow())
+				   .setTitle("Einstellungen")
+				   .setCurrent(controller);
+		}
 	}
 
 }

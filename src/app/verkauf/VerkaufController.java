@@ -29,17 +29,16 @@ public class VerkaufController implements Controller<VerkaufView> {
 	private VerkaufObserver observer = new VerkaufObserver();
 	
 	private VerkaufView view = new VerkaufView()
-			.decorate(new SaeuleView(this,"Säule 1").show())
-			.decorate(new SaeuleView(this,"Säule 2").show())
-			.decorate(new SaeuleView(this,"Säule 3").show())
-			.decorate(new JournalView(this).show());
+			.onDecorate(new SaeuleView(this,"Säule 1").onShow())
+			.onDecorate(new SaeuleView(this,"Säule 2").onShow())
+			.onDecorate(new SaeuleView(this,"Säule 3").onShow())
+			.onDecorate(new JournalView(this).onShow());
 	
-	VerkaufController onStart(String command) {
+	public void onStart(String command) {
 		if(Commands.SAEULE1.equals(command)) {view.setIndex(0);}
 		else if(Commands.SAEULE2.equals(command)) {view.setIndex(1);}
 		else if(Commands.SAEULE3.equals(command)) {view.setIndex(2);}
 		else if(Commands.JOURNAL.equals(command)) {view.setIndex(3);}
-		return this;
 	}
 	
 	VerkaufSimulation onSimulate(SaeuleView view, VerkaufRecord verkauf) {
@@ -119,7 +118,7 @@ public class VerkaufController implements Controller<VerkaufView> {
 	}
 	
 	@Override
-	public boolean destroy() {
+	public boolean onDestroy() {
 		/*	TODO journal.onCommit() */
 	//	if(0 != view.getCount()) {
 	//		new VerkaufDialoge().createOffeneVorgaenge();
@@ -129,5 +128,5 @@ public class VerkaufController implements Controller<VerkaufView> {
 	}
 	
 	@Override
-	public VerkaufView show() {return view;}
+	public VerkaufView onShow() {return view;}
 }

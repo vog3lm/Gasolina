@@ -58,6 +58,6 @@ class BenutzerView extends Loadable<AnchorPane> {
 	}
 
 	@Override
-	protected AnchorPane show() {return benutzer;}
+	protected AnchorPane onShow() {return benutzer;}
 	
 }

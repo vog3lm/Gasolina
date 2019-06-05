@@ -27,13 +27,12 @@ public class WarenController implements Controller<WarenView> {
 	private AusgabenTable ausgaben = new AusgabenTable();
 	
 	private WarenView view = new WarenView()
-			.decorate(new BestandView(this).setItems(bestand.onRead()).show())
-			.decorate(new BestellungenView(this).setItems(bestellungen.onRead()).show());
+			.onDecorate(new BestandView(this).setItems(bestand.onRead()).onShow())
+			.onDecorate(new BestellungenView(this).setItems(bestellungen.onRead()).onShow());
 		
-	WarenController onStart(String command) {
+	public void onStart(String command) {
 		if(Commands.WAREN_BESTAND.equals(command)) {view.setIndex(0);}
 		else if(Commands.WAREN_BESTELLUNGEN.equals(command)) {view.setIndex(1);}
-		return this;
 	}
 	
 	void onBestandEdit(int index, String id, String value) {
@@ -132,7 +131,7 @@ public class WarenController implements Controller<WarenView> {
 	}
 	
 	@Override
-	public boolean destroy() {
+	public boolean onDestroy() {
 		bestand.onCommit();
 		bestellungen.onCommit();
 		ausgaben.onCommit();
@@ -140,5 +139,5 @@ public class WarenController implements Controller<WarenView> {
 	}
 
 	@Override
-	public WarenView show() {return view;}
+	public WarenView onShow() {return view;}
 }

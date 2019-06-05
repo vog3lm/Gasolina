@@ -8,8 +8,11 @@ package app;
 public interface Controller<V>{
 	/**
 	 * */
-	public V show();
+	public void onStart(String command);
 	/**
 	 * */
-	public boolean destroy();
+	public V onShow();
+	/**
+	 * */
+	public boolean onDestroy();
 }

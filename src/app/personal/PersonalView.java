@@ -178,7 +178,7 @@ class PersonalView extends Loadable<AnchorPane> {
 	}
 
 	@Override
-	protected AnchorPane show() {return personal;}
+	protected AnchorPane onShow() {return personal;}
 
 	public PersonalView onData(ArrayList<PersonalRecord> data) {
 		personal_liste.setItems(FXCollections.observableList(data));

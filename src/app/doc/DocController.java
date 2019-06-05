@@ -31,6 +31,6 @@ public class DocController extends Loadable<WebView> {
 	}
 
 	@Override
-	protected WebView show() {return webview;}
+	protected WebView onShow() {return webview;}
 
 }

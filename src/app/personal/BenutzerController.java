@@ -21,6 +21,9 @@ public class BenutzerController implements Controller<Node> {
 		view = new BenutzerView(this,benutzer);
 	}
 	
+	@Override
+	public void onStart(String command) {}
+	
 	public void onSpeichern(String un, String vn, String nn, String pw) {
 		PersonalRecord benutzer = bestand.onRead(this.benutzer.getIndex());
 		benutzer.setBenutzername(un);
@@ -30,15 +33,13 @@ public class BenutzerController implements Controller<Node> {
 		bestand.onUpdate(benutzer.getIndex(),benutzer);
 	}
 	
-	
-	
 	@Override
-	public boolean destroy() {
+	public boolean onDestroy() {
 		bestand.onCommit();
 		return true;
 	}
 
 	@Override
-	public Node show() {return view.show();}
+	public Node onShow() {return view.onShow();}
 	
 }

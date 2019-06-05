@@ -8,7 +8,7 @@ import javafx.scene.control.TabPane;
 public class WarenView extends TabPane implements Decorateable<WarenView,Node> {
 	
 	@Override
-	public WarenView decorate(Node node) {
+	public WarenView onDecorate(Node node) {
 		String id = node.getId();
 		if("bestand".equals(id)) {addTab(id,node);}
 		else if("bestellungen".equals(id)) {addTab(id,node);}

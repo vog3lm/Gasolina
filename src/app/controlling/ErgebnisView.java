@@ -24,6 +24,6 @@ class ErgebnisView extends Loadable<AnchorPane> {
 	}
 	
 	@Override
-	protected AnchorPane show() { return ergebnis; }
+	protected AnchorPane onShow() { return ergebnis; }
 		
 }

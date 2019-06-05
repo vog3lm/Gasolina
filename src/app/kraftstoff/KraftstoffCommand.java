@@ -1,5 +1,6 @@
 package app.kraftstoff;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
 import app.command.Commands;
@@ -12,10 +13,16 @@ public class KraftstoffCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		KraftstoffController controller = new KraftstoffController().onStart(command);
-		commander.getRuntime().setCenter(controller.show())
-							  .setTitle("Kraftstoffverwaltung")
-							  .setCurrent(controller);
+		Runtime runtime = commander.getRuntime();
+		if("Kraftstoffverwaltung".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{	
+			KraftstoffController controller = new KraftstoffController();
+			controller.onStart(command);
+			runtime.setCenter(controller.onShow())
+				   .setTitle("Kraftstoffverwaltung")
+				   .setCurrent(controller);
+		}
 	}
 	
 }

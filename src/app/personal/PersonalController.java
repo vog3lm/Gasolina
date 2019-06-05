@@ -16,6 +16,9 @@ public class PersonalController implements Controller<AnchorPane> {
 	
 	private PersonalView view = new PersonalView(this).onData(bestand.onRead());
 		
+	@Override
+	public void onStart(String command) {}
+	
 	void onAdd(String bn, String vn, String nn, String pw, String d) {
 		bestand.onCreate(new PersonalRecord(-1,"-1",bn,vn,nn,pw,d));
 		view.onRefresh();
@@ -36,11 +39,11 @@ public class PersonalController implements Controller<AnchorPane> {
 	}
 		
 	@Override
-	public boolean destroy() {
+	public boolean onDestroy() {
 		bestand.onCommit();
 		return true;
 	}
 
 	@Override
-	public AnchorPane show() {return view.show();}
+	public AnchorPane onShow() {return view.onShow();}
 }

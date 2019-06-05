@@ -1,5 +1,6 @@
 package app.verkauf;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
 import app.command.Commands;
@@ -12,9 +13,15 @@ public class VerkaufCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		VerkaufController controller = new VerkaufController().onStart(command);
-		commander.getRuntime().setCenter(controller.show())
-							  .setTitle("Verkauf")
-							  .setCurrent(controller);
+		Runtime runtime = commander.getRuntime();
+		if("Verkauf".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{
+			VerkaufController controller = new VerkaufController();
+			controller.onStart(command);
+			runtime.setCenter(controller.onShow())
+				   .setTitle("Verkauf")
+				   .setCurrent(controller);
+		}
 	}
 }

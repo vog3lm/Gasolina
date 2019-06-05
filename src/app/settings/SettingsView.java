@@ -56,6 +56,6 @@ public class SettingsView extends Loadable<AnchorPane> {
 	}
 
 	@Override
-	protected AnchorPane show() {return settings;}
+	protected AnchorPane onShow() {return settings;}
 
 }

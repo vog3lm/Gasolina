@@ -11,7 +11,7 @@ public abstract class Loadable<R> implements Initializable {
 	@Override
 	public abstract void initialize(URL url, ResourceBundle res);
 	
-	protected abstract R show();
+	protected abstract R onShow();
 	
 	/**
 	 * @param Path to fxml layout

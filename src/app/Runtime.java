@@ -1,6 +1,5 @@
 package app;
 
-import app.personal.Anmelden;
 import app.personal.PersonalRecord;
 import app.settings.Settings;
 
@@ -10,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Runtime implements Anmelden {
+public class Runtime {
 
 	private Stage stage;
 	
@@ -32,15 +31,15 @@ public class Runtime implements Anmelden {
 		this.stage = stage;
 		this.scene = scene;
 		this.layout = layout;
-		observer.onRegister(this);
 	}
 		
+	public Controller<?> getCurrent() {return this.current;}
 	/**
 	 * @param The new Controller obejct
 	 */
 	public boolean setCurrent(Controller<?> controller) {
 		if(null != current) {
-			if(!current.destroy()) {
+			if(!current.onDestroy()) {
 				return false;
 			}
 		}
@@ -63,6 +62,8 @@ public class Runtime implements Anmelden {
 		return this;
 	}
 	
+	public String getTitle() {return this.stage.getTitle();}
+	
 	public Runtime setStyle(String style) {
 		ObservableList<String> sheets = scene.getStylesheets();
 		sheets.remove(settings.getDesign());
@@ -75,15 +76,9 @@ public class Runtime implements Anmelden {
 	public Observer getObserver() {return observer;}
 	
 	public PersonalRecord getBenutzer() {return benutzer;}
-
-	@Override
-	public void onAnmelden(PersonalRecord benutzer) {
-		this.benutzer = benutzer;
-	}
-
-	@Override
-	public void onAbmelden() {
-		benutzer = null;
-	}
 	
+	public Runtime setBenutzer(PersonalRecord benutzer) {
+		this.benutzer = benutzer;
+		return this;
+	}	
 }

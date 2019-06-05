@@ -77,5 +77,5 @@ class AnmeldenView extends Loadable<AnchorPane> {
 	}
 
 	@Override
-	protected AnchorPane show() {return anmelden_pane;}
+	protected AnchorPane onShow() {return anmelden_pane;}
 }

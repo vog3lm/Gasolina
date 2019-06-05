@@ -13,7 +13,7 @@ public class Start extends Command {
 	public void onExecute(String command) {
 		Settings settings = Settings.getInstance();
 		if(null == commander.getRuntime()
-				.setTop(new MenuController(commander).show())
+				.setTop(new MenuController(commander).onShow())
 				.setTitle("Tankstellenverwaltung")
 				.setStyle(settings.getDesign())
 				.getBenutzer()){commander.onExecute(Commands.ANMELDEN);}

@@ -57,5 +57,5 @@ public class MenuController implements Anmelden {
 		view.clearUser();
 	}
 
-	public Node show() {return view.show();}
+	public Node onShow() {return view.onShow();}
 }

@@ -8,10 +8,15 @@ public class SettingsController  implements Controller<AnchorPane> {
 	private SettingsView view = new SettingsView(this);
 	
 	@Override
-	public boolean destroy() {
+	public void onStart(String command) {}
+	
+	@Override
+	public boolean onDestroy() {
 		return true;
 	}
 
 	@Override
-	public AnchorPane show() {return view.show();}
+	public AnchorPane onShow() {return view.onShow();}
+
+
 }

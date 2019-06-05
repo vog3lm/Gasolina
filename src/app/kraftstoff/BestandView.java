@@ -126,7 +126,7 @@ class BestandView extends Loadable<AnchorPane> {
 		return this;
 	}
 	
-	protected AnchorPane show() { return bestand; }
+	protected AnchorPane onShow() { return bestand; }
 	
 	void onRefresh() {
 		bestand_liste.refresh();

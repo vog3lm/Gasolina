@@ -111,5 +111,5 @@ class MenuView extends Loadable<Pane> {
 	
 	public String getId() {return menu.getId();}
 	
-	public Pane show() {return menu;}
+	public Pane onShow() {return menu;}
 }

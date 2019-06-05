@@ -1,8 +1,8 @@
 package app.controlling;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
-import app.command.Commands;
 
 public class ControllingCommand extends Command {
 	
@@ -12,9 +12,15 @@ public class ControllingCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		ControllingController controller = new ControllingController().onStart(command);
-		commander.getRuntime().setCenter(controller.show())
-							  .setTitle("Controlling")
-							  .setCurrent(controller);
+		Runtime runtime = commander.getRuntime();
+		if("Controlling".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{		
+			ControllingController controller = new ControllingController();
+			controller.onStart(command);
+			runtime.setCenter(controller.onShow())
+				   .setTitle("Controlling")
+				   .setCurrent(controller);
+		}
 	}
 }

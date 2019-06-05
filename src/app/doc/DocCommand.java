@@ -1,5 +1,6 @@
 package app.doc;
 
+import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
 
@@ -11,9 +12,14 @@ public class DocCommand extends Command {
 
 	@Override
 	public void onExecute(String command) {
-		commander.getRuntime().setCenter(new DocController().show())
-							  .setTitle("Dokumentation")
-							  .setCurrent(null);		
+		Runtime runtime = commander.getRuntime();
+		if("Dokumentation".equals(runtime.getTitle())){
+			runtime.getCurrent().onStart(command);
+		}else{	
+			runtime.setCenter(new DocController().onShow())
+				   .setTitle("Dokumentation")
+				   .setCurrent(null);	
+		}
 	}
 
 }

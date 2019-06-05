@@ -405,7 +405,7 @@ public class SaeuleView extends Loadable<AnchorPane> {
 	}
 	
 	@Override
-	protected AnchorPane show() {return saeule;}
+	protected AnchorPane onShow() {return saeule;}
 	
 	String getTitle() {return id;}
 	

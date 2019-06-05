@@ -112,7 +112,7 @@ class BestellungenView extends Loadable<AnchorPane> {
 		return this;
 	}
 	
-	protected AnchorPane show() { return bestellungen; }
+	protected AnchorPane onShow() { return bestellungen; }
 	
 	void onRefresh() {
 		bestellungen_liste.refresh();

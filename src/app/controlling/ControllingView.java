@@ -1,7 +1,6 @@
 package app.controlling;
 
 import app.Decorateable;
-
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -9,7 +8,7 @@ import javafx.scene.control.TabPane;
 public class ControllingView extends TabPane implements Decorateable<ControllingView,Node> {
 			
 	@Override
-	public ControllingView decorate(Node node) {
+	public ControllingView onDecorate(Node node) {
 		String id = node.getId();
 		if("einnahmen".equals(id)) {addTab(id,node);}
 		else if("ausgaben".equals(id)) {addTab(id,node);}

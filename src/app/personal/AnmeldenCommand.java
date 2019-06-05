@@ -14,17 +14,19 @@ public class AnmeldenCommand extends Command implements Anmelden {
 	@Override
 	public void onExecute(String command) {
 		commander.getRuntime().setCenter(new AnmeldenController(commander).onShow())
-							  .setTitle("Tankstellenverwaltung")
-					  		  .setCurrent(null);
+				 .setTitle("Tankstellenverwaltung")
+				 .setCurrent(null);
 	}
 
 	@Override
 	public void onAnmelden(PersonalRecord benutzer) {
+		commander.getRuntime().setBenutzer(benutzer);
 		commander.onExecute(Commands.SAEULE1);	
 	}
 
 	@Override
 	public void onAbmelden() {
+		commander.getRuntime().setBenutzer(null);
 		commander.getRuntime().setCenter(new AnmeldenController(commander).onShow())
 		  					  .setTitle("Tankstellenverwaltung")
   					  		  .setCurrent(null);

@@ -21,5 +21,5 @@ class TankView extends Loadable<AnchorPane> {
 	@Override
 	public void initialize(URL arg, ResourceBundle res) {}
 	
-	protected AnchorPane show() { return tanks; }
+	protected AnchorPane onShow() { return tanks; }
 }
