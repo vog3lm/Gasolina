@@ -8,7 +8,7 @@ import app.command.Commands;
  * @version 1.0
  * @since   1.0
  */
-public class ControllingController implements Controller<ControllingView> {
+public class ControllingController implements Controller {
 	
 	private ControllingView view = new ControllingView()
 			.onDecorate(new EinnahmenView().onShow())
@@ -27,6 +27,5 @@ public class ControllingController implements Controller<ControllingView> {
 		return true;
 	}
 
-	@Override
 	public ControllingView onShow() {return view;}
 }

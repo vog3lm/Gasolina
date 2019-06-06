@@ -3,7 +3,7 @@ package app.settings;
 import app.Controller;
 import javafx.scene.layout.AnchorPane;
 
-public class SettingsController  implements Controller<AnchorPane> {
+public class SettingsController  implements Controller {
 	
 	private SettingsView view = new SettingsView(this);
 	
@@ -15,7 +15,6 @@ public class SettingsController  implements Controller<AnchorPane> {
 		return true;
 	}
 
-	@Override
 	public AnchorPane onShow() {return view.onShow();}
 
 

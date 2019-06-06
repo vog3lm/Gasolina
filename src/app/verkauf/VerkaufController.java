@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
  * @version 1.0
  * @since   1.0
  */
-public class VerkaufController implements Controller<VerkaufView> {
+public class VerkaufController implements Controller {
 		
 	private KraftstoffbestandTable kraftstoffe;
 	
@@ -134,6 +134,5 @@ public class VerkaufController implements Controller<VerkaufView> {
 		return true;
 	}
 	
-	@Override
 	public VerkaufView onShow() {return view;}
 }

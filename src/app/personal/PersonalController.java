@@ -11,7 +11,7 @@ import app.Datapool;
  * @version 1.0
  * @since   1.0
  */
-public class PersonalController implements Controller<AnchorPane> {
+public class PersonalController implements Controller {
 	
 	private PersonalTable bestand;
 	
@@ -50,6 +50,5 @@ public class PersonalController implements Controller<AnchorPane> {
 		return true;
 	}
 
-	@Override
 	public AnchorPane onShow() {return view.onShow();}
 }

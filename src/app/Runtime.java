@@ -27,7 +27,7 @@ public class Runtime {
 	
 	private Datapool datapool = new Datapool();
 	
-	private Controller<?> current; 
+	private Controller current; 
 	
 	public Runtime(Stage stage, Scene scene, BorderPane layout) {
 		this.stage = stage;
@@ -35,11 +35,11 @@ public class Runtime {
 		this.layout = layout;
 	}
 		
-	public Controller<?> getCurrent() {return this.current;}
+	public Controller getCurrent() {return this.current;}
 	/**
 	 * @param The new Controller obejct
 	 */
-	public boolean setCurrent(Controller<?> controller) {
+	public boolean setCurrent(Controller controller) {
 		if(null != current) {
 			if(!current.onDestroy()) {
 				return false;

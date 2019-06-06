@@ -17,7 +17,7 @@ import app.settings.Settings;
  * @version 1.0
  * @since   1.0
  */
-public class KraftstoffController implements Controller<KraftstoffView> {
+public class KraftstoffController implements Controller {
 		
 	private KraftstoffbestandTable bestand;
 	
@@ -158,6 +158,5 @@ public class KraftstoffController implements Controller<KraftstoffView> {
 		return true;
 	}
 
-	@Override
 	public KraftstoffView onShow() {return view;}
 }

@@ -19,7 +19,7 @@ import app.settings.Settings;
  * @version 1.0
  * @since   1.0
  */
-public class WarenController implements Controller<WarenView> {
+public class WarenController implements Controller {
 		
 	private WarenbestandTable bestand;
 	
@@ -148,6 +148,5 @@ public class WarenController implements Controller<WarenView> {
 		return true;
 	}
 
-	@Override
 	public WarenView onShow() {return view;}
 }

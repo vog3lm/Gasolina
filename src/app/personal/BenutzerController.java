@@ -10,7 +10,7 @@ import app.Datapool;
  * @version 1.0
  * @since   1.0
  */
-public class BenutzerController implements Controller<Node> {
+public class BenutzerController implements Controller {
 	
 	private PersonalRecord benutzer;
 	
@@ -42,7 +42,6 @@ public class BenutzerController implements Controller<Node> {
 		return true;
 	}
 
-	@Override
 	public Node onShow() {return view.onShow();}
 	
 }
