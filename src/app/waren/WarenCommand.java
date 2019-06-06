@@ -17,7 +17,7 @@ public class WarenCommand extends Command {
 		if("Warenverwaltung".equals(runtime.getTitle())){
 			runtime.getCurrent().onStart(command);
 		}else{
-			WarenController controller = new WarenController();
+			WarenController controller = new WarenController(runtime.getDatapool());
 			controller.onStart(command);
 			commander.getRuntime().setCenter(controller.onShow())
 								  .setTitle("Warenverwaltung")

@@ -3,7 +3,6 @@ package app.verkauf;
 import app.Runtime;
 import app.command.Command;
 import app.command.Commander;
-import app.command.Commands;
 
 public class VerkaufCommand extends Command {
 	
@@ -17,7 +16,7 @@ public class VerkaufCommand extends Command {
 		if("Verkauf".equals(runtime.getTitle())){
 			runtime.getCurrent().onStart(command);
 		}else{
-			VerkaufController controller = new VerkaufController();
+			VerkaufController controller = new VerkaufController(runtime.getDatapool());
 			controller.onStart(command);
 			runtime.setCenter(controller.onShow())
 				   .setTitle("Verkauf")

@@ -7,6 +7,7 @@ import java.io.IOException;
 import app.settings.Settings;
 import app.verkauf.VerkaufRecord;
 import app.Controller;
+import app.Datapool;
 import app.command.Commands;
 import app.waren.WarenbestandRecord;
 import app.waren.WarenbestandTable;
@@ -22,17 +23,23 @@ import javafx.collections.ObservableList;
  */
 public class VerkaufController implements Controller<VerkaufView> {
 		
-	private KraftstoffbestandTable kraftstoffe = new KraftstoffbestandTable();
+	private KraftstoffbestandTable kraftstoffe;
 	
-	private WarenbestandTable waren = new WarenbestandTable();
+	private WarenbestandTable waren;
 	
 	private VerkaufObserver observer = new VerkaufObserver();
 	
-	private VerkaufView view = new VerkaufView()
+	private VerkaufView view;
+	
+	VerkaufController(Datapool pool) {
+		this.kraftstoffe = pool.aquireKraftstoffbestand();
+		this.waren = pool.aquireWarenbestand();
+		this.view = new VerkaufView()
 			.onDecorate(new SaeuleView(this,"Säule 1").onShow())
 			.onDecorate(new SaeuleView(this,"Säule 2").onShow())
 			.onDecorate(new SaeuleView(this,"Säule 3").onShow())
 			.onDecorate(new JournalView(this).onShow());
+	}
 	
 	public void onStart(String command) {
 		if(Commands.SAEULE1.equals(command)) {view.setIndex(0);}

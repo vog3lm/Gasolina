@@ -16,7 +16,7 @@ public class BenutzerCommand extends Command {
 		if("Benutzervweraltung".equals(runtime.getTitle())){
 			runtime.getCurrent().onStart(command);
 		}else{	
-			BenutzerController controller = new BenutzerController(runtime.getBenutzer());
+			BenutzerController controller = new BenutzerController(runtime.getDatapool(),runtime.getBenutzer());
 			runtime.setCenter(controller.onShow())
 				   .setTitle("Benutzervweraltung")
 				   .setCurrent(controller);

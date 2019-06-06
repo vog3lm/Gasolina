@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Controller;
+import app.Datapool;
 import app.command.Commands;
 import app.settings.Settings;
 /**
@@ -20,16 +21,25 @@ import app.settings.Settings;
  */
 public class WarenController implements Controller<WarenView> {
 		
-	private WarenbestandTable bestand = new WarenbestandTable();
+	private WarenbestandTable bestand;
 	
-	private WarenbestellungenTable bestellungen = new WarenbestellungenTable();
+	private WarenbestellungenTable bestellungen;
 	
-	private AusgabenTable ausgaben = new AusgabenTable();
+	private AusgabenTable ausgaben;
 	
-	private WarenView view = new WarenView()
-			.onDecorate(new BestandView(this).setItems(bestand.onRead()).onShow())
-			.onDecorate(new BestellungenView(this).setItems(bestellungen.onRead()).onShow());
-		
+	private WarenView view;
+	
+	WarenController(Datapool pool){
+		this.bestand = pool.aquireWarenbestand();
+		this.bestellungen = pool.aquireWarenbestellungen();
+		this.ausgaben = pool.aquireAusgaben();
+		/**/
+		view = new WarenView()
+				.onDecorate(new BestandView(this,bestand.onRead()).onShow())
+				.onDecorate(new BestellungenView(this,bestellungen.onRead()).onShow());
+	}
+	
+	@Override
 	public void onStart(String command) {
 		if(Commands.WAREN_BESTAND.equals(command)) {view.setIndex(0);}
 		else if(Commands.WAREN_BESTELLUNGEN.equals(command)) {view.setIndex(1);}

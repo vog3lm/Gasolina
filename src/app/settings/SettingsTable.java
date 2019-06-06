@@ -10,7 +10,7 @@ public class SettingsTable implements Database<SettingsRecord> {
     private final CsvConnection database = new CsvConnection(CsvConnection.SETTINGS);
     private ArrayList<SettingsRecord> records = new ArrayList<SettingsRecord>();
 	
-    SettingsTable(){
+    public SettingsTable(){
         ArrayList<String[]> data = database.onRead();
         for(int i=0; i<data.size(); i++){
         	this.records.add(new SettingsRecord(i,data.get(i)));

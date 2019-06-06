@@ -1,7 +1,6 @@
 package app.personal;
 
 import app.command.Commander;
-import app.command.Commands;
 import javafx.scene.layout.AnchorPane;
 /**
  * 
@@ -11,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AnmeldenController {
 		
-	private PersonalTable bestand = new PersonalTable();
+	private PersonalTable bestand;
 	
 	private AnmeldenView view = new AnmeldenView(this);
 	
@@ -19,6 +18,7 @@ public class AnmeldenController {
 	
 	public AnmeldenController(Commander commander) {
 		this.commander = commander;
+		this.bestand = commander.getRuntime().getDatapool().aquirePersonal();
 	}
 	
 	void onAnmelden(String benutzername, String passwort) {

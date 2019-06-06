@@ -25,6 +25,8 @@ public class Runtime {
 	
 	private Observer observer = new Observer();
 	
+	private Datapool datapool = new Datapool();
+	
 	private Controller<?> current; 
 	
 	public Runtime(Stage stage, Scene scene, BorderPane layout) {
@@ -80,5 +82,7 @@ public class Runtime {
 	public Runtime setBenutzer(PersonalRecord benutzer) {
 		this.benutzer = benutzer;
 		return this;
-	}	
+	}
+	
+	public Datapool getDatapool() {return datapool;}
 }

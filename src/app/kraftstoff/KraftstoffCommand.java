@@ -17,7 +17,7 @@ public class KraftstoffCommand extends Command {
 		if("Kraftstoffverwaltung".equals(runtime.getTitle())){
 			runtime.getCurrent().onStart(command);
 		}else{	
-			KraftstoffController controller = new KraftstoffController();
+			KraftstoffController controller = new KraftstoffController(runtime.getDatapool());
 			controller.onStart(command);
 			runtime.setCenter(controller.onShow())
 				   .setTitle("Kraftstoffverwaltung")

@@ -16,7 +16,7 @@ public class PersonalCommand extends Command {
 		if("Personalverwaltung".equals(runtime.getTitle())){
 			runtime.getCurrent().onStart(command);
 		}else{	
-			PersonalController controller = new PersonalController();
+			PersonalController controller = new PersonalController(runtime.getDatapool());
 			runtime.setCenter(controller.onShow())
 			  	   .setTitle("Personalverwaltung")
 	  			   .setCurrent(controller);

@@ -49,8 +49,11 @@ class BestandView extends Loadable<AnchorPane> {
 	
 	private KraftstoffController controller;
 	
-	BestandView(KraftstoffController controller) {
+	private ArrayList<KraftstoffbestandRecord> items;
+		
+	BestandView(KraftstoffController controller,ArrayList<KraftstoffbestandRecord> items) {
 		this.controller = controller;
+		this.items = items;
 		onLoad(layout,this);
 	}
 	
@@ -90,6 +93,7 @@ class BestandView extends Loadable<AnchorPane> {
 	    bestand_kapazitaet.setCellValueFactory(new PropertyValueFactory<KraftstoffbestandRecord, String>("kapazitaet"));	    
 	    /**/
 	    bestand_liste.setRowFactory(this.createRowListener());
+	    bestand_liste.setItems(FXCollections.observableList(items)); 
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    // bestand_liste.setItems(FXCollections.observableList(controller.onData()));
 	    /**/
@@ -120,12 +124,7 @@ class BestandView extends Loadable<AnchorPane> {
         menu.getItems().addAll(bestellen,remove);
         return menu;
 	}
-	
-	BestandView setItems(ArrayList<KraftstoffbestandRecord> items) { 
-		bestand_liste.setItems(FXCollections.observableList(items)); 
-		return this;
-	}
-	
+		
 	protected AnchorPane onShow() { return bestand; }
 	
 	void onRefresh() {

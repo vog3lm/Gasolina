@@ -52,8 +52,11 @@ class BestellungenView extends Loadable<AnchorPane> {
 		
 	private KraftstoffController controller;
 	
-	BestellungenView(KraftstoffController controller) {
+	private ArrayList<KraftstoffbestellungenRecord> items;
+		
+	BestellungenView(KraftstoffController controller,ArrayList<KraftstoffbestellungenRecord> items) {
 		this.controller = controller;
+		this.items = items;
 		onLoad(layout,this);
 	}
 	
@@ -81,6 +84,7 @@ class BestellungenView extends Loadable<AnchorPane> {
 	    bestellungen_mitarbeiter.setCellValueFactory(new PropertyValueFactory<KraftstoffbestellungenRecord, String>("mitarbeiter"));
 	    /**/
 	    bestellungen_liste.setRowFactory(this.createRowListener());
+	    bestellungen_liste.setItems(FXCollections.observableList(items));
 	    /**/
 	    bestellungen_hinzufuegen.setOnAction(event -> {controller.onBestellungAdd();});
 	}
@@ -108,12 +112,7 @@ class BestellungenView extends Loadable<AnchorPane> {
         menu.getItems().addAll(buchen,remove);
         return menu;
 	}
-		
-	BestellungenView setItems(ArrayList<KraftstoffbestellungenRecord> items) {
-		bestellungen_liste.setItems(FXCollections.observableList(items));
-		return this;
-	}
-	
+			
 	protected AnchorPane onShow() { return bestellungen; }
 	
 	void onRefresh() {

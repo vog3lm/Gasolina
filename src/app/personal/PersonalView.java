@@ -57,9 +57,17 @@ class PersonalView extends Loadable<AnchorPane> {
 	
 	private PersonalController controller;
 	
-	PersonalView(PersonalController controller){
+	private ArrayList<PersonalRecord> data;
+	
+	PersonalView(PersonalController controller, ArrayList<PersonalRecord> data){
 		this.controller = controller;
+		this.data = data;
 		onLoad(layout,this);
+	}
+	
+	public PersonalView onData(ArrayList<PersonalRecord> data) {
+		personal_liste.setItems(FXCollections.observableList(data));
+		return this;
 	}
 	
 	@Override
@@ -79,7 +87,7 @@ class PersonalView extends Loadable<AnchorPane> {
 	    personal_passwort.setOnEditCommit(cell -> {controller.onEdit(cell.getTablePosition().getRow(),"passwort",cell.getNewValue());});
 	    personal_einstelldatum.setCellValueFactory(new PropertyValueFactory<PersonalRecord, String>("einstelldatum"));
 	    /**/
-	    
+	    personal_liste.setItems(FXCollections.observableList(data));
 	    personal_liste.setRowFactory(this.createRowListener());
 	    personal_liste.getSortOrder().addAll(personal_nachname);
 	    /**/
@@ -180,8 +188,5 @@ class PersonalView extends Loadable<AnchorPane> {
 	@Override
 	protected AnchorPane onShow() {return personal;}
 
-	public PersonalView onData(ArrayList<PersonalRecord> data) {
-		personal_liste.setItems(FXCollections.observableList(data));
-		return this;
-	}
+
 }

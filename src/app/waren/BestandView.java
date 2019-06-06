@@ -46,8 +46,11 @@ class BestandView extends Loadable<AnchorPane> {
 	
 	private WarenController controller;
 	
-	BestandView(WarenController controller) {
+	private ArrayList<WarenbestandRecord> data;
+	
+	BestandView(WarenController controller, ArrayList<WarenbestandRecord> data) {
 		this.controller = controller;
+		this.data = data;
 		onLoad(layout,this);
 	}
 	
@@ -72,6 +75,7 @@ class BestandView extends Loadable<AnchorPane> {
 	    bestand_kategorie.setOnEditCommit(cell -> {controller.onBestandEdit(cell.getTablePosition().getRow(),"kategorie",cell.getNewValue());});
 	    /**/
 	    bestand_liste.setRowFactory(createRowListener());
+	    bestand_liste.setItems(FXCollections.observableList(data));
 	    bestand_liste.getSortOrder().addAll(bestand_bezeichnung);
 	    /**/
 	    bestand_bestellen.setOnAction(event -> {controller.onBestellungAdd();});
@@ -99,11 +103,6 @@ class BestandView extends Loadable<AnchorPane> {
         remove.setOnAction(event -> { controller.onBestandDelete(row.getIndex()); });
         menu.getItems().addAll(bestellen,remove);
         return menu;
-	}
-
-	BestandView setItems(ArrayList<WarenbestandRecord> items) { 
-		bestand_liste.setItems(FXCollections.observableList(items));
-		return this;
 	}
 	
 	protected AnchorPane onShow() { return bestand; }

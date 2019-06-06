@@ -3,6 +3,7 @@ package app.personal;
 import app.personal.PersonalTable;
 import javafx.scene.layout.AnchorPane;
 import app.Controller;
+import app.Datapool;
 
 /**
  * 
@@ -12,10 +13,15 @@ import app.Controller;
  */
 public class PersonalController implements Controller<AnchorPane> {
 	
-	private PersonalTable bestand = new PersonalTable();
+	private PersonalTable bestand;
 	
-	private PersonalView view = new PersonalView(this).onData(bestand.onRead());
+	private PersonalView view;
 		
+	PersonalController(Datapool pool) {
+		bestand = pool.aquirePersonal();
+		view = new PersonalView(this,bestand.onRead());
+	}
+	
 	@Override
 	public void onStart(String command) {}
 	

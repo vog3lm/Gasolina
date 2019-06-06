@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import app.Controller;
+import app.Datapool;
 import app.command.Commands;
 import app.settings.Settings;
 /**
@@ -18,16 +19,24 @@ import app.settings.Settings;
  */
 public class KraftstoffController implements Controller<KraftstoffView> {
 		
-	private KraftstoffbestandTable bestand = new KraftstoffbestandTable();
+	private KraftstoffbestandTable bestand;
 	
-	private KraftstoffbestellungenTable bestellungen = new KraftstoffbestellungenTable();
+	private KraftstoffbestellungenTable bestellungen;
 	
-	private AusgabenTable ausgaben = new AusgabenTable();
+	private AusgabenTable ausgaben;
 	
-	private KraftstoffView view = new KraftstoffView()
-			.onDecorate(new BestandView(this).setItems(bestand.onRead()).onShow())
-			.onDecorate(new BestellungenView(this).setItems(bestellungen.onRead()).onShow())
+	private KraftstoffView view;
+	
+	KraftstoffController(Datapool pool){
+		
+		this.bestand = pool.aquireKraftstoffbestand();
+		this.bestellungen = pool.aquireKraftstoffbestellungen();
+		this.ausgaben = pool.aquireAusgaben();
+		this.view = new KraftstoffView()
+			.onDecorate(new BestandView(this,bestand.onRead()).onShow())
+			.onDecorate(new BestellungenView(this,bestellungen.onRead()).onShow())
 			.onDecorate(new TankView().onShow());
+	}
 	
 	public void onStart(String command) {
 		if(Commands.KRAFTSTOFF_BESTAND.equals(command)) {view.setIndex(0);}

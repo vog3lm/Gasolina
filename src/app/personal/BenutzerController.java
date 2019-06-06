@@ -1,7 +1,9 @@
 package app.personal;
 
 import javafx.scene.Node;
+
 import app.Controller;
+import app.Datapool;
 /**
  * 
  * @author vog3lm
@@ -12,12 +14,13 @@ public class BenutzerController implements Controller<Node> {
 	
 	private PersonalRecord benutzer;
 	
-	private PersonalTable bestand = new PersonalTable();
+	private PersonalTable bestand;
 	
 	private BenutzerView view;
 
-	BenutzerController(PersonalRecord benutzer){
+	BenutzerController(Datapool pool, PersonalRecord benutzer){
 		this.benutzer = benutzer;
+		this.bestand = pool.aquirePersonal();
 		view = new BenutzerView(this,benutzer);
 	}
 	
